@@ -1,6 +1,6 @@
 let userName = prompt("Ingresa su nombre: ");
 console.log(userName);
-let age = prompt("Ingrese su edad: ");
+let age = parseInt(prompt("Ingrese su edad: "));
 console.log(age);
 let gender = "";
 let heightSelector = "";
@@ -239,7 +239,7 @@ function Fat(TDCI, goal) {
         return FAT.toFixed(2);
     } else if (goal == 2) {
         FAT = (((TDCI * 0.2) + (TDCI * 0.3)) / 2)/9;
-        return FATt.oFixed(2);
+        return FAT.toFixed(2);
     }
 }
 function Carbs(TDCI, Fat, Protein) {
