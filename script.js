@@ -221,8 +221,7 @@ function TDCI(TDEE, heightSelector, weight) {
         return TDCI.toFixed(2);
     }
 }
-/*
-function Macro(){}*/
+
 function Protein(heightSelector, weight) {
     if (heightSelector == "P" || heightSelector == "p") {
         PROT = (1 * weight);
@@ -243,7 +242,10 @@ function Fat(TDCI, goal) {
     }
 }
 function Carbs(TDCI, Fat, Protein) {
-    CARBS = TDCI - Fat - Protein;
+    CARBS = (TDCI/4) - Fat - Protein;
     return CARBS.toFixed(2);
 }
-
+/*
+function Macro(userName, age, TDCI, Protein, Fat ){
+    alert(+ username + 'de' + age + 'anios de edad. Deberia consumir por dia ' 9-0+ TDCI + '. De los cuales' + carbsIntake + ' son gramos de carbs' + proteinIntake + ' son gramos de proteina y ' + fatIntake + ' son gramos de grasas fat');
+}*/
