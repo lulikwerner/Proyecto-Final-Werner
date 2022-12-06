@@ -112,13 +112,15 @@ do {
   }
 } while (gender != "M" && gender != "m" && gender != "F" && gender != "f");
 
+
+
+
 function BMR(gender, heightSelector, weight, height, age) {
   if (
     (gender == "M" || gender == "m") &&
     (heightSelector == "P" || heightSelector == "p")
   ) {
     BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * age;
-    return BMR.toFixed(2);
   } else if (
     (gender == "M" || gender == "m") &&
     (heightSelector == "Me" ||
@@ -127,13 +129,11 @@ function BMR(gender, heightSelector, weight, height, age) {
       heightSelector == "ME")
   ) {
     BMR = 66 + 13.7 * weight + 5 * height - 6.8 * age;
-    return BMR.toFixed(2);
   } else if (
     (gender == "F" || gender == "f") &&
     (heightSelector == "P" || heightSelector == "p")
   ) {
     BMR = 655 + 4.4 * weight + 4.6 * height - 4.7 * age;
-    return BMR.toFixed(2);
   } else if (
     (gender == "F" || gender == "f") &&
     (heightSelector == "Me" ||
@@ -142,55 +142,53 @@ function BMR(gender, heightSelector, weight, height, age) {
       heightSelector == "ME")
   ) {
     BMR = 655 + 9.6 * weight + 1.8 * height - 4.7 * age;
-    return BMR.toFixed(2);
   }
+  return BMR.toFixed(2);
 }
 
 function TDEE(BMR, lifestyle) {
   if (lifestyle == "A" || lifestyle == "a") {
     TDEE = BMR * 1.35;
-    return Number(TDEE).toFixed(2);
   } else if (lifestyle == "B" || lifestyle == "b") {
     TDEE = BMR * 1.55;
-    return Number(TDEE).toFixed(2);
   } else if (lifestyle == "C" || lifestyle == "c") {
     TDEE = BMR * 1.75;
-    return Number(TDEE).toFixed(2);
   }
+  return Number(TDEE).toFixed(2);
 }
 
 function TDCI(TDEE, heightSelector, weight, goal, level) {
   switch (true) {
     case goal == 1 && (heightSelector == "P" || heightSelector == "p"):
       TDCI = TDEE - weight * 0.00075 * 500;
-      return Number(TDCI);
+        break;
     case goal == 1 &&
       (heightSelector == "Me" ||
         heightSelector == "ME" ||
         heightSelector == "me" ||
         heightSelector == "mE"):
       TDCI = TDEE - weight * 0.00075 * 1100;
-      return Number(TDCI).toFixed(2);
+        break;
     case goal == 2 &&
       level == 1 &&
       (heightSelector == "P" || heightSelector == "p"):
       TDCI = TDEE + weight * 0.02 * 150;
-      return Number(TDCI);
+        break;
     case goal == 2 &&
       level == 2 &&
       (heightSelector == "P" || heightSelector == "p"):
       TDCI = TDEE + weight * 0.015 * 150;
-      return Number(TDCI);
+        break;
     case goal == 2 &&
       level == 3 &&
       (heightSelector == "P" || heightSelector == "p"):
       TDCI = TDEE + weight * 0.01 * 150;
-      return Number(TDCI).toFixed(2);
+        break;
     case goal == 2 &&
       level == 4 &&
       (heightSelector == "P" || heightSelector == "p"):
       TDCI = TDEE + weight * 0.005 * 150;
-      return Number(TDCI).toFixed(2);
+        break;
     case goal == 2 &&
       level == 1 &&
       (heightSelector == "Me" ||
@@ -198,7 +196,7 @@ function TDCI(TDEE, heightSelector, weight, goal, level) {
         heightSelector == "me" ||
         heightSelector == "mE"):
       TDCI = Number(TDEE) + weight * 0.02 * 150;
-      return TDCI.toFixed(2);
+        break;
     case goal == 2 &&
       level == 2 &&
       (heightSelector == "Me" ||
@@ -206,7 +204,7 @@ function TDCI(TDEE, heightSelector, weight, goal, level) {
         heightSelector == "me" ||
         heightSelector == "mE"):
       TDCI = TDEE + weight * 0.015 * 150;
-      return Number(TDCI).toFixed(2);
+        break;
     case goal == 2 &&
       level == 3 &&
       (heightSelector == "Me" ||
@@ -214,7 +212,7 @@ function TDCI(TDEE, heightSelector, weight, goal, level) {
         heightSelector == "me" ||
         heightSelector == "mE"):
       TDCI = TDEE + weight * 0.01 * 150;
-      return Number(TDCI).toFixed(2);
+        break;
     case goal == 2 &&
       level == 4 &&
       (heightSelector == "Me" ||
@@ -222,14 +220,14 @@ function TDCI(TDEE, heightSelector, weight, goal, level) {
         heightSelector == "me" ||
         heightSelector == "mE"):
       TDCI = TDEE + weight * 0.005 * 150;
-      return Number(TDCI).toFixed(2);
+        break;
   }
+  return Number(TDCI).toFixed(2);
 }
 
 function Protein(heightSelector, weight) {
   if (heightSelector == "P" || heightSelector == "p") {
     PROT = 1 * weight;
-    return PROT.toFixed(2);
   } else if (
     heightSelector == "Me" ||
     heightSelector == "me" ||
@@ -237,18 +235,17 @@ function Protein(heightSelector, weight) {
     heightSelector == "ME"
   ) {
     PROT = 2.2 * weight;
-    return PROT.toFixed(2);
   }
+  return PROT.toFixed(2);
 }
 
 function Fat(TDCI, goal) {
   if (goal == 1) {
     FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9;
-    return FAT.toFixed(2);
   } else if (goal == 2) {
     FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9;
-    return FAT.toFixed(2);
   }
+  return FAT.toFixed(2);
 }
 function Carbs(TDCI, Fat, Protein) {
   CARBS = TDCI / 4 - Fat - Protein;
@@ -259,16 +256,16 @@ function Macro(userName, age, TDCI, Carbs, Fat, Protein) {
   alert(
     "" +
       userName +
-      " de" +
+      " de " +
       age +
       " anios de edad. Deberia consumir por dia " +
       TDCI +
-      " calorias. De los cuales" +
+      " calorias. De los cuales " +
       Carbs +
-      " son gramos de carbs" +
+      " son gramos de carbs, " +
       Protein +
-      " son gramos de proteina y " +
+      " son gramos de proteina, y " +
       Fat +
-      " son gramos de grasas fat"
+      " son gramos de grasas fat."
   );
 }
