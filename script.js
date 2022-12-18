@@ -97,10 +97,9 @@ do {
                     weight = parseFloat(prompt("Ingrese el peso en kilogramos: "));
                     console.log(weight);
                 }
-
-                
+             
                 /*Calcula el BMR*/
-                var metabolic = BMR(gender, heightSelector, weight, height, age);
+                var metabolic = calculate_BMR(gender, heightSelector, weight, height, age);
                 /*alert('Su BMR es ' + metabolic)*/
                 console.log("El BMR es " + metabolic);
                 lifestyle = prompt(
@@ -109,7 +108,7 @@ do {
                 console.log(lifestyle);
 
                 /*Calcula el TDEE*/
-                var energy = Number(TDEE(metabolic, lifestyle));
+                var energy = Number(calculate_TDEE(metabolic, lifestyle));
                 console.log("El TDEE de es " + energy);
                 alert("El TDEE  de " + userName + " es " + energy);
 
@@ -128,7 +127,7 @@ do {
                     );
                 }
 
-                var calorieIntake = TDCI(energy, heightSelector, weight, goal, level);
+                var calorieIntake = calculate_TDCI(energy, heightSelector, weight, goal, level);
                 console.log("El TDCI de es " + calorieIntake + " calorias");
                 alert(userName + " Deberia consumir por dia " + calorieIntake + " calorias");
 
@@ -161,8 +160,8 @@ do {
                     PROT
                 );
                 console.log(macro_1.macro)
-                peopl.push(macro_1)
-                console.log(peopl)
+                peopl.push(macro_1) 
+                console.log(peopl.join(","))
                 
                 
             }
@@ -176,7 +175,7 @@ do {
 }
 
 
-function BMR(gender, heightSelector, weight, height, age) {
+function calculate_BMR(gender, heightSelector, weight, height, age) {
     if (
         (gender == "M" ) &&
         (heightSelector == "P" )
@@ -201,7 +200,7 @@ function BMR(gender, heightSelector, weight, height, age) {
     return BMR.toFixed(2);
 }
 
-function TDEE(BMR, lifestyle) {
+function calculate_TDEE(BMR, lifestyle) {
     if (lifestyle == "A" || lifestyle == "a") {
         TDEE = BMR * 1.35;
     } else if (lifestyle == "B" || lifestyle == "b") {
@@ -212,7 +211,7 @@ function TDEE(BMR, lifestyle) {
     return Number(TDEE).toFixed(2);
 }
 
-function TDCI(TDEE, heightSelector, weight, goal, level) {
+function calculate_TDCI(TDEE, heightSelector, weight, goal, level) {
     switch (true) {
         case goal == 1 && (heightSelector == "P"):
             TDCI = TDEE - weight * 0.00075 * 500;
