@@ -1,7 +1,4 @@
-let userName = prompt("Ingresa su nombre: ");
-console.log(userName);
-let age = parseInt(prompt("Ingrese su edad: "));
-console.log(age);
+
 let gender = "";
 let heightSelector = "";
 let weight = "";
@@ -9,7 +6,10 @@ let height = "";
 let lifestyle = "";
 let goal = "";
 let level = "";
+let enter_patient = "";
+let options = "";
 const peopl = [];
+
 
 class Person {
     userName;
@@ -54,10 +54,26 @@ class Person {
     }
 
 }
+let patient = true;
+while(patient) {
+    let enter_patient = prompt('Desea ingresar un nuevo paciente (SI/NO): ');
+
+    if(enter_patient.toUpperCase() == 'NO'){
+        patient = false;
+        let options = prompt('Desea hacer alguna de las siguientes consultas: ');
+        break;
+    }
+    
+    let userName = prompt("Ingresa el nombre del paciente: ");
+    console.log(userName);
+    let age = parseInt(prompt("Ingrese la edad del paciente: "));
+    console.log(age);
+   
 
 do {
-    gender = prompt(' Ingrese su sexo "M" para masculino o "F" para femenino: ').toUpperCase();
+    gender = prompt(' Ingrese el sexo de la persona "M" para masculino o "F" para femenino: ').toUpperCase();
     console.log(gender);
+    
     if (gender === "M" ||  gender === "F" ) {
         do {
             heightSelector = prompt(
@@ -69,69 +85,71 @@ do {
                 heightSelector == "ME"
                 ){
                 if (heightSelector == "P") {
-                    height = parseFloat(prompt("Ingrese su altura en Pies: "));
+                    height = parseFloat(prompt("Ingrese la altura en Pies: "));
                     console.log(height);
-                    weight = parseFloat(prompt("Ingrese su peso en libras: "));
+                    weight = parseFloat(prompt("Ingrese el peso en libras: "));
                     console.log(weight);
                 } else if (
                     heightSelector == "ME" 
                     ){
-                    height = parseFloat(prompt("Ingrese su altura en Metros: "));
+                    height = parseFloat(prompt("Ingrese la altura en Metros: "));
                     console.log(height);
-                    weight = parseFloat(prompt("Ingrese su peso en kilogramos: "));
+                    weight = parseFloat(prompt("Ingrese el peso en kilogramos: "));
                     console.log(weight);
                 }
+
+                
                 /*Calcula el BMR*/
                 var metabolic = BMR(gender, heightSelector, weight, height, age);
                 /*alert('Su BMR es ' + metabolic)*/
                 console.log("El BMR es " + metabolic);
                 lifestyle = prompt(
-                    "Ingrese una de las siguientes opciones, si su estilo de vida es :\n A) Sedentaria\n B) Trabaja en oficina y va mas de  3 veces a la semana al gimnasio\n C) Es activa y va 4 o mas veces a la semana al gimnasio "
+                    "Ingrese una de las siguientes opciones, si el estilo de vida de " + userName + " es :\n A) Sedentaria\n B) Trabaja en oficina y va mas de  3 veces a la semana al gimnasio\n C) Es activa y va 4 o mas veces a la semana al gimnasio "
                 );
                 console.log(lifestyle);
 
                 /*Calcula el TDEE*/
                 var energy = Number(TDEE(metabolic, lifestyle));
-                console.log("El TDEE es " + energy);
-                alert("Su TDEE es " + energy);
+                console.log("El TDEE de es " + energy);
+                alert("El TDEE  de " + userName + " es " + energy);
 
                 /*Calcula el TDCI*/
                 goal = parseInt(
                     prompt(
-                        "Ingrese:\n 1) si su meta es bajar de peso\n 2) si su meta es ganar musculo "
+                        "Ingrese:\n 1) Si la meta es bajar de peso\n 2) Si la meta es ganar musculo "
                     )
                 );
                 console.log(goal);
                 if (goal == 2) {
                     level = parseInt(
                         prompt(
-                            "Ingrese su nivel:\n 1) para Beginner\n 2) para Novice\n 3) para Intermedio\n 4) para avanzado "
+                            "Ingrese el nivel para:\n 1)  Beginner\n 2)  Novice\n 3)  Intermedio\n 4)   Avanzado "
                         )
                     );
                 }
 
                 var calorieIntake = TDCI(energy, heightSelector, weight, goal, level);
-                console.log("El TDCI es " + calorieIntake + " calorias");
-                alert("Deberia consumir por dia " + calorieIntake + " calorias");
+                console.log("El TDCI de es " + calorieIntake + " calorias");
+                alert(userName + " Deberia consumir por dia " + calorieIntake + " calorias");
 
                 /*Calcula la Proteina*/
                 var proteinIntake = Protein(heightSelector, weight);
                 console.log("El PROTEIN intake es  " + proteinIntake + " gramos");
-                alert("Deberia consumir por dia " + proteinIntake + " de proteina");
+                alert(userName + " Deberia consumir por dia " + proteinIntake + " de proteina");
 
                 /*Calcula el FAT intake*/
                 var fatIntake = Fat(calorieIntake, goal);
                 console.log("El FAT intake  es " + fatIntake + " gramos");
-                alert("Deberia consumir por dia " + fatIntake + " gramos de fat");
+                alert(userName + " Deberia consumir por dia " + fatIntake + " gramos de fat");
 
                 /*Calcula los CARBS*/
                 var carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake)
                 console.log("El carbs intake  es " + carbsIntake + " gramos");
-                alert("Deberia consumir por dia " + carbsIntake + " gramos de carbs");
+                alert(userName + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
 
                 /*Devuelve la MACRO de la persona que se ingreso*/
                 
-                let macr = new Person(
+                let macro_1 = new Person(
                     userName,
                     gender,
                     weight,
@@ -142,9 +160,10 @@ do {
                     FAT,
                     PROT
                 );
-                console.log(macr.macro)
-                peopl.push(macr)
+                console.log(macro_1.macro)
+                peopl.push(macro_1)
                 console.log(peopl)
+                
                 
             }
         } while (
@@ -154,7 +173,7 @@ do {
     }
 } while (gender != "M" && gender != "F" );
 
-
+}
 
 
 function BMR(gender, heightSelector, weight, height, age) {
