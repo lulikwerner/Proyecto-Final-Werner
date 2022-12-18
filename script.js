@@ -159,9 +159,10 @@ do {
                     FAT,
                     PROT
                 );
-                console.log(macro_1.macro)
-                peopl.push(macro_1) 
-                console.log(peopl.join(","))
+               
+                peopl.push(macro_1);
+                console.log(peopl);
+                console.log(macro_1.macro);
                 
                 
             }
