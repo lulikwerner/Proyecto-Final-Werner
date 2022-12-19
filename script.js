@@ -9,7 +9,11 @@ let level = "";
 let enter_patient = "";
 let options = "";
 let options_doc = 0;
+let genderf = "";
+let agesf = 0;
 const peopl = [];
+
+
 
 
 class Person {
@@ -61,8 +65,7 @@ while(patient){
          
         if( options_doc <= 6 && options_doc>=1){
             console.log('Entro');
-    
-            console.log(createString(peopl));   
+            console.log(createString(Opt_doc(options_doc,peopl)));   
             
             }
         
@@ -299,24 +302,26 @@ function Carbs(TDCI, Fat, Protein){
  return CARBS.toFixed(2);
 }
 
-function Opt_doc(option_doc, options_doc, peopl){
-    /*let arrayOrd = peopl.slice[0]*/
-    switch(option_doc){
+function Opt_doc(options_doc, array){
+   
+    switch(true){
         case options_doc == 1:
             peopl.forEach(element => alert(element));
         case options_doc == 2:
-            return  arrayOrd.sort((a,b)=>b.lastName.localeCompare(a.lastName));
+            return  array.sort((a,b)=>b.lastName.localeCompare(a.lastName));
         case options_doc == 3:
-            return  arrayOrd.sort((a,b)=>a.lastName.localeCompare(b.lastName));
+            return  array.sort((a,b)=>a.lastName.localeCompare(b.lastName));
         case options_doc == 4:
-            let agesf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '))
-            let ageFilter = peopl.filter(agesf => { this.age == agesf});
+            agesf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '));
+            let ageFilter = array.filter(agesf => { agesf == agesf});
                 console.log(ageFilter);
         case options_doc == 5:
-            let genderf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '))
-            let genderFilter = peopl.filter(genderf => { this.gender == genderf});
-                console.log(genderfilter);
-        case  option_doc == 6:
+            do{
+                genderf =prompt('Ingrese el sexo del pacientes que desea obtener F para femenino o m para masculino: ').toUpperCase();
+                let genderFilter = array.filter(genderf => { this.genderf == genderf});
+                console.log(genderFilter);
+            }while( genderf !='M' && genderf !='F')
+        case  options_doc == 6:
                 alert('Gracias por su consulta. Adios')
                 break;
             }
@@ -325,13 +330,9 @@ function Opt_doc(option_doc, options_doc, peopl){
     }
 
     function createString(array){
-        /*let info = '';
-        array.forEach(element => {
-            info+= 'Nombre: ' + element.userName + '\nApellido: ' + element.lastName + '\nEdad: ' + element.age + '\nSexo: ' + element.gender + '\nPeso: ' + element.weight + '\nAltura: ' + element.height + '\nCalorias diarias a consumir: ' + element.TDCI + '\nProteinas: ' + element.PROT + '\nCarbohidratos: ' + element.CARBS+ '\nGrasas: ' + element.FAT + '\n\n';
-        })
-        return info;*/
+    
         for (const key in array){
-            console.log(`${key}: ${array[key]}\n`);
+            JSON.stringify(array[key])
         
         }
     }
