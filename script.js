@@ -34,7 +34,7 @@ class Person {
     get macro() {
         alert(
             "" +
-            this.userName + this.lastName +
+            this.userName + " " + this.lastName + " " +
             this.age +
             " anios de edad. Deberia consumir por dia " +
             this.TDCI +
@@ -52,6 +52,12 @@ class Person {
 }
 
 let patient = true;
+/*peopl = [
+    new Person("Sophie", "Werner", "F",  70, 1.7, 32, 1234 , 23, 45, 600 ),
+    new Person("Thomas", "Perez", "M",  98, 1.9, 28, 1900 , 123, 78, 950 ),
+    new Person("Juan", "Fernandez", "M",  89, 1.87, 40, 1350 , 785, 56, 340 ),
+    new Person("Felicitas", "Zabuleta", "F",  50, 1.66, 18, 1200 , 985, 87, 506 ),
+];*/
 while(patient){
     let enter_patient = prompt('Desea ingresar un nuevo paciente (SI/NO): ');
 
@@ -60,16 +66,15 @@ while(patient){
         console.log(peopl);
         
         do{
-        let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1 - Ver todos los pacientes \n 2 - Ordenar de la A a la Z por apellido \n 3 - Ordenar de la Z a la A por apellido \n 4 - Filtrar por edad \n 5 - Filtrar por sexo \n 6 - Salir  '));
+        let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1  - Ordenar de la A a la Z por apellido \n 2 - Ordenar de la Z a la A por apellido \n 3 - Filtrar por edad \n 4 - Filtrar por sexo \n 5 - Salir  '));
          
-        if( options_doc <= 6 && options_doc>=1){
-            console.log('Entro');
+        if( options_doc <= 5 && options_doc>=1){
             console.log(createString(Opt_doc(options_doc, peopl)));   
             
             }
         
 
-        }while(options_doc <= 0 || options_doc > 6)
+        }while(options_doc <= 0 || options_doc > 5)
     }
     
     let userName = prompt("Ingresa el nombre del paciente: ");
@@ -307,23 +312,26 @@ function Opt_doc(options_doc, array){
     let genderf = "";
     let agesf = 0;
     switch(true){
+        
         case options_doc == 1:
-            peopl.forEach(element => alert(element));
-        case options_doc == 2:
             return  array.sort((a,b)=>a.lastName.localeCompare(b.lastName));
-        case options_doc == 3:
+
+        case options_doc == 2:
             return  array.sort((a,b)=>b.lastName.localeCompare(a.lastName));
-        case options_doc == 4:
+
+        case options_doc == 3:
             agesf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '));
-            let ageFilter = array.filter(agesf => { agesf == agesf});
-                console.log(ageFilter);
-        case options_doc == 5:
+            return array.filter(a=> { a.age == agesf});
+           
+
+       case options_doc == 4:
             do{
                 genderf =prompt('Ingrese el sexo del pacientes que desea obtener F para femenino o m para masculino: ').toUpperCase();
-                let genderFilter = array.filter(genderf => { this.genderf == genderf});
-                console.log(genderFilter);
+                return array.filter(genderf => { a.gender == genderf});
+                
             }while( genderf !='M' && genderf !='F')
-        case  options_doc == 6:
+        
+            case  options_doc == 5:
                 alert('Gracias por su consulta. Adios')
                 break;
             }
@@ -334,7 +342,7 @@ function Opt_doc(options_doc, array){
     function createString(array){
     let info ='';
         array.forEach(element =>
-            info += 'Nombre: ' + element.userName + '\n' + 'Apellido: ' + element.lastName + '\n'+ 'Edad: ' + element.age + '\n' + 'Genero: ' + element.gender + '\n' + 'Peso: ' + element.weight + '\n' + 'Altura: ' + element.height + '\n' + 'Calorias diarias: ' + element.TDCI + '\n' + 'Proteinas diarias: ' + element.Prot + ' gr \n' + 'Carbs diarios: ' + element.Carbs + ' gr \n'+ 'Grasas  diarias: ' + element.Fat + ' gr \n\n');
+            info += 'Nombre: ' + element.userName + '\n' + 'Apellido: ' + element.lastName + '\n'+ 'Edad: ' + element.age + '\n' + 'Genero: ' + element.gender + '\n' + 'Calorias diarias: ' + element.TDCI + '\n' + 'Proteinas diarias: ' + element.Prot + ' gr \n' + 'Carbs diarios: ' + element.Carbs + ' gr \n'+ 'Grasas  diarias: ' + element.Fat + ' gr \n\n');
             alert(info);
         return info;
     }
