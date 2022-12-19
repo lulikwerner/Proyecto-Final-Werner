@@ -59,14 +59,13 @@ while(patient){
         do{
         let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1 - Ver todos los pacientes \n 2 - Ordenar de la A a la Z por apellido \n 3 - Ordenar de la Z a la A por apellido \n 4 - Filtrar por edad \n 5 - Filtrar por sexo \n 6 - Salir:  '));
          
-        if( 0 < options_doc <= 6){
+        if( options_doc <= 6){
             alert(createString(Opt_doc(options_doc, peopl)));   
             
             }
-           
+        
 
-
-        }while(6 < options_doc <0)
+        }while(options_doc < 0 && options_doc > 6)
     }
     
     let userName = prompt("Ingresa el nombre del paciente: ");
