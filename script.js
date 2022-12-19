@@ -8,22 +8,16 @@ let goal = "";
 let level = "";
 let enter_patient = "";
 let options = "";
+let options_doc = "";
 const peopl = [];
 
 
 class Person {
-    userName;
-    gender;
-    weight;
-    height;
-    age;
-    TDCI;
-    CARBS;
-    FAT;
-    PROT;
+    
 
-    constructor(userName, gender, weight, height, age, TDCI, CARBS, FAT, PROT) {
+    constructor(userName, lastName, gender, weight, height, age, TDCI, CARBS, FAT, PROT) {
         this.userName = userName;
+        this.lastName = lastName;
         this.gender = gender;
         this.weight = weight;
         this.height = height;
@@ -37,8 +31,7 @@ class Person {
     get macro() {
         alert(
             "" +
-            this.userName +
-            " de " +
+            this.userName + this.lastName +
             this.age +
             " anios de edad. Deberia consumir por dia " +
             this.TDCI +
@@ -54,18 +47,32 @@ class Person {
     }
 
 }
+
 let patient = true;
-while(patient) {
+while(patient){
     let enter_patient = prompt('Desea ingresar un nuevo paciente (SI/NO): ');
 
     if(enter_patient.toUpperCase() == 'NO'){
         patient = false;
-        let options = prompt('Desea hacer alguna de las siguientes consultas: ');
-        break;
+        console.log(peopl);
+        
+        do{
+        let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1 - Ver todos los pacientes \n 2 - Ordenar de la A a la Z por apellido \n 3 - Ordenar de la Z a la A por apellido \n 4 - Filtrar por edad \n 5 - Filtrar por sexo \n 6 - Salir:  '));
+         
+        if( 0 < options_doc <= 6){
+            alert(createString(Opt_doc(options_doc, peopl)));   
+            
+            }
+           
+
+
+        }while(6 < options_doc <0)
     }
     
     let userName = prompt("Ingresa el nombre del paciente: ");
     console.log(userName);
+    let lastName = prompt("Ingresa el apellido del paciente: ");
+    console.log(lastName);
     let age = parseInt(prompt("Ingrese la edad del paciente: "));
     console.log(age);
    
@@ -150,6 +157,7 @@ do {
                 
                 let macro_1 = new Person(
                     userName,
+                    lastName,
                     gender,
                     weight,
                     height,
@@ -290,5 +298,40 @@ function Carbs(TDCI, Fat, Protein){
  return CARBS.toFixed(2);
 }
 
+function Opt_doc(option_doc, options_doc, peopl){
+    /*let arrayOrd = peopl.slice[0]*/
+    switch(option_doc){
+        case options_doc == 1:
+            peopl.forEach(element => alert(element));
+        case options_doc == 2:
+            return  arrayOrd.sort((a,b)=>b.lastName.localeCompare(a.lastName));
+        case options_doc == 3:
+            return  arrayOrd.sort((a,b)=>a.lastName.localeCompare(b.lastName));
+        case options_doc == 4:
+            let agesf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '))
+            let ageFilter = peopl.filter(agesf => { this.age == agesf});
+                console.log(ageFilter);
+        case options_doc == 5:
+            let genderf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '))
+            let genderFilter = peopl.filter(genderf => { this.gender == genderf});
+                console.log(genderfilter);
+        case  option_doc == 6:
+                alert('Gracias por su consulta. Adios')
+                break;
+            }
+            
 
+    }
+
+    function createString(array){
+        /*let info = '';
+        array.forEach(element => {
+            info+= 'Nombre: ' + element.userName + '\nApellido: ' + element.lastName + '\nEdad: ' + element.age + '\nSexo: ' + element.gender + '\nPeso: ' + element.weight + '\nAltura: ' + element.height + '\nCalorias diarias a consumir: ' + element.TDCI + '\nProteinas: ' + element.PROT + '\nCarbohidratos: ' + element.CARBS+ '\nGrasas: ' + element.FAT + '\n\n';
+        })
+        return info;*/
+        for (const key in array){
+            return ( `${key}: ${peopl[key]}\n` )
+        
+        }
+    }
 
