@@ -8,7 +8,7 @@ let goal = "";
 let level = "";
 let enter_patient = "";
 let options = "";
-let options_doc = "";
+let options_doc = 0;
 const peopl = [];
 
 
@@ -59,13 +59,15 @@ while(patient){
         do{
         let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1 - Ver todos los pacientes \n 2 - Ordenar de la A a la Z por apellido \n 3 - Ordenar de la Z a la A por apellido \n 4 - Filtrar por edad \n 5 - Filtrar por sexo \n 6 - Salir:  '));
          
-        if( options_doc <= 6){
-            alert(createString(Opt_doc(options_doc, peopl)));   
+        if( options_doc <= 6 && options_doc>=1){
+            console.log('Entro');
+    
+            console.log(createString(peopl));   
             
             }
         
 
-        }while(options_doc < 0 && options_doc > 6)
+        }while(options_doc <= 0 || options_doc > 6)
     }
     
     let userName = prompt("Ingresa el nombre del paciente: ");
@@ -329,7 +331,7 @@ function Opt_doc(option_doc, options_doc, peopl){
         })
         return info;*/
         for (const key in array){
-            return ( `${key}: ${peopl[key]}\n` )
+            console.log(`${key}: ${array[key]}\n`);
         
         }
     }
