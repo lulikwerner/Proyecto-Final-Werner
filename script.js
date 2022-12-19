@@ -9,9 +9,8 @@ let level = "";
 let enter_patient = "";
 let options = "";
 let options_doc = 0;
-let genderf = "";
-let agesf = 0;
 const peopl = [];
+
 
 
 
@@ -61,11 +60,11 @@ while(patient){
         console.log(peopl);
         
         do{
-        let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1 - Ver todos los pacientes \n 2 - Ordenar de la A a la Z por apellido \n 3 - Ordenar de la Z a la A por apellido \n 4 - Filtrar por edad \n 5 - Filtrar por sexo \n 6 - Salir:  '));
+        let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1 - Ver todos los pacientes \n 2 - Ordenar de la A a la Z por apellido \n 3 - Ordenar de la Z a la A por apellido \n 4 - Filtrar por edad \n 5 - Filtrar por sexo \n 6 - Salir  '));
          
         if( options_doc <= 6 && options_doc>=1){
             console.log('Entro');
-            console.log(createString(Opt_doc(options_doc,peopl)));   
+            console.log(createString(Opt_doc(options_doc, peopl)));   
             
             }
         
@@ -173,8 +172,8 @@ do {
                 );
                
                 peopl.push(macro_1);
-                console.log(peopl);
-                console.log(macro_1.macro);
+                ver = macro_1.macro;
+                JSON.stringify(peopl);  
                 
                 
             }
@@ -302,15 +301,18 @@ function Carbs(TDCI, Fat, Protein){
  return CARBS.toFixed(2);
 }
 
+
+
 function Opt_doc(options_doc, array){
-   
+    let genderf = "";
+    let agesf = 0;
     switch(true){
         case options_doc == 1:
             peopl.forEach(element => alert(element));
         case options_doc == 2:
-            return  array.sort((a,b)=>b.lastName.localeCompare(a.lastName));
-        case options_doc == 3:
             return  array.sort((a,b)=>a.lastName.localeCompare(b.lastName));
+        case options_doc == 3:
+            return  array.sort((a,b)=>b.lastName.localeCompare(a.lastName));
         case options_doc == 4:
             agesf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '));
             let ageFilter = array.filter(agesf => { agesf == agesf});
@@ -330,10 +332,10 @@ function Opt_doc(options_doc, array){
     }
 
     function createString(array){
-    
-        for (const key in array){
-            JSON.stringify(array[key])
-        
-        }
+    let info ='';
+        array.forEach(element =>
+            info += 'Nombre: ' + element.userName + '\n' + 'Apellido: ' + element.lastName + '\n'+ 'Edad: ' + element.age + '\n' + 'Genero: ' + element.gender + '\n' + 'Peso: ' + element.weight + '\n' + 'Altura: ' + element.height + '\n' + 'Calorias diarias: ' + element.TDCI + '\n' + 'Proteinas diarias: ' + element.Prot + ' gr \n' + 'Carbs diarios: ' + element.Carbs + ' gr \n'+ 'Grasas  diarias: ' + element.Fat + ' gr \n\n');
+            alert(info);
+        return info;
     }
-
+    
