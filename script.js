@@ -320,14 +320,14 @@ function Opt_doc(options_doc, array){
             return  array.sort((a,b)=>b.lastName.localeCompare(a.lastName));
 
         case options_doc == 3:
-            agesf = parseInt(prompt('Ingrese la edad de pacientes que desea obtener: '));
-            return array.filter(a=> { a.age == agesf});
-           
+            agesf = prompt('Ingrese la edad de pacientes que desea obtener: ');
+            return array.filter(a=>  a.age == agesf);
+         
 
        case options_doc == 4:
             do{
                 genderf =prompt('Ingrese el sexo del pacientes que desea obtener F para femenino o m para masculino: ').toUpperCase();
-                return array.filter(genderf => { a.gender == genderf});
+                return array.filter(a =>  a.gender == genderf);
                 
             }while( genderf !='M' && genderf !='F')
         
@@ -342,7 +342,7 @@ function Opt_doc(options_doc, array){
     function createString(array){
     let info ='';
         array.forEach(element =>
-            info += 'Nombre: ' + element.userName + '\n' + 'Apellido: ' + element.lastName + '\n'+ 'Edad: ' + element.age + '\n' + 'Genero: ' + element.gender + '\n' + 'Calorias diarias: ' + element.TDCI + '\n' + 'Proteinas diarias: ' + element.Prot + ' gr \n' + 'Carbs diarios: ' + element.Carbs + ' gr \n'+ 'Grasas  diarias: ' + element.Fat + ' gr \n\n');
+            info += 'Nombre: ' + element.userName + '\n' + 'Apellido: ' + element.lastName + '\n'+ 'Edad: ' + element.age + '\n' + 'Genero: ' + element.gender + '\n' + 'Calorias diarias: ' + element.TDCI + '\n' + 'Proteinas diarias: ' + element.PROT + ' gr \n' + 'Carbs diarios: ' + element.CARBS + ' gr \n'+ 'Grasas  diarias: ' + element.FAT + ' gr \n\n');
             alert(info);
         return info;
     }
