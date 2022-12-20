@@ -9,7 +9,7 @@ let level = "";
 let enter_patient = "";
 let options = "";
 let options_doc = 0;
-const peopl = [];
+let peopl = [];
 
 
 
@@ -52,15 +52,10 @@ class Person {
 }
 
 let patient = true;
-/*peopl = [
-    new Person("Sophie", "Werner", "F",  70, 1.7, 32, 1234 , 23, 45, 600 ),
-    new Person("Thomas", "Perez", "M",  98, 1.9, 28, 1900 , 123, 78, 950 ),
-    new Person("Juan", "Fernandez", "M",  89, 1.87, 40, 1350 , 785, 56, 340 ),
-    new Person("Felicitas", "Zabuleta", "F",  50, 1.66, 18, 1200 , 985, 87, 506 ),
-];*/
+
 while(patient){
     let enter_patient = prompt('Desea ingresar un nuevo paciente (SI/NO): ');
-
+ 
     if(enter_patient.toUpperCase() == 'NO'){
         patient = false;
         console.log(peopl);
@@ -161,8 +156,16 @@ do {
                 console.log("El carbs intake  es " + carbsIntake + " gramos");
                 alert(userName + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
 
+             
+                /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
+                peopl = [
+                    new Person("Sophie", "Werner", "F",  70, 1.7, 32, 1234 , 23, 45, 600 ),
+                    new Person("Thomas", "Perez", "M",  98, 1.9, 28, 1900 , 123, 78, 950 ),
+                    new Person("Juan", "Fernandez", "M",  89, 1.87, 40, 1350 , 785, 56, 340 ),
+                    new Person("Felicitas", "Zabuleta", "F",  50, 1.66, 18, 1200 , 985, 87, 506 ),
+                        ];
+
                 /*Devuelve la MACRO de la persona que se ingreso*/
-                
                 let macro_1 = new Person(
                     userName,
                     lastName,
@@ -175,9 +178,15 @@ do {
                     FAT,
                     PROT
                 );
-               
+              
+                /*Subo al array el nuevo "paciente"*/
                 peopl.push(macro_1);
+                console.log(peopl);
+
+                /*Muestro por consola el mensaje de get macro*/
                 ver = macro_1.macro;
+
+                /*Convierto el array en un string*/
                 JSON.stringify(peopl);  
                 
                 
@@ -192,6 +201,7 @@ do {
 }
 
 
+/*Funcion para calcular el BMR*/ 
 function calculate_BMR(gender, heightSelector, weight, height, age) {
     if (
         (gender == "M" ) &&
@@ -217,6 +227,7 @@ function calculate_BMR(gender, heightSelector, weight, height, age) {
     return BMR.toFixed(2);
 }
 
+/*Funcion para calcular el TDEE*/ 
 function calculate_TDEE(BMR, lifestyle) {
     if (lifestyle == "A" || lifestyle == "a") {
         TDEE = BMR * 1.35;
@@ -228,6 +239,7 @@ function calculate_TDEE(BMR, lifestyle) {
     return Number(TDEE).toFixed(2);
 }
 
+/*Funcion para calcular el consumo de calorias diarias*/ 
 function calculate_TDCI(TDEE, heightSelector, weight, goal, level) {
     switch (true) {
         case goal == 1 && (heightSelector == "P"):
@@ -281,6 +293,7 @@ function calculate_TDCI(TDEE, heightSelector, weight, goal, level) {
     return Number(TDCI).toFixed(2);
 }
 
+/*Funcion para calcular el consumo de proteinas diarias*/ 
 function Protein(heightSelector, weight) {
     if (heightSelector == "P" ) {
         PROT = 1 * weight;
@@ -292,6 +305,7 @@ function Protein(heightSelector, weight) {
     return Number(PROT).toFixed(2);
 }
 
+/*Funcion para calcular el consumo de grasas diarias*/ 
 function Fat(TDCI, goal) {
     if (goal == 1) {
         FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9;
@@ -301,13 +315,13 @@ function Fat(TDCI, goal) {
     return Number(FAT).toFixed(2);
 }
 
+/*Funcion para calcular el consumo de carbohidratos diarias*/ 
 function Carbs(TDCI, Fat, Protein){
  CARBS =((TDCI / 4) - Fat - Protein);
  return CARBS.toFixed(2);
 }
 
-
-
+/*Funcion con las distintas opciones que tiene el medico para ver la informacion*/ 
 function Opt_doc(options_doc, array){
     let genderf = "";
     let agesf = 0;
@@ -321,8 +335,7 @@ function Opt_doc(options_doc, array){
 
         case options_doc == 3:
             agesf = prompt('Ingrese la edad de pacientes que desea obtener: ');
-            return array.filter(a=>  a.age == agesf);
-         
+            return array.filter(a=>  a.age == agesf);        
 
        case options_doc == 4:
             do{
@@ -331,15 +344,15 @@ function Opt_doc(options_doc, array){
                 
             }while( genderf !='M' && genderf !='F')
         
-            case  options_doc == 5:
-                alert('Gracias por su consulta. Adios')
-                break;
-            }
-            
+        case  options_doc == 5:
+            alert('Gracias por su consulta. Adios')
+            break;
 
+            }
     }
 
-    function createString(array){
+/*Funcion que me trae como va a ver el usuario la informacion*/ 
+function createString(array){
     let info ='';
         array.forEach(element =>
             info += 'Nombre: ' + element.userName + '\n' + 'Apellido: ' + element.lastName + '\n'+ 'Edad: ' + element.age + '\n' + 'Genero: ' + element.gender + '\n' + 'Calorias diarias: ' + element.TDCI + '\n' + 'Proteinas diarias: ' + element.PROT + ' gr \n' + 'Carbs diarios: ' + element.CARBS + ' gr \n'+ 'Grasas  diarias: ' + element.FAT + ' gr \n\n');
