@@ -327,11 +327,10 @@ function enter(){
 function consult(array){
     do{
        options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1  - Ordenar de la A a la Z por apellido \n 2 - Ordenar de la Z a la A por apellido \n 3 - Filtrar por edad \n 4 - Filtrar por sexo \n 5 - Salir  '));
-         console.log(typeof(options_doc))
         if( options_doc < 5 && options_doc>=1){
             console.log(createString(Opt_doc(options_doc, array)));   
         }else if( options_doc == 5){
-                alert('Gracias por su consulta. Adiossssp')
+                alert('Gracias por su consulta. Adios')
                 break;
         }
 
