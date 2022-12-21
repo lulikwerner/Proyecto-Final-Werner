@@ -1,4 +1,3 @@
-
 let gender = "";
 let heightSelector = "";
 let weight = "";
@@ -9,8 +8,6 @@ let level = "";
 let enter_patient = "";
 let options = "";
 let options_doc = 0;
-let peopl = [];
-
 
 
 
@@ -51,6 +48,15 @@ class Person {
 
 }
 
+  /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
+  let peopl = [
+    new Person("Sophie", "Werner", "F",  70, 1.7, 32, 1234 , 23, 45, 600 ),
+    new Person("Thomas", "Perez", "M",  98, 1.9, 28, 1900 , 123, 78, 950 ),
+    new Person("Juan", "Fernandez", "M",  89, 1.87, 40, 1350 , 785, 56, 340 ),
+    new Person("Felicitas", "Zabuleta", "F",  50, 1.66, 18, 1200 , 985, 87, 506 ),
+        ];
+
+
 let patient = true;
 
 while(patient){
@@ -58,7 +64,6 @@ while(patient){
  
     if(enter_patient.toUpperCase() == 'NO'){
         patient = false;
-        console.log(peopl);
         
         do{
         let options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1  - Ordenar de la A a la Z por apellido \n 2 - Ordenar de la Z a la A por apellido \n 3 - Filtrar por edad \n 4 - Filtrar por sexo \n 5 - Salir  '));
@@ -67,6 +72,7 @@ while(patient){
             console.log(createString(Opt_doc(options_doc, peopl)));   
             
             }
+            
         
 
         }while(options_doc <= 0 || options_doc > 5)
@@ -157,14 +163,7 @@ do {
                 alert(userName + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
 
              
-                /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
-                peopl = [
-                    new Person("Sophie", "Werner", "F",  70, 1.7, 32, 1234 , 23, 45, 600 ),
-                    new Person("Thomas", "Perez", "M",  98, 1.9, 28, 1900 , 123, 78, 950 ),
-                    new Person("Juan", "Fernandez", "M",  89, 1.87, 40, 1350 , 785, 56, 340 ),
-                    new Person("Felicitas", "Zabuleta", "F",  50, 1.66, 18, 1200 , 985, 87, 506 ),
-                        ];
-
+              
                 /*Devuelve la MACRO de la persona que se ingreso*/
                 let macro_1 = new Person(
                     userName,
@@ -334,8 +333,16 @@ function Opt_doc(options_doc, array){
             return  array.sort((a,b)=>b.lastName.localeCompare(a.lastName));
 
         case options_doc == 3:
+            const newArrayp = [];
             agesf = prompt('Ingrese la edad de pacientes que desea obtener: ');
-            return array.filter(a=>  a.age == agesf);        
+            /*Guardo en un nuevo array para poder mostrar en pantalla solo lo filtrado*/
+            array.forEach((patient) => {
+                if (patient.age === agesf) {
+                    newArrayp.push(patient);
+                    console.log(newArrayp)
+                }
+            });
+            return array.filter(a=>  a.age == agesf); 
 
        case options_doc == 4:
             do{
@@ -350,6 +357,24 @@ function Opt_doc(options_doc, array){
 
             }
     }
+
+
+    const miPropioFilter = (array, dato) => {
+        const nuevoArray = [];
+        
+        array.forEach((producto) => {
+            if (producto.age === dato) {
+                nuevoArray.push(producto);
+            }
+        });
+    
+        return nuevoArray;
+    };
+    
+
+    
+
+
 
 /*Funcion que me trae como va a ver el usuario la informacion*/ 
 function createString(array){
