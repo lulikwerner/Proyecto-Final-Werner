@@ -13,7 +13,7 @@
     color: $primarycolor;
     background-image: linear-gradient($background, $background),
       url("/static/background.png");
-    background-position: cover;
+    background-position: center;
     background-size: cover;
     overflow: scroll;
   }

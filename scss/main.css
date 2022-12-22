@@ -29,7 +29,7 @@ footer {
   color: #fff;
   height: 15%;
   width: 98%;
-  bottom: -5%;
+  bottom: -10%;
 }
 
 /*Index Grids*/
@@ -110,51 +110,16 @@ footer {
     visibility: visible;
   }
 }
-/*Footer image*/
-footer div img {
-  height: 60px;
-  width: 60px;
-  margin-top: 20px;
-  margin-right: 100px;
-  -webkit-animation: moveright 1s linear 1;
-          animation: moveright 1s linear 1;
-  -webkit-animation-delay: 2.7s;
-          animation-delay: 2.7s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  visibility: hidden;
-}
-@-webkit-keyframes moveright {
-  0% {
-    transform: translateX(-100px);
-    visibility: visible;
-  }
-  100% {
-    transform: translateX(0);
-    visibility: visible;
-  }
-}
-@keyframes moveright {
-  0% {
-    transform: translateX(-100px);
-    visibility: visible;
-  }
-  100% {
-    transform: translateX(0);
-    visibility: visible;
-  }
-}
-
 /*Menu*/
 .menu {
   grid-area: navbar;
   display: flex;
   list-style-type: none;
-  margin-left: 80%;
-  margin-top: -49%;
+  margin-right: 30000%;
+  margin-top: -50%;
 }
 .menu li {
-  margin-left: 20%;
+  margin-left: 10%;
   float: left;
 }
 .menu a {
@@ -203,9 +168,23 @@ footer div img {
   height: 110vh;
   width: 110%;
   font-family: "Montserrat", sans-serif;
-  color: gray;
+  color: lightgray;
   background-image: linear-gradient(rgba(5, 0, 136, 0.5), rgba(5, 0, 136, 0.5)), url("/static/background.png");
-  background-position: cover;
+  background-position: center;
   background-size: cover;
   overflow: scroll;
+}
+
+.form {
+  margin-top: 3%;
+  margin-left: 35%;
+  align-items: center;
+  grid-area: form;
+}
+
+.spc {
+  margin-left: 5%;
+}
+.spc label {
+  margin-left: 10%;
 }/*# sourceMappingURL=main.css.map */

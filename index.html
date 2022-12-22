@@ -16,7 +16,7 @@
                 <li class="logo"><a href="./index.html" ><img
                     href="./index.html" src="./static/logo.png"
                     alt="Muscle logo"></li></a>
-            </div>
+           
 
             
                 <ul class = "menu">
@@ -27,10 +27,11 @@
             </nav>
         </header>
         <main>
-            <section>
+            <section class="form">
                 <form action="" method="'GET">
-                    <fieldset>
-                        <legend>Informacion del paciente:</legend>
+                    <fieldset class="op">
+                        <h1>Informacion del paciente:</h1>
+                        <br>
                         <div>
                             <label for="">Nombre:</label>
                         </div>
@@ -55,7 +56,7 @@
                         <br>
 
                         <label>Sexo:</label>
-                        <div>
+                        <div class="spc">
                             <label for="sexo_h">hombre</label>
                             <input type="radio" name="sexo" value="hombre"
                                 id="sexo_h">
@@ -66,7 +67,9 @@
                         <br>
 
                         <div>
-                            <h2>Elija como quiere ingresar la informacion</h2>
+                            <h3>Elija como quiere ingresar la informacion</h3>
+                            <br> 
+                            <div class="spc">
                             <label for="pounds">lbs</label>
                             <input type="radio" name="metrics" value="lbs"
                                 id="pounds">
@@ -74,10 +77,11 @@
                             <input type="radio" name="metrics" value="kls"
                                 id="kilos">
                         </div>
-                        
+                    </div>
                         <br>
                         <div>
-                            <h2> Ingrese su nivel de actividad: </h2>
+                            <h3> Ingrese su nivel de actividad: </h3>
+                            <br>
                             <select name=" ">
                                 <option value="sedent">Sedentaria</option>
                                 <option value="moderate">Moderada</option>
@@ -86,8 +90,10 @@
                         </div>
 
                         <br>
-                        <div>
-                            <h2> Ingrese su meta: </h2>
+                        <div >
+                            <h3> Ingrese su meta: </h3>
+                            <br>    
+                            <div class="spc">
                             <label for="shred">Bajar de peso</label>
                             <input type="radio" name="goal" value="shred"
                                 id="shred">
@@ -95,8 +101,11 @@
                             <input type="radio" name="goal" value="gains"
                                 id="gains">
                         </div>
+                    </div>
+                        <br>
                         <div data-hide-if="goal:shred">
-                            <h2> Ingrese el nivel de entrenamiento: </h2>
+                            <h3> Ingrese el nivel de entrenamiento: </h3>
+                            <br>
                             <select name=" ">
                                 <option value="Beginner">Principiante</option>
                                 <option value="novice">Novato</option>
@@ -105,7 +114,7 @@
                             </select>
                         </div>
                 
-
+                    </div>
                         <div>
 
                         </div>

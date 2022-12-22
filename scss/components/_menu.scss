@@ -3,19 +3,18 @@
     grid-area: navbar;
     display: flex;
     list-style-type: none;
-    margin-left: 80%;
-    margin-top: -49%;
+    margin-right: 30000%;
+    margin-top: -50%;
     li {
     
      
-        margin-left: 20%;
+      margin-left: 10%;
       float: left;
     }
     a {
       display: block;
       position: relative;
       text-align: center;
-
       font-size: medium;
       color: $solidbutton;
       text-decoration: none;
