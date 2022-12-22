@@ -1,0 +1,19 @@
+
+* {
+    margin: 0;
+    padding: 0px;
+    border: 2px;
+    box-sizing: border-box;
+  }
+  .bar {
+    display: absolute;
+    height: 110vh;
+    width: 110%;
+    font-family: "Montserrat", sans-serif;
+    color: $primarycolor;
+    background-image: linear-gradient($background, $background),
+      url("/static/background.png");
+    background-position: cover;
+    background-size: cover;
+    overflow: scroll;
+  }

@@ -1,0 +1,53 @@
+
+/*Navbar logo*/
+.logo img {
+    display: flex;
+    height: 80px;
+    width: 100px;
+    margin-top: -13%;
+    margin-left: 5%;
+    animation: movedown 1s linear 1;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    visibility: hidden;
+  }
+  @keyframes movedown {
+    0% {
+      transform: translateY(-100px);
+      visibility: visible;
+    }
+  
+    100% {
+      transform: translateY(0);
+      visibility: visible;
+    }
+  }
+  
+
+  /*Footer image*/
+footer {
+    div {
+      img {
+        height: 60px;
+        width: 60px;
+        margin-top: 20px;
+        margin-right: 100px;
+        animation: moveright 1s linear 1;
+        animation-delay: 2.7s;
+        animation-fill-mode: forwards;
+        visibility: hidden;
+      }
+  
+      @keyframes moveright {
+        0% {
+          transform: translateX(-100px);
+          visibility: visible;
+        }
+  
+        100% {
+          transform: translateX(0);
+          visibility: visible;
+        }
+      }
+    }
+  }

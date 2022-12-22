@@ -1,0 +1,211 @@
+/*Navbar*/
+.nav-bar {
+  grid: navbar;
+  z-index: 99;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 15vh;
+  width: 100%;
+  margin-top: 1%;
+  list-style: none;
+  border-radius: 30px 20px 30px 30px;
+}
+.nav-bar:hover {
+  height: 15vh;
+  width: 100%;
+  margin-left: -2%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*Footer*/
+footer {
+  grid: footer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  color: #fff;
+  height: 15%;
+  width: 98%;
+  bottom: -5%;
+}
+
+/*Index Grids*/
+.bar {
+  display: grid;
+  grid-template-areas: "navbar" "form" "footer";
+  grid-template-columns: 2fr;
+  grid-template-rows: 90px 180px 60px;
+  width: 100%;
+  height: 120vh;
+  margin-top: -5%;
+  margin-left: -2%;
+  padding: 5%;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  -webkit-animation: slideleft 1s linear forwards;
+          animation: slideleft 1s linear forwards;
+  -webkit-animation-delay: 1.6s;
+          animation-delay: 1.6s;
+  visibility: hidden;
+}
+
+@-webkit-keyframes slideleft {
+  0% {
+    transform: translateX(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translatex(0);
+    visibility: visible;
+  }
+}
+
+@keyframes slideleft {
+  0% {
+    transform: translateX(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translatex(0);
+    visibility: visible;
+  }
+}
+/*Navbar logo*/
+.logo img {
+  display: flex;
+  height: 80px;
+  width: 100px;
+  margin-top: -13%;
+  margin-left: 5%;
+  -webkit-animation: movedown 1s linear 1;
+          animation: movedown 1s linear 1;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  visibility: hidden;
+}
+
+@-webkit-keyframes movedown {
+  0% {
+    transform: translateY(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+@keyframes movedown {
+  0% {
+    transform: translateY(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+/*Footer image*/
+footer div img {
+  height: 60px;
+  width: 60px;
+  margin-top: 20px;
+  margin-right: 100px;
+  -webkit-animation: moveright 1s linear 1;
+          animation: moveright 1s linear 1;
+  -webkit-animation-delay: 2.7s;
+          animation-delay: 2.7s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  visibility: hidden;
+}
+@-webkit-keyframes moveright {
+  0% {
+    transform: translateX(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+@keyframes moveright {
+  0% {
+    transform: translateX(-100px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+/*Menu*/
+.menu {
+  grid-area: navbar;
+  display: flex;
+  list-style-type: none;
+  margin-left: 80%;
+  margin-top: -49%;
+}
+.menu li {
+  margin-left: 20%;
+  float: left;
+}
+.menu a {
+  display: block;
+  position: relative;
+  text-align: center;
+  font-size: medium;
+  color: white;
+  text-decoration: none;
+  list-style: none;
+  -webkit-animation: movedown 1s linear 1;
+          animation: movedown 1s linear 1;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  visibility: hidden;
+}
+.menu a:after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  transition: 0.3s ease-in-out;
+}
+.menu a:hover {
+  color: #fff;
+}
+.menu a:hover:after {
+  width: 100%;
+  color: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0px;
+  border: 2px;
+  box-sizing: border-box;
+}
+
+.bar {
+  display: absolute;
+  height: 110vh;
+  width: 110%;
+  font-family: "Montserrat", sans-serif;
+  color: gray;
+  background-image: linear-gradient(rgba(5, 0, 136, 0.5), rgba(5, 0, 136, 0.5)), url("/static/background.png");
+  background-position: cover;
+  background-size: cover;
+  overflow: scroll;
+}/*# sourceMappingURL=main.css.map */

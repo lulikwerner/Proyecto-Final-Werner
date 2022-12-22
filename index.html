@@ -1,13 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="./script.js"></script>
-    <title>Consultas</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script defer src="./script.js"></script>
+        <link rel="stylesheet" href="./scss/main.css">
+        <title>Consultas</title>
+        <link rel="icon" href="./static/logo.svg">
+    </head>
+    <body>
+<div class = bar>
+        <header>
+            <nav class = "nav-bar">
+                <li class="logo"><a href="./index.html" ><img
+                    href="./index.html" src="./static/logo.png"
+                    alt="Muscle logo"></li></a>
+            </div>
+
+            
+                <ul class = "menu">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="#">Formulario</a></li>
+
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <form action="" method="'GET">
+                    <fieldset>
+                        <legend>Informacion del paciente:</legend>
+                        <div>
+                            <label for="">Nombre:</label>
+                        </div>
+
+                        <div>
+                            <input type="text" placeholder="Nombre">
+                        </div>
+                        <br>
+                        <div>
+                            <label for="">Apellido:</label>
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Apellido">
+                        </div>
+                        <br>
+                        <div>
+                            <label for="">Edad:</label>
+                        </div>
+                        <div>
+                            <input type="number" placeholder="Apellido">
+                        </div>
+                        <br>
+
+                        <label>Sexo:</label>
+                        <div>
+                            <label for="sexo_h">hombre</label>
+                            <input type="radio" name="sexo" value="hombre"
+                                id="sexo_h">
+                            <label for="sexo_m">mujer</label>
+                            <input type="radio" name="sexo" value="mujer"
+                                id="sexo_m">
+                        </div>
+                        <br>
+
+                        <div>
+                            <h2>Elija como quiere ingresar la informacion</h2>
+                            <label for="pounds">lbs</label>
+                            <input type="radio" name="metrics" value="lbs"
+                                id="pounds">
+                            <label for="kilos">kg</label>
+                            <input type="radio" name="metrics" value="kls"
+                                id="kilos">
+                        </div>
+                        
+                        <br>
+                        <div>
+                            <h2> Ingrese su nivel de actividad: </h2>
+                            <select name=" ">
+                                <option value="sedent">Sedentaria</option>
+                                <option value="moderate">Moderada</option>
+                                <option value="active">Activa</option>
+                            </select>
+                        </div>
+
+                        <br>
+                        <div>
+                            <h2> Ingrese su meta: </h2>
+                            <label for="shred">Bajar de peso</label>
+                            <input type="radio" name="goal" value="shred"
+                                id="shred">
+                            <label for="gains">Ganar masa muscular</label>
+                            <input type="radio" name="goal" value="gains"
+                                id="gains">
+                        </div>
+                        <div data-hide-if="goal:shred">
+                            <h2> Ingrese el nivel de entrenamiento: </h2>
+                            <select name=" ">
+                                <option value="Beginner">Principiante</option>
+                                <option value="novice">Novato</option>
+                                <option value="intermediate">Intermedio</option>
+                                <option value="advance">Avanzado</option>
+                            </select>
+                        </div>
+                
+
+                        <div>
+
+                        </div>
+
+                        <br>
+                        <button>Enviar</button>
+
+                    </fieldset>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <section>
+                    <a>  © 2022 Copyright: </a>
+            </section>
+        </footer>
+    </div>
+    </body>
 </html>
