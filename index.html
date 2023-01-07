@@ -21,68 +21,66 @@
             
                 <ul class = "menu">
                     <li><a href="../index.html">Inicio</a></li>
-                    <li><a href="#">Formulario</a></li>
+                    <li><a href="#">Log In</a></li>
 
                 </ul>
             </nav>
         </header>
         <main>
-            <section class="form">
-                <form action="" method="'GET">
+        
+
+ <section class="form">
+                <form action="/redireccion" method="'GET" id="form_cal">
                     <fieldset class="op">
                         <h1>Informacion del paciente:</h1>
                         <br>
                         <div>
-                            <label for="">Nombre:</label>
-                        </div>
-
-                        <div>
-                            <input type="text" placeholder="Nombre">
-                        </div>
-                        <br>
-                        <div>
-                            <label for="">Apellido:</label>
-                        </div>
-                        <div>
-                            <input type="text" placeholder="Apellido">
+                            <label for="">Nombre completo:</label>
+                            <input type="text" placeholder="Nombre" id="name" required>
+                            <input type="text" placeholder="Apellido" id="last_name" required>
                         </div>
                         <br>
                         <div>
                             <label for="">Edad:</label>
-                        </div>
-                        <div>
-                            <input type="number" placeholder="Apellido">
+                            <input type="number" placeholder="Edad" id="age_in" required>
                         </div>
                         <br>
-
-                        <label>Sexo:</label>
-                        <div class="spc">
+                        <section id = "gender" >
+                            <label>Sexo:</label>
+                            <input  class = "male" type="radio" name="sexo" value="hombre" id="sexo_h">
                             <label for="sexo_h">hombre</label>
-                            <input type="radio" name="sexo" value="hombre"
-                                id="sexo_h">
+                            <input class = "female" type="radio" name="sexo" value="mujer" id="sexo_m">
                             <label for="sexo_m">mujer</label>
-                            <input type="radio" name="sexo" value="mujer"
-                                id="sexo_m">
-                        </div>
+
+                        </section>
                         <br>
 
-                        <div>
+                        <section>
                             <h3>Elija como quiere ingresar la informacion</h3>
                             <br> 
-                            <div class="spc">
-                            <label for="pounds">lbs</label>
-                            <input type="radio" name="metrics" value="lbs"
-                                id="pounds">
-                            <label for="kilos">kg</label>
-                            <input type="radio" name="metrics" value="kls"
-                                id="kilos">
+                            <div class="spc" required>
+                            <input type="radio" name="metrics" value="lbs" id="pounds">
+                            <label for="pounds">lbs/pies</label>
+                            <input type="radio" name="metrics" value="kls" id="kilos">
+                            <label for="kilos">kg/metros</label>
                         </div>
-                    </div>
+                        <section >
+                            <br>
+                        <div class="spc_btw">
+                            <label for="">Ingrese su peso:</label>
+                            <label for="">Ingrese su altura:</label>
+                        </div>
+                        <div class="spc_btw">
+                            <input class = "weights" type="text" placeholder="Peso">
+                            <input class = "heights" type="text" placeholder="Altura">
+                        </div>
+                    </section>
+                    </section>
                         <br>
                         <div>
                             <h3> Ingrese su nivel de actividad: </h3>
                             <br>
-                            <select name=" ">
+                            <select name=" " id = "activity">
                                 <option value="sedent">Sedentaria</option>
                                 <option value="moderate">Moderada</option>
                                 <option value="active">Activa</option>
@@ -93,37 +91,35 @@
                         <div >
                             <h3> Ingrese su meta: </h3>
                             <br>    
-                            <div class="spc">
+                            <div class="spc_2">
+                            <input type="radio" name="goal" value="shred" id="shred">
                             <label for="shred">Bajar de peso</label>
-                            <input type="radio" name="goal" value="shred"
-                                id="shred">
+                            <input type="radio" name="goal" value="gains" id="gains">
                             <label for="gains">Ganar masa muscular</label>
-                            <input type="radio" name="goal" value="gains"
-                                id="gains">
                         </div>
                     </div>
                         <br>
                         <div >
                             <h3> Ingrese el nivel de entrenamiento: </h3>
                             <br>
-                            <select name=" ">
-                                <option value="Beginner">Principiante</option>
+                            <select name=" " id = "train_level">
+                                <option value="beginner">Principiante</option>
                                 <option value="novice">Novato</option>
                                 <option value="intermediate">Intermedio</option>
                                 <option value="advance">Avanzado</option>
                             </select>
                         </div>
-                
-                    </div>
-                        <div>
-
-                        </div>
-
                         <br>
-                        <button>Enviar</button>
-
+                <div>
+                    <button type="submit"   class="butt_send">Enviar</button>
+                </div>
+                    </div>
                     </fieldset>
                 </form>
+                <!--Aca voy a mostrar la informacion del FORMULARIO-->
+                <div class="table">
+                <div class="info"></div>
+                </div>
             </section>
         </main>
         <footer>

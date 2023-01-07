@@ -69,94 +69,82 @@ do{
 
 function enter(){
 
-        let userName = prompt("Ingresa el nombre del paciente: ");
-        console.log(userName);
-        let lastName = prompt("Ingresa el apellido del paciente: ");
-        console.log(lastName);
-        let age = parseInt(prompt("Ingrese la edad del paciente: "));
-        console.log(age);
-       
-    
-    do {
-        gender = prompt(' Ingrese el sexo de la persona "M" para masculino o "F" para femenino: ').toUpperCase();
-        console.log(gender);
-        
-        if (gender === "M" ||  gender === "F" ) {
-            do {
-                heightSelector = prompt(
-                    ' Para ingresar la altura en pies escribir "P" si prefiere ingresar la altura en metros ingresar "Me": '
-                ).toUpperCase();
-                console.log(heightSelector);
-                if (
-                    heightSelector == "P" ||
-                    heightSelector == "ME"
-                    ){
-                    if (heightSelector == "P") {
-                        height = parseFloat(prompt("Ingrese la altura en Pies: "));
-                        console.log(height);
-                        weight = parseFloat(prompt("Ingrese el peso en libras: "));
-                        console.log(weight);
-                    } else if (
-                        heightSelector == "ME" 
-                        ){
-                        height = parseFloat(prompt("Ingrese la altura en Metros: "));
-                        console.log(height);
-                        weight = parseFloat(prompt("Ingrese el peso en kilogramos: "));
-                        console.log(weight);
-                    }
+    let userName = document.querySelector("#name");
+    let lastName = document.querySelector("#last_name");
+    let age = document.querySelector("#age_in");
+
+//Eventos
+userName.addEventListener("input",function(){
+    if(userName.value ===""){
+        alert("Por favor ingrese un nombre")
+    }
+});
+
+lastName.addEventListener("input",function(){
+    if(lastName.value ===""){
+        alert("Por favor ingrese un apellido")
+    }
+});
+age.addEventListener("input",function(){
+    if(age.value ===""){
+        alert("Por favor ingrese un dato valido")
+    }
+});
+
+
+    let gender = document.querySelector('input[name="sexo"]:checked').value;
+    console.log(gender);
+    let metric = document.querySelector('input[name="metrics"]:checked').value;
+    console.log(metric);
+    let weight = document.querySlecetor(".weights");
+    console.log(weight);
+    let height = document.querySelector(".heights");
+    console.log(age);
+
+
                  
-                    /*Calcula el BMR*/
-                    var metabolic = calculate_BMR(gender, heightSelector, weight, height, age);
-                    /*alert('Su BMR es ' + metabolic)*/
-                    console.log("El BMR es " + metabolic);
-                    lifestyle = prompt(
-                        "Ingrese una de las siguientes opciones, si el estilo de vida de " + userName + " es :\n A) Sedentaria\n B) Trabaja en oficina y va mas de  3 veces a la semana al gimnasio\n C) Es activa y va 4 o mas veces a la semana al gimnasio "
-                    );
-                    console.log(lifestyle);
+    /*Calcula el BMR*/
+    var metabolic = calculate_BMR(gender, metric, weight, height, age);
+    /*alert('Su BMR es ' + metabolic)*/
+    console.log("El BMR es " + metabolic);
+    let lifestyle = document.querySelector("#activity").value
+    console.log(lifestyle);
     
-                    /*Calcula el TDEE*/
-                    var energy = Number(calculate_TDEE(metabolic, lifestyle));
-                    console.log("El TDEE de es " + energy);
-                    alert("El TDEE  de " + userName + " es " + energy);
+    /*Calcula el TDEE*/
+    var energy = Number(calculate_TDEE(metabolic, lifestyle));
+    console.log("El TDEE de es " + energy);
+    alert("El TDEE  de " + userName + " es " + energy);
     
-                    /*Calcula el TDCI*/
-                    goal = parseInt(
-                        prompt(
-                            "Ingrese:\n 1) Si la meta es bajar de peso\n 2) Si la meta es ganar musculo "
-                        )
-                    );
-                    console.log(goal);
-                    if (goal == 2) {
-                        level = parseInt(
-                            prompt(
-                                "Ingrese el nivel para:\n 1)  Beginner\n 2)  Novice\n 3)  Intermedio\n 4)   Avanzado "
-                            )
-                        );
-                    }
+    /*Calcula el TDCI*/
+    let goal = document.querySelector('input[name="goal"]:checked').value
+    console.log(goal);
+    if (goal == "gains") {
+        let level = document.querySelector("#train_level").value
+    }
     
-                    var calorieIntake = calculate_TDCI(energy, heightSelector, weight, goal, level);
-                    console.log("El TDCI de es " + calorieIntake + " calorias");
-                    alert(userName + " Deberia consumir por dia " + calorieIntake + " calorias");
+    var calorieIntake = calculate_TDCI(energy, metric, weight, goal, level);
+    console.log("El TDCI de es " + calorieIntake + " calorias");
+    alert(userName + " Deberia consumir por dia " + calorieIntake + " calorias");
     
-                    /*Calcula la Proteina*/
-                    var proteinIntake = Protein(heightSelector, weight);
-                    console.log("El PROTEIN intake es  " + proteinIntake + " gramos");
-                    alert(userName + " Deberia consumir por dia " + proteinIntake + " de proteina");
+    /*Calcula la Proteina*/
+    var proteinIntake = Protein(metric, weight);
+    console.log("El PROTEIN intake es  " + proteinIntake + " gramos");
+    alert(userName + " Deberia consumir por dia " + proteinIntake + " de proteina");
     
-                    /*Calcula el FAT intake*/
-                    var fatIntake = Fat(calorieIntake, goal);
-                    console.log("El FAT intake  es " + fatIntake + " gramos");
-                    alert(userName + " Deberia consumir por dia " + fatIntake + " gramos de fat");
+    /*Calcula el FAT intake*/
+    var fatIntake = Fat(calorieIntake, goal);
+    console.log("El FAT intake  es " + fatIntake + " gramos");
+    alert(userName + " Deberia consumir por dia " + fatIntake + " gramos de fat");
     
-                    /*Calcula los CARBS*/
-                    var carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake)
-                    console.log("El carbs intake  es " + carbsIntake + " gramos");
-                    alert(userName + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
+    /*Calcula los CARBS*/
+    var carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake)
+    console.log("El carbs intake  es " + carbsIntake + " gramos");
+    alert(userName + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
     
                  
                   
-                    /*Devuelve la MACRO de la persona que se ingreso*/
-                    let macro_1 = new Person(
+    /*Devuelve la MACRO de la persona que se ingreso*/
+    let macro_1 = new Person(
                         userName,
                         lastName,
                         gender,
@@ -169,54 +157,35 @@ function enter(){
                         PROT
                     );
                   
-                    /*Subo al array el nuevo "paciente"*/
-                    peopl.push(macro_1);
-                    console.log(peopl);
+    /*Subo al array el nuevo "paciente"*/
+    peopl.push(macro_1);
+    console.log(peopl);
     
-                    /*Muestro por consola el mensaje de get macro*/
-                    ver = macro_1.macro;
+    /*Muestro por consola el mensaje de get macro*/
+    ver = macro_1.macro;
     
-                    /*Convierto el array en un string*/
-                    JSON.stringify(peopl);  
-                    
-                    
-                }
-            } while (
-                heightSelector != "P" &&
-                heightSelector != "ME" 
-            );
-        }
-    
-    
-    
-        
-    } while (gender != "M" && gender != "F" );
-    
-    
-    
-    
-    
+    /*Convierto el array en un string*/
+    JSON.stringify(peopl);                     
+ }
+
+
     
     /*Funcion para calcular el BMR*/ 
-    function calculate_BMR(gender, heightSelector, weight, height, age) {
+    function calculate_BMR(gender, metric, weight, height, age) {
         if (
-            (gender == "M" ) &&
-            (heightSelector == "P" )
+            (gender == "hombre") && (metric =="lbs")
         ) {
             BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * age;
         } else if (
-            (gender == "M" ) &&
-            (heightSelector == "ME" )
+            (gender == "hombre") && (metric =="kls")
         ) {
             BMR = 66 + 13.7 * weight + 5 * height - 6.8 * age;
         } else if (
-            (gender == "F" ) &&
-            (heightSelector == "P" )
+            (gender == "mujer") && (metric =="lbs")
         ) {
             BMR = 655 + 4.4 * weight + 4.6 * height - 4.7 * age;
         } else if (
-            (gender == "F" ) &&
-            (heightSelector == "ME")
+            (gender == "mujer") && (metric =="kls")
         ) {
             BMR = 655 + 9.6 * weight + 1.8 * height - 4.7 * age;
         }
@@ -225,64 +194,64 @@ function enter(){
     
     /*Funcion para calcular el TDEE*/ 
     function calculate_TDEE(BMR, lifestyle) {
-        if (lifestyle == "A" || lifestyle == "a") {
+        if (lifestyle == "sedent") {
             TDEE = BMR * 1.35;
-        } else if (lifestyle == "B" || lifestyle == "b") {
+        } else if (lifestyle == "moderate") {
             TDEE = BMR * 1.55;
-        } else if (lifestyle == "C" || lifestyle == "c") {
+        } else if (lifestyle == "active") {
             TDEE = BMR * 1.75;
         }
         return Number(TDEE).toFixed(2);
     }
     
     /*Funcion para calcular el consumo de calorias diarias*/ 
-    function calculate_TDCI(TDEE, heightSelector, weight, goal, level) {
+    function calculate_TDCI(TDEE, metric, weight, goal, level) {
         switch (true) {
-            case goal == 1 && (heightSelector == "P"):
+            case (goal == "shred") && (metric == "lbs"):
                 TDCI = TDEE - weight * 0.00075 * 500;
                 break;
-            case goal == 1 &&
-                ( heightSelector == "ME" ):
+            case (goal == "shred") &&
+                ( metric == "kls" ):
                 TDCI = TDEE - weight * 0.00075 * 1100;
                 break;
-            case goal == 2 &&
-                level == 1 &&
-                (heightSelector == "P" ):
+            case (goal == "gains") &&
+                (level == "begginer") &&
+                (metric == "lbs" ):
                 TDCI = TDEE + weight * 0.02 * 150;
                 break;
-            case goal == 2 &&
-                level == 2 &&
-                (heightSelector == "P" ):
+            case (goal == "gains") &&
+                (level == "novice") &&
+                (metric == "lbs"):
                 TDCI = TDEE + weight * 0.015 * 150;
                 break;
-            case goal == 2 &&
-                level == 3 &&
-                (heightSelector == "P" ):
+            case (goal == "gains") &&
+                (level == "intermediate") &&
+                (metric == "lbs" ):
                 TDCI = TDEE + weight * 0.01 * 150;
                 break;
-            case goal == 2 &&
-                level == 4 &&
-                (heightSelector == "P" ):
+            case (goal == "gains") &&
+                (level == "advance") &&
+                (metric == "lbs" ):
                 TDCI = TDEE + weight * 0.005 * 150;
                 break;
-            case goal == 2 &&
-                level == 1 &&
-                ( heightSelector == "ME" ):
-                TDCI = Number(TDEE) + weight * 0.02 * 150;
+            case (goal == "gains") &&
+                 (level == "begginer") &&
+                 ( metric == "kls" ):
+                 TDCI = Number(TDEE) + weight * 0.02 * 150;
                 break;
-            case goal == 2 &&
-                level == 2 &&
-                (heightSelector == "ME" ):
+            case (goal == "gains") &&
+                (level == "novice") &&
+                (metric == "kls" ):
                 TDCI = TDEE + weight * 0.015 * 150;
                 break;
-            case goal == 2 &&
-                level == 3 &&
-                ( heightSelector == "ME" ):
+            case (goal == "gains") &&
+                (level == "intermediate") &&
+                ( metric == "kls" ):
                 TDCI = TDEE + weight * 0.01 * 150;
                 break;
-            case goal == 2 &&
-                level == 4 &&
-                ( heightSelector == "ME" ):
+            case (goal == "gains") &&
+            (level == "advance") &&
+                ( metric == "kls" ):
                 TDCI = TDEE + weight * 0.005 * 150;
                 break;
         }
@@ -290,11 +259,11 @@ function enter(){
     }
     
     /*Funcion para calcular el consumo de proteinas diarias*/ 
-    function Protein(heightSelector, weight) {
-        if (heightSelector == "P" ) {
+    function Protein(metric, weight) {
+        if (metric == "lbs" ) {
             PROT = 1 * weight;
         } else if (
-            heightSelector == "ME"
+            metric == "kls"
         ) {
             PROT = 2.2 * weight;
         }
@@ -303,9 +272,9 @@ function enter(){
     
     /*Funcion para calcular el consumo de grasas diarias*/ 
     function Fat(TDCI, goal) {
-        if (goal == 1) {
+        if (goal == "shred") {
             FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9;
-        } else if (goal == 2) {
+        } else if (goal == "gains") {
             FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9;
         }
         return Number(FAT).toFixed(2);
@@ -316,13 +285,31 @@ function enter(){
      CARBS =((TDCI / 4) - Fat - Protein);
      return CARBS.toFixed(2);
     }
-    
-   
-    
 
 
 
-}
+ //Agrego la informacion del formulario en el DOM
+ let forms = document.querySelector("#form_cal");
+ let info = document.querySelector(".info");
+
+ const showInfo = forms.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    info.innerHTML = `
+    <div class ="alert alert-warning" role="alert">
+    <h5> Muchas gracias ${userName.value} nos contactaremos</h5></div>`
+ });
+
+
+
+
+
+
+
+
+
+
+
 
 function consult(array){
     do{
@@ -399,3 +386,4 @@ function createString(array){
         return info;
     }
     
+

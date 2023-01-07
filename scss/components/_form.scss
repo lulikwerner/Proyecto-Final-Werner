@@ -1,12 +1,42 @@
 .form{
+    grid-area: form;
     margin-top:3%;
     margin-left: 35%;
     align-items: center;
     grid-area: form;
 }
 .spc{
-    margin-left: 5%;
+    margin-left: 2%;
+    input{
+    margin-left: 14%;
+    }
+    label{
+        margin-left: 2%;
+    }
+}
+.spc_btw{
+    margin-left: -12%;
     label{
         margin-left: 10%;
+}
+
+}
+.weights{
+    margin-left: 10%;
+}
+.heights{
+    margin-left: 7%;
+}
+.male{
+    margin-left: 8%;
+
+}
+.female{
+    margin-left: 10%;
+}
+.spc_2{
+    margin-left: 8%;
+    input{
+        margin-left: 5%;
     }
 }

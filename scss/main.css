@@ -38,7 +38,7 @@ footer {
   display: grid;
   grid-template-areas: "navbar" "form" "footer";
   grid-template-columns: 2fr;
-  grid-template-rows: 90px 180px 60px;
+  grid-template-rows: 15% 85% 5%;
   width: 100%;
   height: 120vh;
   margin-top: -5%;
@@ -74,6 +74,10 @@ footer {
     visibility: visible;
   }
 }
+.col {
+  width: 20%;
+}
+
 /*Navbar logo*/
 .logo img {
   display: flex;
@@ -157,6 +161,59 @@ footer {
   color: #fff;
 }
 
+.butt_send {
+  width: 50%;
+  color: red;
+}
+
+.form {
+  grid-area: form;
+  margin-top: 3%;
+  margin-left: 35%;
+  align-items: center;
+  grid-area: form;
+}
+
+.spc {
+  margin-left: 2%;
+}
+.spc input {
+  margin-left: 14%;
+}
+.spc label {
+  margin-left: 2%;
+}
+
+.spc_btw {
+  margin-left: -12%;
+}
+.spc_btw label {
+  margin-left: 10%;
+}
+
+.weights {
+  margin-left: 10%;
+}
+
+.heights {
+  margin-left: 7%;
+}
+
+.male {
+  margin-left: 8%;
+}
+
+.female {
+  margin-left: 10%;
+}
+
+.spc_2 {
+  margin-left: 8%;
+}
+.spc_2 input {
+  margin-left: 5%;
+}
+
 * {
   margin: 0;
   padding: 0px;
@@ -166,26 +223,12 @@ footer {
 
 .bar {
   display: absolute;
-  height: 110vh;
+  height: 120vh;
   width: 110%;
   font-family: "Montserrat", sans-serif;
   color: lightgray;
-  background-image: linear-gradient(rgba(5, 0, 136, 0.5), rgba(5, 0, 136, 0.5)), url("/static/background.png");
+  background-image: linear-gradient(rgba(5, 0, 136, 0.5), rgba(5, 0, 136, 0.5)), url("/PreEntrega2-Werner/static/background.png");
   background-position: center;
   background-size: cover;
   overflow: scroll;
-}
-
-.form {
-  margin-top: 3%;
-  margin-left: 35%;
-  align-items: center;
-  grid-area: form;
-}
-
-.spc {
-  margin-left: 5%;
-}
-.spc label {
-  margin-left: 10%;
 }/*# sourceMappingURL=main.css.map */
