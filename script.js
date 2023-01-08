@@ -1,18 +1,8 @@
+let BMR ='';
+let TDCI ='';
+let PROT ='';
+let FAT = '';
 
-let heightSelector = "";
-let weight = "";
-let height = "";
-let lifestyle = "";
-let goal = "";
-let level = "";
-let enter_patient = "SI";
-let options = "";
-let options_doc = 0;
-let lastName ="";
-let userName="";
-let age = 0;
-let gend = "";
-let mea =0;
 class Person {
     
 
@@ -32,7 +22,7 @@ class Person {
     get macro() {
         alert(
             "" +
-            this.userName + " " + this.lastName + " " +
+            this.userName.value + " " + this.lastName.value + " " +
             this.age +
             " anios de edad. Deberia consumir por dia " +
             this.TDCI +
@@ -57,25 +47,16 @@ class Person {
             ];
 
 
-
-do{
-    enter_patient = prompt('Desea ingresar un nuevo paciente (SI/NO): ').toUpperCase();
-    if(enter_patient =='SI'){
-            enter();
-    }else if(enter_patient =='NO'){
-         consult(peopl);
-    }
-}while(enter_patient!='NO')
-
-function enter(){
-
-    let userName = document.querySelector("#name");
-    let lastName = document.querySelector("#last_name");
-    let age = document.querySelector("#age_in");
-
+let userName = document.querySelector("#name");
+let lastName = document.querySelector("#last_name");
+let age = document.querySelector("#age_in");
+let gender = document.querySelector('input[name="sexo"]:checked');
+let metric = document.querySelector('input[name="metrics"]:checked');
+let weight = document.querySelector(".weights");
+let height = document.querySelector(".heights");
 //Eventos
 userName.addEventListener("input",function(){
-    if(userName.value ===""){
+  if(userName.value ===""){
         alert("Por favor ingrese un nombre")
     }
 });
@@ -85,21 +66,8 @@ lastName.addEventListener("input",function(){
         alert("Por favor ingrese un apellido")
     }
 });
-age.addEventListener("input",function(){
-    if(age.value ===""){
-        alert("Por favor ingrese un dato valido")
-    }
-});
 
 
-    let gender = document.querySelector('input[name="sexo"]:checked').value;
-    console.log(gender);
-    let metric = document.querySelector('input[name="metrics"]:checked').value;
-    console.log(metric);
-    let weight = document.querySlecetor(".weights");
-    console.log(weight);
-    let height = document.querySelector(".heights");
-    console.log(age);
 
 
                  
@@ -108,38 +76,50 @@ age.addEventListener("input",function(){
     /*alert('Su BMR es ' + metabolic)*/
     console.log("El BMR es " + metabolic);
     let lifestyle = document.querySelector("#activity").value
-    console.log(lifestyle);
+
     
     /*Calcula el TDEE*/
     var energy = Number(calculate_TDEE(metabolic, lifestyle));
     console.log("El TDEE de es " + energy);
-    alert("El TDEE  de " + userName + " es " + energy);
+    alert("El TDEE  de " + userName.value + " es " + energy);
     
     /*Calcula el TDCI*/
-    let goal = document.querySelector('input[name="goal"]:checked').value
+    let goal = document.querySelector('input[name="goal"]:checked');
     console.log(goal);
-    if (goal == "gains") {
-        let level = document.querySelector("#train_level").value
+    let level = document.querySelector(".train_level").value
+
+    if (goal === "shred") {
+   
+        level.innerHTML = `<select name=" " >
+        <h3> Ingrese el nivel de entrenamiento: </h3>
+        <br>
+    <option value="beginner">Principiante</option>
+    <option value="novice">Novato</option>
+    <option value="intermediate">Intermedio</option>
+    <option value="advance">Avanzado</option>;
+    </select>`;
     }
+   
+
     
     var calorieIntake = calculate_TDCI(energy, metric, weight, goal, level);
     console.log("El TDCI de es " + calorieIntake + " calorias");
-    alert(userName + " Deberia consumir por dia " + calorieIntake + " calorias");
+    alert(userName.value + " Deberia consumir por dia " + calorieIntake + " calorias");
     
     /*Calcula la Proteina*/
     var proteinIntake = Protein(metric, weight);
     console.log("El PROTEIN intake es  " + proteinIntake + " gramos");
-    alert(userName + " Deberia consumir por dia " + proteinIntake + " de proteina");
+    alert(userName.value + " Deberia consumir por dia " + proteinIntake + " de proteina");
     
     /*Calcula el FAT intake*/
     var fatIntake = Fat(calorieIntake, goal);
     console.log("El FAT intake  es " + fatIntake + " gramos");
-    alert(userName + " Deberia consumir por dia " + fatIntake + " gramos de fat");
+    alert(userName.value + " Deberia consumir por dia " + fatIntake + " gramos de fat");
     
     /*Calcula los CARBS*/
     var carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake)
     console.log("El carbs intake  es " + carbsIntake + " gramos");
-    alert(userName + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
+    alert(userName.value + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
     
                  
                   
@@ -166,7 +146,7 @@ age.addEventListener("input",function(){
     
     /*Convierto el array en un string*/
     JSON.stringify(peopl);                     
- }
+ 
 
 
     
@@ -175,21 +155,21 @@ age.addEventListener("input",function(){
         if (
             (gender == "hombre") && (metric =="lbs")
         ) {
-            BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * age;
+            BMR = 66 + 6.2 * Number(weight) + 12.7 * Number(height) - 6.8 * Number(age);
         } else if (
             (gender == "hombre") && (metric =="kls")
         ) {
-            BMR = 66 + 13.7 * weight + 5 * height - 6.8 * age;
+            BMR = 66 + 13.7 * Number(weight) + 5 * Number(height) - 6.8 * Number(age);
         } else if (
             (gender == "mujer") && (metric =="lbs")
         ) {
-            BMR = 655 + 4.4 * weight + 4.6 * height - 4.7 * age;
+            BMR = 655 + 4.4 * Number(weight) + 4.6 * Number(height) - 4.7 * Number(age);
         } else if (
             (gender == "mujer") && (metric =="kls")
         ) {
-            BMR = 655 + 9.6 * weight + 1.8 * height - 4.7 * age;
+            BMR = 655 + 9.6 * Number(weight)+ 1.8 * Number(height) - 4.7 * Number(age);
         }
-        return BMR.toFixed(2);
+        return Number(BMR).toFixed(2);
     }
     
     /*Funcion para calcular el TDEE*/ 
@@ -296,8 +276,24 @@ age.addEventListener("input",function(){
     e.preventDefault();
 
     info.innerHTML = `
-    <div class ="alert alert-warning" role="alert">
-    <h5> Muchas gracias ${userName.value} nos contactaremos</h5></div>`
+    <div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">${userName.value}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+>`
  });
 
 
@@ -307,7 +303,7 @@ age.addEventListener("input",function(){
 
 
 
-
+/*
 
 
 
@@ -327,7 +323,7 @@ function consult(array){
 
 
 
- /*Funcion con las distintas opciones que tiene el medico para ver la informacion*/ 
+ /*Funcion con las distintas opciones que tiene el medico para ver la informacion
  function Opt_doc(options_doc, array){
     let genderf = "";
     let agesf = 0;
@@ -342,7 +338,7 @@ function consult(array){
         case options_doc == 3:
             const newArrayp = [];
             agesf = prompt('Ingrese la edad de pacientes que desea obtener: ');
-            /*Guardo en un nuevo array para poder mostrar en pantalla solo lo filtrado*/
+            /*Guardo en un nuevo array para poder mostrar en pantalla solo lo filtrado
             array.forEach((patient) => {
                 if (patient.age === agesf) {
                     newArrayp.push(patient);
@@ -377,7 +373,7 @@ const miPropioFilter = (array, dato) => {
 
 
 
-/*Funcion que me trae como va a ver el usuario la informacion*/ 
+/*Funcion que me trae como va a ver el usuario la informacion
 function createString(array){
     let info ='';
         array.forEach(element =>
@@ -385,5 +381,4 @@ function createString(array){
             alert(info);
         return info;
     }
-    
-
+    */
