@@ -2,6 +2,9 @@ let BMR = '';
 let TDCI ='';
 let PROT ='';
 let FAT = '';
+let gender = '';
+let metric = '';
+
 
 
 
@@ -53,7 +56,7 @@ class Person {
 
 let userName = document.querySelector("#name");
 let lastName = document.querySelector("#last_name");
-let age = parseInt(document.querySelector("#age_in").value);
+let age = document.getElementById('ages').value;
 let weight = parseInt(document.querySelector(".weights").value);
 let height = parseInt(document.querySelector(".heights").value);
 //Eventos
@@ -79,19 +82,18 @@ const showInfo = forms.addEventListener("submit", function(e){
 //Traigo el valor del gender seleccionado
     const genderInputs = document.getElementsByName('sexo');
     let gender='' ;
-
+    
     for (i = 0; i < genderInputs.length; i++) {
         if (genderInputs[i].checked) {
-         gender = genderInputs[i];
+         gender = genderInputs[i].value;
         } 
     }
  // Traigo el valor de la metrica seleccionada
     const metricInputs =document.getElementsByName('metrics');
     let  metric='';
-
-    for (x = 0; i < metricInputs.length; x++) {
+    for (x = 0; x < metricInputs.length; x++) {
         if (metricInputs[x].checked) {
-            metric = metricInputs[x];
+            metric = metricInputs[x].value;
         }
     }
 
@@ -101,7 +103,7 @@ let  goal='';
 
 for (z = 0; i < goalInputs.length; z++) {
     if (goalInputs[z].checked) {
-        goal = goalInputs[z];
+        goal = goalInputs[z].value;
     }
 }
 
