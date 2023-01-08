@@ -76,7 +76,7 @@ let forms = document.querySelector("#form_cal");
 const showInfo = forms.addEventListener("submit", function(e){
     e.preventDefault();
 
-//Traigo el valor del input del gender
+//Traigo el valor del gender seleccionado
     const genderInputs = document.getElementsByName('sexo');
     let gender='' ;
 
@@ -85,15 +85,25 @@ const showInfo = forms.addEventListener("submit", function(e){
          gender = genderInputs[i];
         } 
     }
- // Traigo el valor del input de la metrica
+ // Traigo el valor de la metrica seleccionada
     const metricInputs =document.getElementsByName('metrics');
     let  metric='';
 
     for (x = 0; i < metricInputs.length; x++) {
         if (metricInputs[x].checked) {
-            metric = metricInputs[i];
+            metric = metricInputs[x];
         }
     }
+
+// Traigo el valor del goal
+const goalInputs =document.getElementsByName('goals');
+let  goal='';
+
+for (z = 0; i < goalInputs.length; z++) {
+    if (goalInputs[z].checked) {
+        goal = goalInputs[z];
+    }
+}
 
               
     /*Calcula el BMR*/
@@ -109,10 +119,8 @@ const showInfo = forms.addEventListener("submit", function(e){
     /*alert("El TDEE  de " + userName.value + " es " + energy);*/
     
     /*Calcula el TDCI*/
-    let goal = document.querySelector('input[name="goal"]:checked').value;
-    console.log(goal);
+  
     let level = document.querySelector(".train_level").value
-
     if (goal === "gains") {
    
         level.innerHTML = `<select name=" " >
@@ -178,6 +186,11 @@ const showInfo = forms.addEventListener("submit", function(e){
     
     /*Funcion para calcular el BMR*/ 
     function calculate_BMR(gender, metric, weight, height, age) {
+        console.log(gender);
+        console.log(metric);
+        console.log(age);
+        console.log(height);
+        console.log(weight);
         if (
             (gender === "hombre") && (metric ==="lbs")
             
