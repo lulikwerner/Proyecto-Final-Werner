@@ -2,8 +2,6 @@ let BMR = '';
 let TDCI ='';
 let PROT ='';
 let FAT = '';
-let gender = '';
-let metric = '';
 
 
 
@@ -56,15 +54,12 @@ class Person {
 
 let userName = document.querySelector("#name");
 let lastName = document.querySelector("#last_name");
-let age = document.getElementById('ages').value;
-let weight = parseInt(document.querySelector(".weights").value);
-let height = parseInt(document.querySelector(".heights").value);
+
 //Eventos
 userName.addEventListener("input",function(){
-    console.log(userName.value)
-  /*if(userName.value ===""){
+if(userName.value ===""){
         alert("Por favor ingrese un nombre")
-    }*/
+    }
 });
 
 lastName.addEventListener("input",function(){
@@ -73,10 +68,14 @@ lastName.addEventListener("input",function(){
     }
 });
 
+//Para mostrar la informacion del form
+
 let forms = document.querySelector("#form_cal");
 
-
 const showInfo = forms.addEventListener("submit", function(e){
+    const age = document.querySelector("#ages").value;
+    const weight = document.querySelector(".weights").value;
+    const height = document.querySelector(".heights").value;
     e.preventDefault();
 
 //Traigo el valor del gender seleccionado
@@ -97,15 +96,6 @@ const showInfo = forms.addEventListener("submit", function(e){
         }
     }
 
-// Traigo el valor del goal
-const goalInputs =document.getElementsByName('goals');
-let  goal='';
-
-for (z = 0; i < goalInputs.length; z++) {
-    if (goalInputs[z].checked) {
-        goal = goalInputs[z].value;
-    }
-}
 
               
     /*Calcula el BMR*/
@@ -121,19 +111,37 @@ for (z = 0; i < goalInputs.length; z++) {
     /*alert("El TDEE  de " + userName.value + " es " + energy);*/
     
     /*Calcula el TDCI*/
-  
-    let level = document.querySelector(".train_level").value
-    if (goal === "gains") {
-   
-        level.innerHTML = `<select name=" " >
-        <h3> Ingrese el nivel de entrenamiento: </h3>
-        <br>
-    <option value="beginner">Principiante</option>
-    <option value="novice">Novato</option>
-    <option value="intermediate">Intermedio</option>
-    <option value="advance">Avanzado</option>;
-    </select>`;
+
+    // Traigo el valor del goal y del html en donde voy a agregar las opciones
+    const level = document.querySelector(".train_level").value
+    const goalInputs =document.getElementsByName('goals');
+    let  goal='';
+    for (z = 0; z < goalInputs.length; z++) {
+    if (goalInputs[z].checked) {
+    goal = goalInputs[z].value;
+        }
     }
+
+    goalInputs.addEventListener("click",function onClick(){
+       level.innerHTML='';
+       console.log(goal);
+        if(goal ==="gains"){
+            level.innerHTML = `<select name=" " >
+            <h3> Ingrese el nivel de entrenamiento: </h3>
+            <br>
+        <option value="beginner">Principiante</option>
+        <option value="novice">Novato</option>
+        <option value="intermediate">Intermedio</option>
+        <option value="advance">Avanzado</option>;
+        </select>`;
+        }
+    });
+
+   
+    
+   
+   
+       
  
    
 
@@ -188,16 +196,10 @@ for (z = 0; i < goalInputs.length; z++) {
     
     /*Funcion para calcular el BMR*/ 
     function calculate_BMR(gender, metric, weight, height, age) {
-        console.log(gender);
-        console.log(metric);
-        console.log(age);
-        console.log(height);
-        console.log(weight);
         if (
             (gender === "hombre") && (metric ==="lbs")
             
         ) {
-            console.log('gender');
             BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * age;
         } else if (
             (gender === "hombre") && (metric ==="kls")
