@@ -2,10 +2,10 @@ let BMR ='';
 let TDCI ='';
 let PROT ='';
 let FAT = '';
-let age =0;
-let weight =0;
-let height =0;
-let metric ='';
+let gender = ''
+let  metric = '';
+
+
 
 
 class Person {
@@ -53,13 +53,10 @@ class Person {
 
 
 let userName = document.querySelector("#name");
-console.log(userName.value)
 let lastName = document.querySelector("#last_name");
- age = parseInt(document.querySelector("#age_in").value);
-let gender = document.querySelector('input[name="sexo"]:checked');
-metric = document.querySelector('input[name="metrics"]:checked');
- weight = parseInt(document.querySelector(".weights").value);
-height = parseInt(document.querySelector(".heights").value);
+let age = parseInt(document.querySelector("#age_in").value);
+let weight = parseInt(document.querySelector(".weights").value);
+let height = parseInt(document.querySelector(".heights").value);
 //Eventos
 userName.addEventListener("input",function(){
     console.log(userName.value)
@@ -79,6 +76,25 @@ let forms = document.querySelector("#form_cal");
 
 const showInfo = forms.addEventListener("submit", function(e){
     e.preventDefault();
+    const genderInputs = document.getElementsByName('sexo');
+  
+    
+   
+    for (i = 0; i < genderInputs.length; i++) {
+        if (genderInputs[i].checked) {
+            gender = genderInputs[i].value;
+        }return gender;
+    }
+
+    const metricInputs =document.getElementByName('metrics');
+
+    console.log(metric);
+
+    for (x = 0; i < metricInputs.length; x++) {
+        if (metricInputs[x].checked) {
+            metric = metricInputs[i];
+        }return metric;
+    }
 
               
     /*Calcula el BMR*/
@@ -163,12 +179,13 @@ const showInfo = forms.addEventListener("submit", function(e){
     
     /*Funcion para calcular el BMR*/ 
     function calculate_BMR(gender, metric, weight, height, age) {
-        
+
         if (
             (gender == "hombre") && (metric =="lbs")
             
         ) {
-            BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * Number(age);
+            console.log('geneder');
+            BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * age;
         } else if (
             (gender == "hombre") && (metric =="kls")
         ) {
