@@ -1,9 +1,8 @@
-let BMR ='';
+let BMR = '';
 let TDCI ='';
 let PROT ='';
 let FAT = '';
-let gender = ''
-let  metric = '';
+
 
 
 
@@ -76,24 +75,24 @@ let forms = document.querySelector("#form_cal");
 
 const showInfo = forms.addEventListener("submit", function(e){
     e.preventDefault();
+
+//Traigo el valor del input del gender
     const genderInputs = document.getElementsByName('sexo');
-  
-    
-   
+    let gender='' ;
+
     for (i = 0; i < genderInputs.length; i++) {
         if (genderInputs[i].checked) {
-            gender = genderInputs[i].value;
-        }return gender;
+         gender = genderInputs[i];
+        } 
     }
-
-    const metricInputs =document.getElementByName('metrics');
-
-    console.log(metric);
+ // Traigo el valor del input de la metrica
+    const metricInputs =document.getElementsByName('metrics');
+    let  metric='';
 
     for (x = 0; i < metricInputs.length; x++) {
         if (metricInputs[x].checked) {
             metric = metricInputs[i];
-        }return metric;
+        }
     }
 
               
@@ -179,23 +178,22 @@ const showInfo = forms.addEventListener("submit", function(e){
     
     /*Funcion para calcular el BMR*/ 
     function calculate_BMR(gender, metric, weight, height, age) {
-
         if (
-            (gender == "hombre") && (metric =="lbs")
+            (gender === "hombre") && (metric ==="lbs")
             
         ) {
-            console.log('geneder');
+            console.log('gender');
             BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * age;
         } else if (
-            (gender == "hombre") && (metric =="kls")
+            (gender === "hombre") && (metric ==="kls")
         ) {
             BMR = 66 + 13.7 * weight + 5 * height - 6.8 * age;
         } else if (
-            (gender == "mujer") && (metric =="lbs")
+            (gender === "mujer") && (metric ==="lbs")
         ) {
             BMR = 655 + 4.4 * weight + 4.6 * height - 4.7 * age;
         } else if (
-            (gender == "mujer") && (metric =="kls")
+            (gender === "mujer") && (metric ==="kls")
         ) {
             BMR = 655 + 9.6 * weight+ 1.8 * height - 4.7 * age;
         }
@@ -218,51 +216,51 @@ const showInfo = forms.addEventListener("submit", function(e){
     /*Funcion para calcular el consumo de calorias diarias*/ 
     function calculate_TDCI(TDEE, metric, weight, goal, level) {
         switch (true) {
-            case (goal == "shred") && (metric == "lbs"):
+            case (goal === "shred") && (metric === "lbs"):
                 TDCI = TDEE - weight * 0.00075 * 500;
                 break;
-            case (goal == "shred") &&
-                ( metric == "kls" ):
+            case (goal === "shred") &&
+                ( metric === "kls" ):
                 TDCI = TDEE - weight * 0.00075 * 1100;
                 break;
-            case (goal == "gains") &&
-                (level == "begginer") &&
-                (metric == "lbs" ):
+            case (goal === "gains") &&
+                (level === "begginer") &&
+                (metric === "lbs" ):
                 TDCI = TDEE + weight * 0.02 * 150;
                 break;
-            case (goal == "gains") &&
-                (level == "novice") &&
-                (metric == "lbs"):
+            case (goal === "gains") &&
+                (level === "novice") &&
+                (metric === "lbs"):
                 TDCI = TDEE + weight * 0.015 * 150;
                 break;
-            case (goal == "gains") &&
-                (level == "intermediate") &&
-                (metric == "lbs" ):
+            case (goal === "gains") &&
+                (level === "intermediate") &&
+                (metric === "lbs" ):
                 TDCI = TDEE + weight * 0.01 * 150;
                 break;
-            case (goal == "gains") &&
-                (level == "advance") &&
-                (metric == "lbs" ):
+            case (goal === "gains") &&
+                (level === "advance") &&
+                (metric === "lbs" ):
                 TDCI = TDEE + weight * 0.005 * 150;
                 break;
-            case (goal == "gains") &&
-                 (level == "begginer") &&
-                 ( metric == "kls" ):
+            case (goal === "gains") &&
+                 (level === "begginer") &&
+                 ( metric === "kls" ):
                  TDCI = Number(TDEE) + weight * 0.02 * 150;
                 break;
-            case (goal == "gains") &&
-                (level == "novice") &&
-                (metric == "kls" ):
+            case (goal === "gains") &&
+                (level === "novice") &&
+                (metric === "kls" ):
                 TDCI = TDEE + weight * 0.015 * 150;
                 break;
-            case (goal == "gains") &&
-                (level == "intermediate") &&
-                ( metric == "kls" ):
+            case (goal === "gains") &&
+                (level === "intermediate") &&
+                ( metric === "kls" ):
                 TDCI = TDEE + weight * 0.01 * 150;
                 break;
-            case (goal == "gains") &&
-            (level == "advance") &&
-                ( metric == "kls" ):
+            case (goal === "gains") &&
+            (level === "advance") &&
+                ( metric === "kls" ):
                 TDCI = TDEE + weight * 0.005 * 150;
                 break;
         }
@@ -283,9 +281,9 @@ const showInfo = forms.addEventListener("submit", function(e){
     
     /*Funcion para calcular el consumo de grasas diarias*/ 
     function Fat(TDCI, goal) {
-        if (goal == "shred") {
+        if (goal === "shred") {
             FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9;
-        } else if (goal == "gains") {
+        } else if (goal === "gains") {
             FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9;
         }
         return Number(FAT).toFixed(2);
