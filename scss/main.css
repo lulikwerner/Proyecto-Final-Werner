@@ -128,6 +128,7 @@ footer {
   float: left;
 }
 .menu a {
+  width: 90%;
   display: block;
   position: relative;
   text-align: center;

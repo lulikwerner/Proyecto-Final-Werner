@@ -2,6 +2,11 @@ let BMR ='';
 let TDCI ='';
 let PROT ='';
 let FAT = '';
+let age =0;
+let weight =0;
+let height =0;
+let metric ='';
+
 
 class Person {
     
@@ -19,7 +24,7 @@ class Person {
         this.PROT = parseInt (PROT);
     }
 
-    get macro() {
+   /* get macro() {
         alert(
             "" +
             this.userName.value + " " + this.lastName.value + " " +
@@ -35,7 +40,7 @@ class Person {
             " son gramos de carbs. " 
            
         );
-    }
+    }*/
 
 }
 
@@ -48,17 +53,19 @@ class Person {
 
 
 let userName = document.querySelector("#name");
+console.log(userName.value)
 let lastName = document.querySelector("#last_name");
-let age = document.querySelector("#age_in");
+ age = parseInt(document.querySelector("#age_in").value);
 let gender = document.querySelector('input[name="sexo"]:checked');
-let metric = document.querySelector('input[name="metrics"]:checked');
-let weight = document.querySelector(".weights");
-let height = document.querySelector(".heights");
+metric = document.querySelector('input[name="metrics"]:checked');
+ weight = parseInt(document.querySelector(".weights").value);
+height = parseInt(document.querySelector(".heights").value);
 //Eventos
 userName.addEventListener("input",function(){
-  if(userName.value ===""){
+    console.log(userName.value)
+  /*if(userName.value ===""){
         alert("Por favor ingrese un nombre")
-    }
+    }*/
 });
 
 lastName.addEventListener("input",function(){
@@ -67,10 +74,13 @@ lastName.addEventListener("input",function(){
     }
 });
 
+let forms = document.querySelector("#form_cal");
 
 
+const showInfo = forms.addEventListener("submit", function(e){
+    e.preventDefault();
 
-                 
+              
     /*Calcula el BMR*/
     var metabolic = calculate_BMR(gender, metric, weight, height, age);
     /*alert('Su BMR es ' + metabolic)*/
@@ -81,14 +91,14 @@ lastName.addEventListener("input",function(){
     /*Calcula el TDEE*/
     var energy = Number(calculate_TDEE(metabolic, lifestyle));
     console.log("El TDEE de es " + energy);
-    alert("El TDEE  de " + userName.value + " es " + energy);
+    /*alert("El TDEE  de " + userName.value + " es " + energy);*/
     
     /*Calcula el TDCI*/
-    let goal = document.querySelector('input[name="goal"]:checked');
+    let goal = document.querySelector('input[name="goal"]:checked').value;
     console.log(goal);
     let level = document.querySelector(".train_level").value
 
-    if (goal === "shred") {
+    if (goal === "gains") {
    
         level.innerHTML = `<select name=" " >
         <h3> Ingrese el nivel de entrenamiento: </h3>
@@ -99,27 +109,28 @@ lastName.addEventListener("input",function(){
     <option value="advance">Avanzado</option>;
     </select>`;
     }
+ 
    
 
     
     var calorieIntake = calculate_TDCI(energy, metric, weight, goal, level);
     console.log("El TDCI de es " + calorieIntake + " calorias");
-    alert(userName.value + " Deberia consumir por dia " + calorieIntake + " calorias");
+    /*alert(userName.value + " Deberia consumir por dia " + calorieIntake + " calorias");*/
     
     /*Calcula la Proteina*/
     var proteinIntake = Protein(metric, weight);
     console.log("El PROTEIN intake es  " + proteinIntake + " gramos");
-    alert(userName.value + " Deberia consumir por dia " + proteinIntake + " de proteina");
+    /*alert(userName.value + " Deberia consumir por dia " + proteinIntake + " de proteina");*/
     
     /*Calcula el FAT intake*/
     var fatIntake = Fat(calorieIntake, goal);
     console.log("El FAT intake  es " + fatIntake + " gramos");
-    alert(userName.value + " Deberia consumir por dia " + fatIntake + " gramos de fat");
+    /*alert(userName.value + " Deberia consumir por dia " + fatIntake + " gramos de fat");*/
     
     /*Calcula los CARBS*/
     var carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake)
     console.log("El carbs intake  es " + carbsIntake + " gramos");
-    alert(userName.value + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");
+    /*alert(userName.value + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");*/
     
                  
                   
@@ -147,29 +158,32 @@ lastName.addEventListener("input",function(){
     /*Convierto el array en un string*/
     JSON.stringify(peopl);                     
  
-
+    });
 
     
     /*Funcion para calcular el BMR*/ 
     function calculate_BMR(gender, metric, weight, height, age) {
+        
         if (
             (gender == "hombre") && (metric =="lbs")
+            
         ) {
-            BMR = 66 + 6.2 * Number(weight) + 12.7 * Number(height) - 6.8 * Number(age);
+            BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * Number(age);
         } else if (
             (gender == "hombre") && (metric =="kls")
         ) {
-            BMR = 66 + 13.7 * Number(weight) + 5 * Number(height) - 6.8 * Number(age);
+            BMR = 66 + 13.7 * weight + 5 * height - 6.8 * age;
         } else if (
             (gender == "mujer") && (metric =="lbs")
         ) {
-            BMR = 655 + 4.4 * Number(weight) + 4.6 * Number(height) - 4.7 * Number(age);
+            BMR = 655 + 4.4 * weight + 4.6 * height - 4.7 * age;
         } else if (
             (gender == "mujer") && (metric =="kls")
         ) {
-            BMR = 655 + 9.6 * Number(weight)+ 1.8 * Number(height) - 4.7 * Number(age);
+            BMR = 655 + 9.6 * weight+ 1.8 * height - 4.7 * age;
         }
-        return Number(BMR).toFixed(2);
+        return BMR;
+        
     }
     
     /*Funcion para calcular el TDEE*/ 
@@ -268,7 +282,7 @@ lastName.addEventListener("input",function(){
 
 
 
- //Agrego la informacion del formulario en el DOM
+ /*//Agrego la informacion del formulario en el DOM
  let forms = document.querySelector("#form_cal");
  let info = document.querySelector(".info");
 
