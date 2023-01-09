@@ -91,7 +91,6 @@ let forms = document.querySelector("#form_cal");
  // Traigo el valor de la metrica seleccionada
     const metricInputs =document.getElementsByName('metrics');
     let  metric='';
-    console.log(metric);
     for (x = 0; x < metricInputs.length; x++) {
         if (metricInputs[x].checked) {
             metric = metricInputs[x].value;
@@ -104,7 +103,7 @@ let forms = document.querySelector("#form_cal");
     var metabolic = calculate_BMR(gender, metric, weight, height, age);
     /*alert('Su BMR es ' + metabolic)*/
     console.log("El BMR es " + metabolic);
-    let lifestyle = document.querySelector("#activity").value
+    let lifestyle = document.querySelector("#activity").value;
 
     
     /*Calcula el TDEE*/
@@ -114,62 +113,38 @@ let forms = document.querySelector("#form_cal");
     
     /*Calcula el TDCI*/
 
+
+
     // Traigo el valor del goal y del html en donde voy a agregar las opciones
     const goalInputs =document.getElementsByName('goals');
-    console.log(goalInputs)
     let  goal='';
-    
+    let level ='';
     for (z = 0; z < goalInputs.length; z++) {
     if (goalInputs[z].checked) {
     goal = goalInputs[z].value;
     const inputLevel = document.querySelector(".train_level");
-   
-    if(goal ==="gains"){
-        
-        console.log('ok');
-        inputLevel.innerHTML = `<select name=" " id = "level"> 
-        <h3> Ingrese el nivel de entrenamiento: </h3>
-        <br>
-    <option value="beginner">Principiante</option>
-    <option value="novice">Novato</option>
-    <option value="intermediate">Intermedio</option>
-    <option value="advance">Avanzado</option>;
-    </select>`;
-    }
-    
-        }
-    }
-
     inputLevel.innerHTML='';
+    document.getElementById("gains").addEventListener("click", function(){
 
-
-
-   
-    
-
-    let level="";
-    for(p=0;p<goalInputs.length;p++){
-    goalInputs[p].addEventListener("click",()=>{
-
-        console.log(goalInputs);
-
-       
-        if(goalInputs[p].checked ==="gains"){
-            inputLevel.innerHTML = `<<select name=" " id = "level"> >
-            <h3> Ingrese el nivel de entrenamiento: </h3>
-            <br>
-        <option value="beginner">Principiante</option>
+   inputLevel.innerHTML = 
+   `<select name=" " id = "levels"> 
+   <h3> Ingrese el nivel de entrenamiento: </h3>
+   <br>
+        <option value="begginer">Principiante</option>
         <option value="novice">Novato</option>
         <option value="intermediate">Intermedio</option>
         <option value="advance">Avanzado</option>;
-        </select>`;
-        level = document.querySelector("#level");
-        console.log(level)
-        }else{
-            level.innerHTML='';
-        }console.log(inputGains);
-    });
+</select>`;
+    let level = document.querySelector("#levels").value;
+    console.log(level)
+    return level;
+     });
 }
+    
+    }
+
+   
+
    
     
    
@@ -179,22 +154,22 @@ let forms = document.querySelector("#form_cal");
    
 
     
-    var calorieIntake = calculate_TDCI(energy, metric, weight, goal, level);
+    let calorieIntake = calculate_TDCI(energy, metric, weight, goal, level);
     console.log("El TDCI de es " + calorieIntake + " calorias");
     /*alert(userName.value + " Deberia consumir por dia " + calorieIntake + " calorias");*/
     
     /*Calcula la Proteina*/
-    var proteinIntake = Protein(metric, weight);
+    let proteinIntake = Protein(metric, weight);
     console.log("El PROTEIN intake es  " + proteinIntake + " gramos");
     /*alert(userName.value + " Deberia consumir por dia " + proteinIntake + " de proteina");*/
     
     /*Calcula el FAT intake*/
-    var fatIntake = Fat(calorieIntake, goal);
+    let fatIntake = Fat(calorieIntake, goal);
     console.log("El FAT intake  es " + fatIntake + " gramos");
     /*alert(userName.value + " Deberia consumir por dia " + fatIntake + " gramos de fat");*/
     
     /*Calcula los CARBS*/
-    var carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake)
+    let carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake)
     console.log("El carbs intake  es " + carbsIntake + " gramos");
     /*alert(userName.value + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");*/
     
