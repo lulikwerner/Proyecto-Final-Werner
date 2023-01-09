@@ -72,10 +72,11 @@ lastName.addEventListener("input",function(){
 
 let forms = document.querySelector("#form_cal");
 
-const showInfo = forms.addEventListener("submit", function(e){
-    const age = document.querySelector("#ages").value;
-    const weight = document.querySelector(".weights").value;
-    const height = document.querySelector(".heights").value;
+    const showInfo = forms.addEventListener("submit", function(e){
+        
+    const age = parseFloat(document.querySelector("#ages").value);
+    const weight = parseFloat(document.querySelector(".weights").value);
+    const height = parseFloat(document.querySelector(".heights").value);
     e.preventDefault();
 
 //Traigo el valor del gender seleccionado
@@ -90,6 +91,7 @@ const showInfo = forms.addEventListener("submit", function(e){
  // Traigo el valor de la metrica seleccionada
     const metricInputs =document.getElementsByName('metrics');
     let  metric='';
+    console.log(metric);
     for (x = 0; x < metricInputs.length; x++) {
         if (metricInputs[x].checked) {
             metric = metricInputs[x].value;
@@ -113,20 +115,47 @@ const showInfo = forms.addEventListener("submit", function(e){
     /*Calcula el TDCI*/
 
     // Traigo el valor del goal y del html en donde voy a agregar las opciones
-    const level = document.querySelector(".train_level").value
     const goalInputs =document.getElementsByName('goals');
+    console.log(goalInputs)
     let  goal='';
+    
     for (z = 0; z < goalInputs.length; z++) {
     if (goalInputs[z].checked) {
     goal = goalInputs[z].value;
+    const inputLevel = document.querySelector(".train_level");
+   
+    if(goal ==="gains"){
+        
+        console.log('ok');
+        inputLevel.innerHTML = `<select name=" " id = "level"> 
+        <h3> Ingrese el nivel de entrenamiento: </h3>
+        <br>
+    <option value="beginner">Principiante</option>
+    <option value="novice">Novato</option>
+    <option value="intermediate">Intermedio</option>
+    <option value="advance">Avanzado</option>;
+    </select>`;
+    }
+    
         }
     }
 
-    goalInputs.addEventListener("click",function onClick(){
-       level.innerHTML='';
-       console.log(goal);
-        if(goal ==="gains"){
-            level.innerHTML = `<select name=" " >
+    inputLevel.innerHTML='';
+
+
+
+   
+    
+
+    let level="";
+    for(p=0;p<goalInputs.length;p++){
+    goalInputs[p].addEventListener("click",()=>{
+
+        console.log(goalInputs);
+
+       
+        if(goalInputs[p].checked ==="gains"){
+            inputLevel.innerHTML = `<<select name=" " id = "level"> >
             <h3> Ingrese el nivel de entrenamiento: </h3>
             <br>
         <option value="beginner">Principiante</option>
@@ -134,9 +163,13 @@ const showInfo = forms.addEventListener("submit", function(e){
         <option value="intermediate">Intermedio</option>
         <option value="advance">Avanzado</option>;
         </select>`;
-        }
+        level = document.querySelector("#level");
+        console.log(level)
+        }else{
+            level.innerHTML='';
+        }console.log(inputGains);
     });
-
+}
    
     
    
@@ -232,6 +265,10 @@ const showInfo = forms.addEventListener("submit", function(e){
     
     /*Funcion para calcular el consumo de calorias diarias*/ 
     function calculate_TDCI(TDEE, metric, weight, goal, level) {
+        console.log(goal);
+        console.log(TDEE);
+        console.log(level);
+        console.log(metric);
         switch (true) {
             case (goal === "shred") && (metric === "lbs"):
                 TDCI = TDEE - weight * 0.00075 * 500;
