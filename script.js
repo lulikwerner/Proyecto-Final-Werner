@@ -4,9 +4,13 @@ let PROT ='';
 let FAT = '';
 
 
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
 
-
-
+myModal.addEventListener('shown.bs.modal', () => {
+    $(document).off('focusin.modal');
+  myInput.focus()
+})
 
 class Person {
     
@@ -50,6 +54,9 @@ class Person {
                {userName: "Juan", lastName: "Fernandez", gender: "M", age: 39, weight: 1.87 , heihgt: 40 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
                {userName: "Felicitas", lastName: "Zabuleta", gender: "F", age: 50, weight: 1.66, height: 18, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')
+              })
 
 
 let userName = document.querySelector("#name");
@@ -122,23 +129,7 @@ let forms = document.querySelector("#form_cal");
     for (z = 0; z < goalInputs.length; z++) {
     if (goalInputs[z].checked) {
     goal = goalInputs[z].value;
-    const inputLevel = document.querySelector(".train_level");
-    inputLevel.innerHTML='';
-    document.getElementById("gains").addEventListener("click", function(){
 
-   inputLevel.innerHTML = 
-   `<select name=" " id = "levels"> 
-   <h3> Ingrese el nivel de entrenamiento: </h3>
-   <br>
-        <option value="begginer">Principiante</option>
-        <option value="novice">Novato</option>
-        <option value="intermediate">Intermedio</option>
-        <option value="advance">Avanzado</option>;
-</select>`;
-    let level = document.querySelector("#levels").value;
-    console.log(level)
-    return level;
-     });
 }
     
     }
@@ -200,6 +191,28 @@ let forms = document.querySelector("#form_cal");
     JSON.stringify(peopl);                     
  
     });
+
+
+    document.getElementById("gains").addEventListener("change", function(){
+    const inputLevel = document.querySelector(".train_level");
+    inputLevel.innerHTML='';
+    
+
+   inputLevel.innerHTML += 
+   `<select name=" " id = "levels"> 
+   <h3> Ingrese el nivel de entrenamiento: </h3>
+   <br>
+        <option value="begginer">Principiante</option>
+        <option value="novice">Novato</option>
+        <option value="intermediate">Intermedio</option>
+        <option value="advance">Avanzado</option>;
+</select>`;
+    let level = document.querySelector("#levels").value;
+    console.log(level)
+    return level;
+     });
+
+
 
     
     /*Funcion para calcular el BMR*/ 
@@ -325,13 +338,17 @@ let forms = document.querySelector("#form_cal");
     }
 
 
+const user = document.getElementById("userLogin");
+const pw = document.getElementById("pwLogin");
+const remember = document.getElementById("remember");
+
+
+
+
 
  /*//Agrego la informacion del formulario en el DOM
- let forms = document.querySelector("#form_cal");
- let info = document.querySelector(".info");
 
- const showInfo = forms.addEventListener("submit", function(e){
-    e.preventDefault();
+
 
     info.innerHTML = `
     <div class="modal" tabindex="-1">
@@ -361,7 +378,9 @@ let forms = document.querySelector("#form_cal");
 
 
 
+
 /*
+
 
 
 
@@ -440,3 +459,6 @@ function createString(array){
         return info;
     }
     */
+
+
+  
