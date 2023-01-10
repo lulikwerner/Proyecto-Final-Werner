@@ -68,6 +68,7 @@ const showInfo = forms.addEventListener("submit", function(e){
 
     const age = parseFloat(document.querySelector("#ages").value);
     const height = parseFloat(document.querySelector(".heights").value);
+    const weight = parseFloat(document.querySelector(".weights").value);
     const userName = document.querySelector("#name").value;
     const lastName = document.querySelector("#last_name").value;
     const userNamef = document.querySelector("#name");
@@ -353,6 +354,71 @@ document.getElementById("form_cal").reset();
     }
 
 
+
+//Log in
+coninform = document.getElementById('inform');
+toggles = document.querySelectorAll('.toggles')
+
+function saveLogin(userDB, storage){
+    const user={'email': userDB.email,
+                'pw': userDB.pw
+
+}
+storage.setItem('user',JSON.stringify(usuario));
+}
+
+function retriveUser(storage){
+    let userInStorage = JSON.parse(storage.getItem('user'));
+    return userInStorage
+}
+
+function showPatients(array){
+    continform.innerHTML='';
+    array.forEach(e =>{
+        i=1;
+        let html = `
+        <tbody class="e.userName">
+        <tr>
+        <td>{e.i}</td>
+        <td>{e.userName}</td>
+        <td>{e.lastName}</td>
+        <td>{e.rgender}</td>
+        <td>{e.age}</td>
+        <td>{e.weight}</td>
+        <td>{e.height}</td>
+        <td>{e.TDCI}</td>
+        <td>{e.CARBS}</td>
+        <td>{e.FAT}</td>
+        <td>{e.PROT}</td>
+        <td>@mdo</td>
+      </tr>
+      </tbody>
+   
+      `
+      i++;
+      continform.innerHTML +=html;
+    })
+}
+
+function magic(array, clase){
+    array.forEach(e =>{
+        e.classList.toggle(clase)
+    });
+}
+
+function validateUser(userDB){
+    let encontrado = userDB.find((userDB) =>userDB.email ==user);
+    if (typeof encontrado ==='undefined'){
+        return false;
+    }else{
+        if(encontrado.pw!='1234'){
+            return false;
+        }else{
+            return encontrado;
+
+}
+    }
+}
 
  /*//Agrego la informacion del formulario en el DOM
 
