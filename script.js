@@ -169,11 +169,10 @@ lastNamef.addEventListener("input",function(){
     JSON.stringify(peopl);     
     
     //Creo un modal mostrando la informacion de la persona ingresada
-  
-
+        
    
        const modal = document.createElement("div");
-    
+      
     
         modal.innerHTML += 
        `
@@ -190,7 +189,7 @@ lastNamef.addEventListener("input",function(){
                  <br>Carbohidratos: ${CARBS.toFixed(2)} gramos
                </div>
                <div class="modal-footer">
-               <button type="button" class="close btn btn-default" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">Cerrar</span></button>
+               <button type="button" class="close btn btn-default" data-dismiss="modal" aria-label="Cerrar" "><span aria-hidden="true">Cerrar</span></button>
                
                </div>
              </div>
@@ -208,16 +207,30 @@ lastNamef.addEventListener("input",function(){
      
   `;
 
+  $(document).ready(function() {             
+    $('#loginModal').modal('hide');
+      $(function () {
+        
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    });
 
 $(document).ready(function () {
-    $('#myModal').modal('show');
+    $('#myModal').modal('show');   
+    $('#myModal').modal('hide');
+    $(function () {
+      
+        modal.innerHTML ='';
+    })
 });  
+
+
+
 
 personalData.appendChild(modal);
 
 //Borra la info cargada en  el form
 document.getElementById("form_cal").reset();
-
     });
  
 
