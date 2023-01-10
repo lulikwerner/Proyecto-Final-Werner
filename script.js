@@ -24,21 +24,22 @@ class Person {
 
 }
 
-  /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
-  let peopl = [{userName: "Sophie", lastName: "Werner", gender: "F", age: 70, weight:1.7, height:32, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
+/*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
+let peopl = [{userName: "Sophie", lastName: "Werner", gender: "F", age: 70, weight:1.7, height:32, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
                {userName: "Thomas", lastName: "Perez", gender: "M", age: 18,weight: 1.9, height: 28, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
                {userName: "Juan", lastName: "Fernandez", gender: "M", age: 39, weight: 1.87 , heihgt: 40 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
                {userName: "Felicitas", lastName: "Zabuleta", gender: "F", age: 50, weight: 1.66, height: 18, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
 
 //Llama al modal del Login
-            $(document).ready(function() {             
-                $('#loginModal').modal('hide');
-                  $(function () {
-                    
-                    $('[data-toggle="tooltip"]').tooltip()
-                  })
-                });
+$(document).ready(function() {             
+    $('#loginModal').modal('hide');
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    });
+
 //Para el modal de data
 const personalData= document.querySelector("#data");
 
@@ -56,25 +57,24 @@ const showInfo = forms.addEventListener("submit", function(e){
     const userNamef = document.querySelector("#name");
     const lastNamef = document.querySelector("#last_name");
 
-//Eventos
-userNamef.addEventListener("input",function(){
-if(userNamef.value ===""){
-        alert("Por favor ingrese un nombre")
-    }
-});
+    //Eventos
+    userNamef.addEventListener("input",function(){
+    if(userNamef.value ===""){
+            alert("Por favor ingrese un nombre")
+        }
+    });
 
-lastNamef.addEventListener("input",function(){
-    if(lastName.value ===""){
-        alert("Por favor ingrese un apellido")
-    }
-});
+    lastNamef.addEventListener("input",function(){
+        if(lastName.value ===""){
+            alert("Por favor ingrese un apellido")
+        }
+    });
+
     e.preventDefault();
 
 
-
-
     
-//Traigo el valor del gender seleccionado
+    //Traigo el valor del gender seleccionado
     const genderInputs = document.getElementsByName('sexo');
     let gender='' ;
     
@@ -83,7 +83,7 @@ lastNamef.addEventListener("input",function(){
          gender = genderInputs[i].value;
         } 
     }
- // Traigo el valor de la metrica seleccionada
+    // Traigo el valor de la metrica seleccionada
     const metricInputs =document.getElementsByName('metrics');
     let  metric='';
     for (x = 0; x < metricInputs.length; x++) {
@@ -107,7 +107,6 @@ lastNamef.addEventListener("input",function(){
     /*alert("El TDEE  de " + userName.value + " es " + energy);*/
     
     /*Calcula el TDCI*/
-
 
 
     // Traigo el valor del goal 
@@ -169,8 +168,6 @@ lastNamef.addEventListener("input",function(){
     JSON.stringify(peopl);     
     
     //Creo un modal mostrando la informacion de la persona ingresada
-        
-   
        const modal = document.createElement("div");
       
     
@@ -195,9 +192,9 @@ lastNamef.addEventListener("input",function(){
              <br>Grasas Fat:${parseFloat(FAT).toFixed(2)} gramos
              <br>Carbohidratos: ${parseFloat(CARBS).toFixed(2)} gramos
            </div>
-           <div class="d-flex flex-column">
-           <p class="text-left">Para mas informacion logearse</p>
-           <a class="text-right" href="#loginModal" class="trigger-btn toggles" data-toggle="modal">Login </a>
+     
+           <div class="d-flex flex-column modal-footer">
+           <p class="text-left">Para ver otros pacientes por favor logearse</p>
            </div>
 
              
@@ -212,39 +209,25 @@ lastNamef.addEventListener("input",function(){
      
   `;
 
-  $(document).ready(function() {             
-    $('#loginModal').modal('hide');
-      $(function () {
-        
-        $('[data-toggle="tooltip"]').tooltip()
-      })
-    });
+//Muestra y esconde el modal con los datos de la persona
+    $(document).ready(function () {
+        $('#myModal').modal('show');   
+        $('#myModal').modal('hide');
 
-$(document).ready(function () {
-    $('#myModal').modal('show');   
-    $('#myModal').modal('hide');
     $(function () {
-      
-        modal.innerHTML ='';
-    })
-});  
+            modal.innerHTML ='';
+        })
+    });  
 
+    personalData.appendChild(modal);
 
-
-
-personalData.appendChild(modal);
-
-//Borra la info cargada en  el form
-document.getElementById("form_cal").reset();
-    });
+    //Borra la info cargada en  el form
+    document.getElementById("form_cal").reset();
+});
  
 
-
-
-
-    
-    /*Funcion para calcular el BMR*/ 
-    function calculate_BMR(gender, metric, weight, height, age) {
+/*Funcion para calcular el BMR*/ 
+function calculate_BMR(gender, metric, weight, height, age) {
         if (
             (gender === "hombre") && (metric ==="lbs")
             
@@ -265,10 +248,10 @@ document.getElementById("form_cal").reset();
         }
         return BMR;
         
-    }
+}
     
-    /*Funcion para calcular el TDEE*/ 
-    function calculate_TDEE(BMR, lifestyle) {
+/*Funcion para calcular el TDEE*/ 
+function calculate_TDEE(BMR, lifestyle) {
         if (lifestyle == "sedent") {
             TDEE = BMR * 1.35;
         } else if (lifestyle == "moderate") {
@@ -277,10 +260,10 @@ document.getElementById("form_cal").reset();
             TDEE = BMR * 1.75;
         }
         return Number(TDEE).toFixed(2);
-    }
+}
     
-    /*Funcion para calcular el consumo de calorias diarias*/ 
-    function calculate_TDCI(TDEE, metric, weight, goal, level) {
+/*Funcion para calcular el consumo de calorias diarias*/ 
+function calculate_TDCI(TDEE, metric, weight, goal, level) {
         console.log(goal);
         console.log(TDEE);
         console.log(level);
@@ -335,10 +318,10 @@ document.getElementById("form_cal").reset();
                 break;
         }
         return Number(TDCI).toFixed(2);
-    }
+}
     
-    /*Funcion para calcular el consumo de proteinas diarias*/ 
-    function Protein(metric, weight) {
+/*Funcion para calcular el consumo de proteinas diarias*/ 
+function Protein(metric, weight) {
         if (metric == "lbs" ) {
             PROT = 1 * weight;
         } else if (
@@ -347,28 +330,30 @@ document.getElementById("form_cal").reset();
             PROT = 2.2 * weight;
         }
         return Number(PROT).toFixed(2);
-    }
+}
     
-    /*Funcion para calcular el consumo de grasas diarias*/ 
-    function Fat(TDCI, goal) {
+/*Funcion para calcular el consumo de grasas diarias*/ 
+function Fat(TDCI, goal) {
         if (goal === "shred") {
             FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9;
         } else if (goal === "gains") {
             FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9;
         }
         return Number(FAT).toFixed(2);
-    }
+}
     
-    /*Funcion para calcular el consumo de carbohidratos diarias*/ 
-    function Carbs(TDCI, Fat, Protein){
+/*Funcion para calcular el consumo de carbohidratos diarias*/ 
+function Carbs(TDCI, Fat, Protein){
      CARBS =((TDCI / 4) - Fat - Protein);
      return CARBS.toFixed(2);
-    }
+}
 
+
+/*Aca empieza lo que sucede apartir de clickear Login*/
 
 
 //Log in
-/*coninform = document.getElementById('inform');
+coninform = document.getElementById('inform');
 toggles = document.querySelectorAll('.toggles')
 
 function saveLogin(userDB, storage){
@@ -442,7 +427,7 @@ btnLogin.addEventListener('click', (e)=>{
     }
 });
 
-Agrego la informacion del formulario en el DOM
+//Agrego la informacion del formulario en el DOM
 
 
 
@@ -468,12 +453,12 @@ Agrego la informacion del formulario en el DOM
  ;
 
 
-/*
 
 
 
 
-function consult(array){
+
+/*function consult(array){
     do{
        options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1  - Ordenar de la A a la Z por apellido \n 2 - Ordenar de la Z a la A por apellido \n 3 - Filtrar por edad \n 4 - Filtrar por sexo \n 5 - Salir  '));
         if( options_doc < 5 && options_doc>=1){
