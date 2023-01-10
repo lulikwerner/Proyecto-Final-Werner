@@ -7,10 +7,7 @@ let FAT = '';
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput')
 
-myModal.addEventListener('shown.bs.modal', () => {
-    $(document).off('focusin.modal');
-  myInput.focus()
-})
+
 
 class Person {
     
@@ -122,27 +119,17 @@ let forms = document.querySelector("#form_cal");
 
 
 
-    // Traigo el valor del goal y del html en donde voy a agregar las opciones
+    // Traigo el valor del goal 
     const goalInputs =document.getElementsByName('goals');
     let  goal='';
-    let level ='';
     for (z = 0; z < goalInputs.length; z++) {
     if (goalInputs[z].checked) {
     goal = goalInputs[z].value;
-
+    console.log(goal);
+    }
 }
     
-    }
-
-   
-
-   
-    
-   
-   
-       
- 
-   
+    let level = document.querySelector("#levels").value;   
 
     
     let calorieIntake = calculate_TDCI(energy, metric, weight, goal, level);
@@ -191,26 +178,8 @@ let forms = document.querySelector("#form_cal");
     JSON.stringify(peopl);                     
  
     });
+ 
 
-
-    document.getElementById("gains").addEventListener("change", function(){
-    const inputLevel = document.querySelector(".train_level");
-    inputLevel.innerHTML='';
-    
-
-   inputLevel.innerHTML += 
-   `<select name=" " id = "levels"> 
-   <h3> Ingrese el nivel de entrenamiento: </h3>
-   <br>
-        <option value="begginer">Principiante</option>
-        <option value="novice">Novato</option>
-        <option value="intermediate">Intermedio</option>
-        <option value="advance">Avanzado</option>;
-</select>`;
-    let level = document.querySelector("#levels").value;
-    console.log(level)
-    return level;
-     });
 
 
 
@@ -336,13 +305,6 @@ let forms = document.querySelector("#form_cal");
      CARBS =((TDCI / 4) - Fat - Protein);
      return CARBS.toFixed(2);
     }
-
-
-const user = document.getElementById("userLogin");
-const pw = document.getElementById("pwLogin");
-const remember = document.getElementById("remember");
-
-
 
 
 
