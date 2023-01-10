@@ -353,11 +353,14 @@ function Carbs(TDCI, Fat, Protein){
 
 
 //Log in
-btnLogin = document.getElementById('btnLogin');
-toggles = document.querySelectorAll('.toggles');
-remember = document.getElementById('remember');
-emailLog = document.querySelectorAll('#email1');
-pwLog = document.querySelectorAll('#password1')
+const btnLogin = document.getElementById('btnIngres'),
+    toggles = document.querySelectorAll('.toggles'),
+    remember = document.getElementById('remember'),
+    emailLog = document.getElementById('email1'),
+    pwLog = document.getElementById('password1'),
+    continform = document.getElementById('inform'),
+    modal = new bootstrap.Modal(document.getElementById('modalLogin'), )
+   
 
 function saveLogin(userDB, storage){
     const user={'email': userDB.email,
@@ -379,22 +382,22 @@ function retriveUser(storage){
 function showPatients(array){
     console.log('entro a showpatients');
     continform.innerHTML='';
-    array.forEach(e =>{
+    array.forEach(e => {
         i=1;
         let html = `
         <tbody class="e.userName">
         <tr>
-        <td>{e.i}</td>
-        <td>{e.userName}</td>
-        <td>{e.lastName}</td>
-        <td>{e.rgender}</td>
-        <td>{e.age}</td>
-        <td>{e.weight}</td>
-        <td>{e.height}</td>
-        <td>{e.TDCI}</td>
-        <td>{e.CARBS}</td>
-        <td>{e.FAT}</td>
-        <td>{e.PROT}</td>
+        <td>${e.i}</td>
+        <td>${e.userName}</td>
+        <td>${e.lastName}</td>
+        <td>${e.rgender}</td>
+        <td>${e.age}</td>
+        <td>${e.weight}</td>
+        <td>${e.height}</td>
+        <td>${e.TDCI}</td>
+        <td>${e.CARBS}</td>
+        <td>${e.FAT}</td>
+        <td>${e.PROT}</td>
         <td>@mdo</td>
       </tr>
       </tbody>
@@ -411,13 +414,13 @@ function magic(array, clase){
     });
 }
 /*Valido si el usuario ya existe*/
-function validateUser(userDB,email,pw){
+function validateUser(userDB,emailLog,pw){
     console.log('entro a validateusers');
-    let found= userDB.find((userDB) =>userDB.email == email);
+    let found= userDB.find((userDB) =>userDB.email == emailLog.value);
     if (typeof found ==='undefined'){
         return false;
     }else{
-        if(found.pw!=pw){
+        if(found.pw!=pwLog.value){
             return false;
         }else{
             return found;
@@ -428,31 +431,31 @@ function validateUser(userDB,email,pw){
 
 btnLogin.addEventListener('click', (e)=>{
     e.preventDefault();
-console.log(emailLog.value)
-console.log(pwLog.value)
-    if(!emailLog.value||!pwLog.value ){
+    let data = validateUser(users, emailLog, pwLog)
+    if(emailLog.value==''||pwLog.value==''){
+        
         alert('Por favor complete todos los campos');
     }else{
-         let data = validateUser(users, emailLog.value, pwLog.value)
+        data = validateUser(users, emailLog, pwLog)
     }
     if(!data){
         alert("Usuario o contrasenia erroneos");
     }else{
         if(remember.checked){
-            storageinfo(data,localStorage);
+            saveLogin(data,localStorage);
         }else{
-            storageinfo(data, sessionStorage);
+            saveLogin(data, sessionStorage);
         }
         //Cierro el modal
         modal.hide();
-        showPatients(Person);
+        showPatients(peopl);
         magic(toggles,'d-none');
     } 
 });
 
 function logged(user){
     if(user){
-        showPatients(Person);
+        showPatients(peopl);
         magic(toggles,'d-none');
     }
 }
