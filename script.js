@@ -22,24 +22,6 @@ class Person {
         this.PROT = parseInt (PROT);
     }
 
-   get macro() {
-        alert(
-            "" +
-            this.userName + " " + this.lastName + " " +
-            this.age +
-            " anios de edad. Deberia consumir por dia " +
-            this.TDCI +
-            " calorias. De los cuales " +
-            this.PROT +
-            " son gramos de proteina, " +
-            this.FAT +
-            " son gramos de grasas fat y " +
-            this.CARBS+
-            " son gramos de carbs. " 
-           
-        );
-    }
-
 }
 
   /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
@@ -187,29 +169,25 @@ lastNamef.addEventListener("input",function(){
     JSON.stringify(peopl);     
     
     //Creo un modal mostrando la informacion de la persona ingresada
-    $('.modal').on('shown.bs.modal', function () {
-        $('.modal-content').trigger('show')
-      })
+  
 
    
        const modal = document.createElement("div");
     
     
         modal.innerHTML += 
-       `<div class="modal"  "tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+       `<div class="myModal container"  "tabindex="-1" role="dialog">
+  <div class="modal-dialog " role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">${userName.value} ${lastName.value}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title">${userName} ${lastName}</h5>
+     
       </div>
       <div class="modal-body">
-        <p> Deberia consumir por dia "${TDCI.value} calorias. De los cuales se componene:
-        Proteina: ${PROT.value} 
-        Grasas Fat:${FAT.value}
-        Carbohidratos: ${CARBS.value}
+        <p> Deberia consumir por dia: ${TDCI.toFixed(2)} calorias.<br> De los cuales se componene:
+        <br>Proteina: ${PROT.toFixed(2)}  gramos
+        <br>Grasas Fat:${FAT.toFixed(2)} gramos
+        <br>Carbohidratos: ${CARBS.toFixed(2)} gramos
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -217,7 +195,11 @@ lastNamef.addEventListener("input",function(){
     </div>
   </div>
 </div>`;
-      
+
+
+$(document).ready(function () {
+    $('#myModal').modal('show');
+});  
 
 personalData.appendChild(modal);
 
@@ -356,7 +338,7 @@ document.getElementById("form_cal").reset();
 
 
 //Log in
-coninform = document.getElementById('inform');
+/*coninform = document.getElementById('inform');
 toggles = document.querySelectorAll('.toggles')
 
 function saveLogin(userDB, storage){
@@ -420,7 +402,17 @@ function validateUser(userDB){
     }
 }
 
- /*//Agrego la informacion del formulario en el DOM
+btnLogin.addEventListener('click', (e)=>{
+    e.preventDefault();
+
+    if(!emailLogin.value||pwLogin.value ){
+        alert('Por favor complete todos los campos');
+    }else{
+        let data = validateUser(emailLogin.value, pwLogin.value)
+    }
+});
+
+Agrego la informacion del formulario en el DOM
 
 
 
