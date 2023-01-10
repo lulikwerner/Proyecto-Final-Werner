@@ -4,7 +4,7 @@ let PROT ='';
 let FAT = '';
 
 
-
+let users =[{email:"doc@mail.com", pw:"user123"},{email:"doc2@mail.com", pw:"user2123"}];
 
 class Person {
     
@@ -359,17 +359,22 @@ toggles = document.querySelectorAll('.toggles')
 function saveLogin(userDB, storage){
     const user={'email': userDB.email,
                 'pw': userDB.pw
-
+               
 }
-storage.setItem('user',JSON.stringify(usuario));
+/*Seteo un usuaio*/
+console.log('entro a savelogin');
+storage.setItem('user',JSON.stringify(user));
 }
-
+/*Traigo un usuario del storage*/
 function retriveUser(storage){
     let userInStorage = JSON.parse(storage.getItem('user'));
+    console.log('entro a retrive');
+
     return userInStorage
 }
 
 function showPatients(array){
+    console.log('entro a showpatients');
     continform.innerHTML='';
     array.forEach(e =>{
         i=1;
@@ -402,16 +407,17 @@ function magic(array, clase){
         e.classList.toggle(clase)
     });
 }
-
-function validateUser(userDB){
-    let encontrado = userDB.find((userDB) =>userDB.email ==user);
-    if (typeof encontrado ==='undefined'){
+/*Valido si el usuario ya existe*/
+function validateUser(userDB,email,pw){
+    console.log('entro a validateusers');
+    let found= userDB.find((userDB) =>userDB.email == email);
+    if (typeof found ==='undefined'){
         return false;
     }else{
-        if(encontrado.pw!='1234'){
+        if(found.pw!=pw){
             return false;
         }else{
-            return encontrado;
+            return found;
 
 }
     }
@@ -419,38 +425,38 @@ function validateUser(userDB){
 
 btnLogin.addEventListener('click', (e)=>{
     e.preventDefault();
-
-    if(!emailLogin.value||pwLogin.value ){
+console.log(email.value)
+console.log(pw.value)
+    if(!email.value||!pw.value ){
         alert('Por favor complete todos los campos');
     }else{
-        let data = validateUser(emailLogin.value, pwLogin.value)
+         let data = validateUser(users, email.value, pw.value)
     }
+    if(!data){
+        alert("Usuario o contrasenia erroneos");
+    }else{
+        if(remember.checked){
+            storageinfo(data,localStorage);
+        }else{
+            storageinfo(data, sessionStorage);
+        }
+        //Cierro el modal
+        modal.hide();
+        showPatients(Person);
+        magic(toggles,'d-none');
+    } 
 });
 
-//Agrego la informacion del formulario en el DOM
+function logged(user){
+    if(user){
+        showPatients(Person);
+        magic(toggles,'d-none');
+    }
+}
+
+logged(retriveUser(localStorage));
 
 
-
-    info.innerHTML = `
-    
-    <div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">${userName.value}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
->`
- ;
 
 
 
