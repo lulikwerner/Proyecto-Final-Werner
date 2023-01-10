@@ -4,9 +4,6 @@ let PROT ='';
 let FAT = '';
 
 
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
-
 
 
 class Person {
@@ -25,10 +22,10 @@ class Person {
         this.PROT = parseInt (PROT);
     }
 
-   /* get macro() {
+   get macro() {
         alert(
             "" +
-            this.userName.value + " " + this.lastName.value + " " +
+            this.userName + " " + this.lastName + " " +
             this.age +
             " anios de edad. Deberia consumir por dia " +
             this.TDCI +
@@ -41,7 +38,7 @@ class Person {
             " son gramos de carbs. " 
            
         );
-    }*/
+    }
 
 }
 
@@ -51,38 +48,49 @@ class Person {
                {userName: "Juan", lastName: "Fernandez", gender: "M", age: 39, weight: 1.87 , heihgt: 40 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
                {userName: "Felicitas", lastName: "Zabuleta", gender: "F", age: 50, weight: 1.66, height: 18, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
-            $('#myModal').on('shown.bs.modal', function () {
-                $('#myInput').trigger('focus')
-              })
 
+//Llama al modal del Login
+            $(document).ready(function() {             
+                $('#loginModal').modal('show');
+                  $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                  })
+                });
+//Para el modal de data
+const personalData= document.querySelector("#data");
 
-let userName = document.querySelector("#name");
-let lastName = document.querySelector("#last_name");
+//Para mostrar la informacion del form
+let forms = document.querySelector("#form_cal");
+    
+const showInfo = forms.addEventListener("submit", function(e){
+    
+
+    const age = parseFloat(document.querySelector("#ages").value);
+    const weight = parseFloat(document.querySelector(".weights").value);
+    const height = parseFloat(document.querySelector(".heights").value);
+    const userName = document.querySelector("#name").value;
+    const lastName = document.querySelector("#last_name").value;
+    const userNamef = document.querySelector("#name");
+    const lastNamef = document.querySelector("#last_name");
 
 //Eventos
-userName.addEventListener("input",function(){
-if(userName.value ===""){
+userNamef.addEventListener("input",function(){
+if(userNamef.value ===""){
         alert("Por favor ingrese un nombre")
     }
 });
 
-lastName.addEventListener("input",function(){
+lastNamef.addEventListener("input",function(){
     if(lastName.value ===""){
         alert("Por favor ingrese un apellido")
     }
 });
-
-//Para mostrar la informacion del form
-
-let forms = document.querySelector("#form_cal");
-
-    const showInfo = forms.addEventListener("submit", function(e){
-        
-    const age = parseFloat(document.querySelector("#ages").value);
-    const weight = parseFloat(document.querySelector(".weights").value);
-    const height = parseFloat(document.querySelector(".heights").value);
     e.preventDefault();
 
+
+
+
+    
 //Traigo el valor del gender seleccionado
     const genderInputs = document.getElementsByName('sexo');
     let gender='' ;
@@ -167,16 +175,55 @@ let forms = document.querySelector("#form_cal");
                         PROT
                     );
                   
-    /*Subo al array el nuevo "paciente"*/
+    //Subo al array el nuevo "paciente"*/
     peopl.push(macro_1);
     console.log(peopl);
     
-    /*Muestro por consola el mensaje de get macro*/
+    //Muestro por consola el mensaje de get macro
     ver = macro_1.macro;
     
-    /*Convierto el array en un string*/
-    JSON.stringify(peopl);                     
- 
+    //Convierto el array en un string
+    JSON.stringify(peopl);     
+    
+    //Creo un modal mostrando la informacion de la persona ingresada
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('show')
+      })
+
+   
+       const modal = document.createElement("div");
+    
+    
+        modal.innerHTML += 
+       `<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">${userName.value} ${lastName.value}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p> Deberia consumir por dia "${TDCI.value} calorias. De los cuales se componene:
+        Proteina: ${PROT.value} 
+        Grasas Fat:${FAT.value}
+        Carbohidratos: ${CARBS.value}
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+      
+
+personalData.appendChild(modal);
+
+//Borra la info cargada en  el form
+document.getElementById("form_cal").reset();
+
     });
  
 
@@ -331,14 +378,7 @@ let forms = document.querySelector("#form_cal");
   </div>
 </div>
 >`
- });
-
-
-
-
-
-
-
+ ;
 
 
 /*
