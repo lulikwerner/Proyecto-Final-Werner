@@ -251,8 +251,8 @@ footer {
   padding: 0.3rem 0rem;
 }
 
-.modal-backdrop {
-  z-index: -1;
+.text-right {
+  margin-right: 0rem;
 }
 
 * {

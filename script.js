@@ -179,31 +179,36 @@ lastNamef.addEventListener("input",function(){
        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
        <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
-               <div class="modal-header">
-                 <h5 class="modal-title">${userName} ${lastName}</h5>
-               </div>
-               <div class="modal-body">
-                 <p> Deberia consumir por dia: ${TDCI.toFixed(2)} calorias.<br> De los cuales se componene:
-                 <br>Proteina: ${PROT.toFixed(2)}  gramos
-                 <br>Grasas Fat:${FAT.toFixed(2)} gramos
-                 <br>Carbohidratos: ${CARBS.toFixed(2)} gramos
-               </div>
-               <div class="modal-footer">
-               <button type="button" class="close btn btn-default" data-dismiss="modal" aria-label="Cerrar" "><span aria-hidden="true">Cerrar</span></button>
-               
-               </div>
-             </div>
+           <div class="modal-header border-bottom-0">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">×</span>
+             </button>
            </div>
-         </div>
-                
-               </form
-            
+           <div class="modal-body">
+             <div class="form-title text-center">
+               <h4>${userName} ${lastName}</h4>
+             </div>
+             <div class="d-flex flex-column ">
+             <div class="modal-body">
+             <p> Deberia consumir por dia: ${TDCI.toFixed(2)} calorias.<br> De los cuales se componene:
+             <br>Proteina: ${parseFloat(PROT).toFixed(2)}  gramos
+             <br>Grasas Fat:${parseFloat(FAT).toFixed(2)} gramos
+             <br>Carbohidratos: ${parseFloat(CARBS).toFixed(2)} gramos
+           </div>
+           <div class="d-flex flex-column">
+           <p class="text-left">Para mas informacion logearse</p>
+           <a class="text-right" href="#loginModal" class="trigger-btn toggles" data-toggle="modal">Login </a>
+           </div>
+
+             
+           
            </div>
          </div>
        
        </div>
      </div>
      </div>
+
      
   `;
 
