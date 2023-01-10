@@ -353,8 +353,11 @@ function Carbs(TDCI, Fat, Protein){
 
 
 //Log in
-coninform = document.getElementById('inform');
-toggles = document.querySelectorAll('.toggles')
+btnLogin = document.getElementById('btnLogin');
+toggles = document.querySelectorAll('.toggles');
+remember = document.getElementById('remember');
+emailLog = document.querySelectorAll('#email1');
+pwLog = document.querySelectorAll('#password1')
 
 function saveLogin(userDB, storage){
     const user={'email': userDB.email,
@@ -425,12 +428,12 @@ function validateUser(userDB,email,pw){
 
 btnLogin.addEventListener('click', (e)=>{
     e.preventDefault();
-console.log(email.value)
-console.log(pw.value)
-    if(!email.value||!pw.value ){
+console.log(emailLog.value)
+console.log(pwLog.value)
+    if(!emailLog.value||!pwLog.value ){
         alert('Por favor complete todos los campos');
     }else{
-         let data = validateUser(users, email.value, pw.value)
+         let data = validateUser(users, emailLog.value, pwLog.value)
     }
     if(!data){
         alert("Usuario o contrasenia erroneos");
