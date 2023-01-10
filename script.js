@@ -51,8 +51,8 @@ const showInfo = forms.addEventListener("submit", function(e){
     const age = parseFloat(document.querySelector("#ages").value);
     const height = parseFloat(document.querySelector(".heights").value);
     const weight = parseFloat(document.querySelector(".weights").value);
-    const userName = document.querySelector("#name").value;
-    const lastName = document.querySelector("#last_name").value;
+    const userName = (document.querySelector("#name").value).toUpperCase();
+    const lastName = (document.querySelector("#last_name").value).toUpperCase();
     const userNamef = document.querySelector("#name");
     const lastNamef = document.querySelector("#last_name");
 
@@ -176,25 +176,37 @@ lastNamef.addEventListener("input",function(){
     
     
         modal.innerHTML += 
-       `<div class="myModal container"  "tabindex="-1" role="dialog">
-  <div class="modal-dialog " role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">${userName} ${lastName}</h5>
+       `
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title">${userName} ${lastName}</h5>
+               </div>
+               <div class="modal-body">
+                 <p> Deberia consumir por dia: ${TDCI.toFixed(2)} calorias.<br> De los cuales se componene:
+                 <br>Proteina: ${PROT.toFixed(2)}  gramos
+                 <br>Grasas Fat:${FAT.toFixed(2)} gramos
+                 <br>Carbohidratos: ${CARBS.toFixed(2)} gramos
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="close btn btn-default" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">Cerrar</span></button>
+               
+               </div>
+             </div>
+           </div>
+         </div>
+                
+               </form
+            
+           </div>
+         </div>
+       
+       </div>
+     </div>
+     </div>
      
-      </div>
-      <div class="modal-body">
-        <p> Deberia consumir por dia: ${TDCI.toFixed(2)} calorias.<br> De los cuales se componene:
-        <br>Proteina: ${PROT.toFixed(2)}  gramos
-        <br>Grasas Fat:${FAT.toFixed(2)} gramos
-        <br>Carbohidratos: ${CARBS.toFixed(2)} gramos
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>`;
+  `;
 
 
 $(document).ready(function () {
@@ -417,6 +429,7 @@ Agrego la informacion del formulario en el DOM
 
 
     info.innerHTML = `
+    
     <div class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -429,7 +442,6 @@ Agrego la informacion del formulario en el DOM
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
