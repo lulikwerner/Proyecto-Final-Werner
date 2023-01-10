@@ -51,8 +51,9 @@ class Person {
 
 //Llama al modal del Login
             $(document).ready(function() {             
-                $('#loginModal').modal('show');
+                $('#loginModal').modal('hide');
                   $(function () {
+                    
                     $('[data-toggle="tooltip"]').tooltip()
                   })
                 });
@@ -66,7 +67,6 @@ const showInfo = forms.addEventListener("submit", function(e){
     
 
     const age = parseFloat(document.querySelector("#ages").value);
-    const weight = parseFloat(document.querySelector(".weights").value);
     const height = parseFloat(document.querySelector(".heights").value);
     const userName = document.querySelector("#name").value;
     const lastName = document.querySelector("#last_name").value;
@@ -186,8 +186,8 @@ lastNamef.addEventListener("input",function(){
     JSON.stringify(peopl);     
     
     //Creo un modal mostrando la informacion de la persona ingresada
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('show')
+    $('.modal').on('shown.bs.modal', function () {
+        $('.modal-content').trigger('show')
       })
 
    
@@ -195,7 +195,7 @@ lastNamef.addEventListener("input",function(){
     
     
         modal.innerHTML += 
-       `<div class="modal" tabindex="-1" role="dialog">
+       `<div class="modal"  "tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -211,7 +211,6 @@ lastNamef.addEventListener("input",function(){
         Carbohidratos: ${CARBS.value}
       </div>
       <div class="modal-footer">
-        
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
