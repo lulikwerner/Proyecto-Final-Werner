@@ -388,12 +388,12 @@ function retriveUser(storage){
 
 function showPatients(array){
     contingo.innerHTML ='';
-    array.forEach((e,i) => {
+    array.forEach((e) => {
         let html = `
         <table class="table table-striped">
         <thead>
        
-        <tr>
+        <tr id ="${e.id}">
         <td scope="row">${e.id}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
@@ -405,7 +405,7 @@ function showPatients(array){
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
         <td>${e.PROT}</td>
-        <td> <button id="btnclear "  class="clear" data-toggle="modal">x</button></td/
+        <td> <button id="btnclear" class="clear" data-toggle="modal">x</button></td/
         </thead>
         </table>
       `
@@ -495,18 +495,16 @@ document.getElementById('myInput').addEventListener("keyup",function(){
         showPatients(newArray); 
 })
 
-/*Borrar dato de la tabla
-
-
-function deleteRows(r) {
-    var i = r.parentNode.parentNode.rowIndex;
-    document.getElementById("btnclear").deleteRow(i);
-  }
-
+/*Borrar dato de la tabla*/
+let rowSelected = document.getElementById("id")
 let deleteRow= document.getElementById("btnclear")
 deleteRow.addEventListener("click",function(){
-   deleteRows(r)
+   rowSelected.remove()
 })
+
+
+
+
 
 
 
