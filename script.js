@@ -1,3 +1,4 @@
+
 let BMR = '';
 let TDCI ='';
 let PROT ='';
@@ -10,7 +11,9 @@ let users =[{email:"doc@mail.com", pw:"user123"},{email:"doc2@mail.com", pw:"use
 class Person {
     
 
-    constructor(userName, lastName, gender, weight, height, age, TDCI, CARBS, FAT, PROT) {
+    constructor(id, userName, lastName, gender, weight, height, age, TDCI, CARBS, FAT, PROT) {
+        
+        this.id =id;
         this.userName = userName;
         this.lastName = lastName;
         this.gender = gender;
@@ -22,14 +25,17 @@ class Person {
         this.FAT= parseInt (FAT);
         this.PROT = parseInt (PROT);
     }
-
+    asigniId(array){
+        return this.id = array.length;
+    }
 }
 
+
 /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
-let peopl = [{ userName:"SOPHIE", lastName: "WERNER", gender: "MUJER", age: 70, weight:63, height:170, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
-               {userName: "THOMAS", lastName: "PEREZ", gender: "VARON", age: 18,weight: 89, height: 190, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
-               {userName: "AUSTIN", lastName: "FERNANDEZ", gender: "VARON", age: 39, weight: 76 , height: 187 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
-               {userName: "FELICITAS", lastName: "ZABULETA", gender: "MUJER", age: 50, weight: 1.66, height: 166, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
+let peopl = [{ id:1, userName:"SOPHIE", lastName: "WERNER", gender: "MUJER", age: "70", weight:"63", height:170, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
+               {id:2, userName: "THOMAS", lastName: "PEREZ", gender: "VARON", age: 18,weight: 89, height: 190, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
+               {id:3, userName: "AUSTIN", lastName: "FERNANDEZ", gender: "VARON", age: 39, weight: 76 , height: 187 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
+               {id:4, userName: "FELICITAS", lastName: "ZABULETA", gender: "MUJER", age: 50, weight: 1.66, height: 166, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
 
 //Llama al modal del Login
@@ -46,7 +52,22 @@ const personalData= document.querySelector("#data");
 
 //Para mostrar la informacion del form
 let forms = document.querySelector("#form_cal");
-    
+const userNamef = document.querySelector("#name");
+const lastNamef = document.querySelector("#last_name");
+
+//Eventos
+userNamef.addEventListener("input",function(){
+    console.log('entro')
+if(userNamef.value ===""){
+        alert("Por favor ingrese un nombre")
+    }
+});
+
+lastNamef.addEventListener("input",function(){
+    if(lastNamef.value ===""){
+        alert("Por favor ingrese un apellido")
+    }
+});
 const showInfo = forms.addEventListener("submit", function(e){
     
 
@@ -55,21 +76,7 @@ const showInfo = forms.addEventListener("submit", function(e){
     const weight = parseFloat(document.querySelector(".weights").value);
     const userName = (document.querySelector("#name").value).toUpperCase();
     const lastName = (document.querySelector("#last_name").value).toUpperCase();
-    const userNamef = document.querySelector("#name");
-    const lastNamef = document.querySelector("#last_name");
-
-    //Eventos
-    userNamef.addEventListener("input",function(){
-    if(userNamef.value ===""){
-            alert("Por favor ingrese un nombre")
-        }
-    });
-
-    lastNamef.addEventListener("input",function(){
-        if(lastName.value ===""){
-            alert("Por favor ingrese un apellido")
-        }
-    });
+ 
 
     e.preventDefault();
 
@@ -155,11 +162,13 @@ const showInfo = forms.addEventListener("submit", function(e){
                         TDCI,
                         CARBS,
                         FAT,
-                        PROT
+                        PROT,
+                        
                     );
                   
     //Subo al array el nuevo "paciente"*/
-    peopl.push(macro_1);
+     peopl.push(macro_1);
+    macro_1.asigniId(peopl);
     console.log(peopl);
     
     //Muestro por consola el mensaje de get macro
@@ -346,7 +355,7 @@ function Fat(TDCI, goal) {
 /*Funcion para calcular el consumo de carbohidratos diarias*/ 
 function Carbs(TDCI, Fat, Protein){
      CARBS =((TDCI / 4) - Fat - Protein);
-     return CARBS.toFixed(2);
+     return Number(CARBS).toFixed(2);
 }
 
 
@@ -380,13 +389,12 @@ function retriveUser(storage){
 function showPatients(array){
     contingo.innerHTML ='';
     array.forEach((e,i) => {
-        i+=1;
         let html = `
         <table class="table table-striped">
         <thead>
        
         <tr>
-        <td scope="row">${i}</td>
+        <td scope="row">${e.id}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
         <td>${e.gender}</td>
@@ -401,7 +409,6 @@ function showPatients(array){
         </thead>
         </table>
       `
-      i++;
       contingo.innerHTML +=html;
     })
 }
@@ -465,18 +472,14 @@ logoutLink.addEventListener("click", function() {
 function logged(user){
     if(user){
         showPatients(peopl);
-        magic(toggles,'d-none');
+        
     }
 }
 
 logged(retriveUser(localStorage));
 
-/*Borrar dato de la tabla*/
-/*let deleteRow= document.getElementById("btnclear")
-deleteRow.addEventListener("click",function(){
-   this.remove()    
-})
-/*Busca en el search box*/
+
+/*Busca en el search box por Nombre Apellido o genero*/
 let newPeopl='';
 document.getElementById('myInput').addEventListener("keyup",function(){
     let search = this.value.toUpperCase();
@@ -492,24 +495,18 @@ document.getElementById('myInput').addEventListener("keyup",function(){
         showPatients(newArray); 
 })
 
+/*Borrar dato de la tabla
 
 
+function deleteRows(r) {
+    var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("btnclear").deleteRow(i);
+  }
 
-
-
-
-/*function consult(array){
-    do{
-       options_doc = parseInt(prompt('Desea hacer alguna de las siguientes consultas:\n 1  - Ordenar de la A a la Z por apellido \n 2 - Ordenar de la Z a la A por apellido \n 3 - Filtrar por edad \n 4 - Filtrar por sexo \n 5 - Salir  '));
-        if( options_doc < 5 && options_doc>=1){
-            console.log(createString(Opt_doc(options_doc, array)));   
-        }else if( options_doc == 5){
-                alert('Gracias por su consulta. Adios')
-                break;
-        }
-
-        }while(options_doc != 5)
-}
+let deleteRow= document.getElementById("btnclear")
+deleteRow.addEventListener("click",function(){
+   deleteRows(r)
+})
 
 
 
@@ -548,19 +545,6 @@ document.getElementById('myInput').addEventListener("keyup",function(){
             }
     }
 
-
-const miPropioFilter = (array, dato) => {
-        const nuevoArray = [];
-        
-        array.forEach((producto) => {
-            if (producto.age === dato) {
-                nuevoArray.push(producto);
-            }
-        });
-    
-        return nuevoArray;
-    };
-    
     */
 
 
