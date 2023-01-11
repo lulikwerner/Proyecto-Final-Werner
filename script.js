@@ -377,16 +377,17 @@ function retriveUser(storage){
 
     return userInStorage
 }
-i=1;
+
 function showPatients(array){
-    array.forEach(e => {
-        
+    continform.innerHTML ='';
+    array.forEach((e,i) => {
+        i+=1;
         let html = `
         <table class="table table-striped">
         <thead>
        
         <tr>
-        <td scope="row">${1}</td>
+        <td scope="row">${i}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
         <td>${e.gender}</td>
