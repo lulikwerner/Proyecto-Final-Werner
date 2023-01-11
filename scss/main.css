@@ -167,6 +167,10 @@ footer {
   color: red;
 }
 
+.clear {
+  width: 60%;
+}
+
 .form {
   grid-area: form;
   margin-top: 3%;
@@ -257,8 +261,8 @@ footer {
 
 #inform {
   margin-top: -40%;
-  padding-left: 21%;
-  padding-right: 21%;
+  padding-left: 19%;
+  padding-right: 19%;
   position: absolute;
 }
 

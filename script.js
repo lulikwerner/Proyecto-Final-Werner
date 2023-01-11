@@ -2,6 +2,7 @@ let BMR = '';
 let TDCI ='';
 let PROT ='';
 let FAT = '';
+let CARBS ='';
 
 
 let users =[{email:"doc@mail.com", pw:"user123"},{email:"doc2@mail.com", pw:"user2123"}];
@@ -25,8 +26,8 @@ class Person {
 }
 
 /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
-let peopl = [{userName:"Sophie", lastName: "Werner", gender: "mujer", age: 70, weight:63, height:170, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
-               {userName: "Thomas", lastName: "Perez", gender: "varon", age: 18,weight: 89, height: 190, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
+let peopl = [{ userName:"Sophie", lastName: "Werner", gender: "mujer", age: 70, weight:63, height:170, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
+               { userName: "Thomas", lastName: "Perez", gender: "varon", age: 18,weight: 89, height: 190, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
                {userName: "Austin", lastName: "Fernandez", gender: "mujer", age: 39, weight: 76 , height: 187 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
                {userName: "Felicitas", lastName: "Zabuleta", gender: "varon", age: 50, weight: 1.66, height: 166, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
@@ -141,7 +142,7 @@ const showInfo = forms.addEventListener("submit", function(e){
     console.log("El carbs intake  es " + carbsIntake + " gramos");
     /*alert(userName.value + " Deberia consumir por dia " + carbsIntake + " gramos de carbs");*/
     
-                 
+         
                   
     /*Devuelve la MACRO de la persona que se ingreso*/
     let macro_1 = new Person(
@@ -373,11 +374,8 @@ storage.setItem('user',JSON.stringify(user));
 /*Traigo un usuario del storage*/
 function retriveUser(storage){
     let userInStorage = JSON.parse(storage.getItem('user'));
-    console.log('entro a retrive');
-
     return userInStorage
 }
-
 
 function showPatients(array){
     contingo.innerHTML ='';
@@ -398,7 +396,8 @@ function showPatients(array){
         <td>${e.TDCI}</td>
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
-        <td>${e.PROT}
+        <td>${e.PROT}</td>
+        <td> <button id="btnclear "  class="clear" data-toggle="modal">x</button></td/
         </thead>
         </table>
       `
@@ -472,7 +471,24 @@ function logged(user){
 
 logged(retriveUser(localStorage));
 
-
+/*Borrar dato de la tabla*/
+/*let deleteRow= document.getElementById("btnclear")
+deleteRow.addEventListener("click",function(){
+   this.remove()    
+})
+/*Busca en el search box*/
+let newPeopl='';
+document.getElementById('myInput').addEventListener("keyup",function(){
+    let search = this.value.toUpperCase();
+    newArray = peopl.filter(function(val){
+        if(val.userName.includes(search)|| val.lastName.includes(search)||val.gender.includes(search)){
+           newPeopl=[{userName: "val.userName", lastName: "val.lastName", gender: 'val.gender', age: 'val.age', weight:'val.weight', 
+                height:'val.height', TDCI:"val.TDCI" , CARBS:"val.CARBS",FAT:"val.FAT",PROT :"val.PROT"}]
+                console.log( newPeopl)
+            }
+        })
+     showPatients(newPeopl); 
+})
 
 
 
