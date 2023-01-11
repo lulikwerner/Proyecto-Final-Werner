@@ -359,7 +359,7 @@ const btnLogin = document.getElementById('btnIngres'),
     emailLog = document.getElementById('email1'),
     pwLog = document.getElementById('password1'),
     continform = document.getElementById('inform'),
-    modal = new bootstrap.Modal(document.getElementById('modalLogin'), )
+    modal = new bootstrap.Modal(document.getElementById('loginModal'))
    
 
 function saveLogin(userDB, storage){
@@ -378,19 +378,19 @@ function retriveUser(storage){
 
     return userInStorage
 }
-
+i=1;
 function showPatients(array){
     console.log('entro a showpatients');
     continform.innerHTML='';
     array.forEach(e => {
-        i=1;
+        
         let html = `
         <tbody class="e.userName">
         <tr>
         <td>${e.i}</td>
         <td>${e.userName}</td>
         <td>${e.lastName}</td>
-        <td>${e.rgender}</td>
+        <td>${e.gender}</td>
         <td>${e.age}</td>
         <td>${e.weight}</td>
         <td>${e.height}</td>
@@ -398,7 +398,6 @@ function showPatients(array){
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
         <td>${e.PROT}</td>
-        <td>@mdo</td>
       </tr>
       </tbody>
    
@@ -432,7 +431,7 @@ function validateUser(userDB,emailLog,pw){
 btnLogin.addEventListener('click', (e)=>{
     e.preventDefault();
     let data = validateUser(users, emailLog, pwLog)
-    if(emailLog.value==''||pwLog.value==''){
+    if(emailLog.value===''||pwLog.value===''){
         
         alert('Por favor complete todos los campos');
     }else{
@@ -447,13 +446,24 @@ btnLogin.addEventListener('click', (e)=>{
             saveLogin(data, sessionStorage);
         }
         //Cierro el modal
-        modal.hide();
-        showPatients(peopl);
+        $('#loginModal').modal('hide');
         magic(toggles,'d-none');
+        showPatients(peopl);
+        
     } 
 });
 
-function logged(user){
+
+
+/* Para poder deslogearme*/
+let logoutLink = document.getElementById("btnLogout");
+
+logoutLink.addEventListener("click", function(event) {
+    magic(toggles,'d-none');
+});
+
+
+/*function logged(user){
     if(user){
         showPatients(peopl);
         magic(toggles,'d-none');
