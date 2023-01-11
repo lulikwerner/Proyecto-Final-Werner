@@ -255,6 +255,11 @@ footer {
   margin-right: 0rem;
 }
 
+.table-fr {
+  margin-top: 0%;
+  color: blue;
+}
+
 * {
   margin: 0;
   padding: 0px;

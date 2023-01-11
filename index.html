@@ -34,8 +34,8 @@
         <main>
         
 
- <section class="form">
-                <form action="/redireccion" id="form_cal">
+ <section class="form toggles">
+                <form action="/redireccion" id="form_cal" class="toggles" >
                     <fieldset class="op">
                         <h1>Informacion del paciente:</h1>
                         <br>
@@ -124,8 +124,8 @@
                     </fieldset>
                 </form>
                 
-
-                <section id="inform" class="table d-none toggles">
+<!--Info de la tabla con todos los pacientes-->
+                <section id="inform" class="table d-none toggles table-fr">
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -142,6 +142,9 @@
                         <th scope="col">Proteinas</th>
                       </tr>
                     </thead>
+                    <tbody id="ingo">
+                      <!--Traigo la ingo-->
+                    </tbody>
                   </table>
                 </section>
             </section>

@@ -25,10 +25,10 @@ class Person {
 }
 
 /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
-let peopl = [{userName: "Sophie", lastName: "Werner", gender: "F", age: 70, weight:1.7, height:32, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
-               {userName: "Thomas", lastName: "Perez", gender: "M", age: 18,weight: 1.9, height: 28, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
-               {userName: "Juan", lastName: "Fernandez", gender: "M", age: 39, weight: 1.87 , heihgt: 40 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
-               {userName: "Felicitas", lastName: "Zabuleta", gender: "F", age: 50, weight: 1.66, height: 18, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
+let peopl = [{userName:"Sophie", lastName: "Werner", gender: "mujer", age: 70, weight:1.7, height:32, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
+               {userName: "Thomas", lastName: "Perez", gender: "varon", age: 18,weight: 1.9, height: 28, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
+               {userName: "Austin", lastName: "Fernandez", gender: "mujer", age: 39, weight: 1.87 , height: 40 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
+               {userName: "Felicitas", lastName: "Zabuleta", gender: "varon", age: 50, weight: 1.66, height: 18, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
 
 //Llama al modal del Login
@@ -368,7 +368,6 @@ function saveLogin(userDB, storage){
                
 }
 /*Seteo un usuaio*/
-console.log('entro a savelogin');
 storage.setItem('user',JSON.stringify(user));
 }
 /*Traigo un usuario del storage*/
@@ -380,16 +379,16 @@ function retriveUser(storage){
 }
 i=1;
 function showPatients(array){
-    console.log('entro a showpatients');
-    continform.innerHTML='';
     array.forEach(e => {
         
         let html = `
-        <tbody class="e.userName">
+        <table class="table table-striped">
+        <thead>
+       
         <tr>
-        <td>${e.i}</td>
-        <td>${e.userName}</td>
-        <td>${e.lastName}</td>
+        <td scope="row">${1}</td>
+        <td >${e.userName}</td>
+        <td >${e.lastName}</td>
         <td>${e.gender}</td>
         <td>${e.age}</td>
         <td>${e.weight}</td>
@@ -397,10 +396,9 @@ function showPatients(array){
         <td>${e.TDCI}</td>
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
-        <td>${e.PROT}</td>
-      </tr>
-      </tbody>
-   
+        <td>${e.PROT}
+        </thead>
+        </table>
       `
       i++;
       continform.innerHTML +=html;
@@ -413,8 +411,8 @@ function magic(array, clase){
     });
 }
 /*Valido si el usuario ya existe*/
-function validateUser(userDB,emailLog,pw){
-    console.log('entro a validateusers');
+function validateUser(userDB,emailLog,pwLog){
+    do{
     let found= userDB.find((userDB) =>userDB.email == emailLog.value);
     if (typeof found ==='undefined'){
         return false;
@@ -426,6 +424,7 @@ function validateUser(userDB,emailLog,pw){
 
 }
     }
+}while(emailLog.value!=''|| pwLog.value!='')
 }
 
 btnLogin.addEventListener('click', (e)=>{
@@ -434,10 +433,9 @@ btnLogin.addEventListener('click', (e)=>{
     if(emailLog.value===''||pwLog.value===''){
         
         alert('Por favor complete todos los campos');
-    }else{
-        data = validateUser(users, emailLog, pwLog)
-    }
-    if(!data){
+    }else {
+      
+    if(data ===false &&  pwLog.value!=''){
         alert("Usuario o contrasenia erroneos");
     }else{
         if(remember.checked){
@@ -450,20 +448,20 @@ btnLogin.addEventListener('click', (e)=>{
         magic(toggles,'d-none');
         showPatients(peopl);
         
-    } 
+    } }
 });
 
 
 
-/* Para poder deslogearme*/
+/* Salgo del logut*/
 let logoutLink = document.getElementById("btnLogout");
 
-logoutLink.addEventListener("click", function(event) {
+logoutLink.addEventListener("click", function() {
     magic(toggles,'d-none');
 });
 
 
-/*function logged(user){
+function logged(user){
     if(user){
         showPatients(peopl);
         magic(toggles,'d-none');
