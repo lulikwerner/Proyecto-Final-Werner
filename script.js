@@ -28,7 +28,7 @@ class Person {
 let peopl = [{userName:"Sophie", lastName: "Werner", gender: "mujer", age: 70, weight:63, height:170, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
                {userName: "Thomas", lastName: "Perez", gender: "varon", age: 18,weight: 89, height: 190, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
                {userName: "Austin", lastName: "Fernandez", gender: "mujer", age: 39, weight: 76 , height: 187 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
-               {userName: "Felicitas", lastName: "Zabuleta", gender: "varon", age: 50, weight: 50, height: 166, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
+               {userName: "Felicitas", lastName: "Zabuleta", gender: "varon", age: 50, weight: 1.66, height: 166, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
 
 //Llama al modal del Login
@@ -358,7 +358,7 @@ const btnLogin = document.getElementById('btnIngres'),
     remember = document.getElementById('remember'),
     emailLog = document.getElementById('email1'),
     pwLog = document.getElementById('password1'),
-    continform = document.getElementById('inform'),
+    contingo = document.getElementById('ingo'),
     modal = new bootstrap.Modal(document.getElementById('loginModal'))
    
 
@@ -378,8 +378,9 @@ function retriveUser(storage){
     return userInStorage
 }
 
+
 function showPatients(array){
-    continform.innerHTML ='';
+    contingo.innerHTML ='';
     array.forEach((e,i) => {
         i+=1;
         let html = `
@@ -402,7 +403,7 @@ function showPatients(array){
         </table>
       `
       i++;
-      continform.innerHTML +=html;
+      contingo.innerHTML +=html;
     })
 }
 
