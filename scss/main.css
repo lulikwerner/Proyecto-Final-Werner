@@ -255,9 +255,10 @@ footer {
   margin-right: 0rem;
 }
 
-.table-fr {
-  margin-top: 0%;
-  color: blue;
+#inform {
+  margin-top: -60%;
+  padding-left: 8%;
+  padding-right: 8%;
 }
 
 * {
@@ -268,7 +269,8 @@ footer {
 }
 
 .bar {
-  display: absolute;
+  z-index: -1;
+  position: relative;
   height: 120vh;
   width: 110%;
   font-family: "Montserrat", sans-serif;
