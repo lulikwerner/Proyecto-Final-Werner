@@ -25,10 +25,10 @@ class Person {
 }
 
 /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/ 
-let peopl = [{userName:"Sophie", lastName: "Werner", gender: "mujer", age: 70, weight:1.7, height:32, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
-               {userName: "Thomas", lastName: "Perez", gender: "varon", age: 18,weight: 1.9, height: 28, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
-               {userName: "Austin", lastName: "Fernandez", gender: "mujer", age: 39, weight: 1.87 , height: 40 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
-               {userName: "Felicitas", lastName: "Zabuleta", gender: "varon", age: 50, weight: 1.66, height: 18, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
+let peopl = [{userName:"Sophie", lastName: "Werner", gender: "mujer", age: 70, weight:63, height:170, TDCI:1234 , CARBS:23,FAT:45,PROT :600 },
+               {userName: "Thomas", lastName: "Perez", gender: "varon", age: 18,weight: 89, height: 190, TDCI: 1900 , CARBS: 123, FAT: 78, PROT:950 },
+               {userName: "Austin", lastName: "Fernandez", gender: "mujer", age: 39, weight: 76 , height: 187 , TDCI: 1350 , CARBS: 785, FAT: 56, PROT: 340 },
+               {userName: "Felicitas", lastName: "Zabuleta", gender: "varon", age: 50, weight: 50, height: 166, TDCI: 1200 , CARBS: 985, FAT: 87, PROT: 506 },
             ];
 
 //Llama al modal del Login
@@ -542,17 +542,6 @@ const miPropioFilter = (array, dato) => {
         return nuevoArray;
     };
     
-
-
-
-/*Funcion que me trae como va a ver el usuario la informacion
-function createString(array){
-    let info ='';
-        array.forEach(element =>
-            info += 'Nombre: ' + element.userName + '\n' + 'Apellido: ' + element.lastName + '\n'+ 'Edad: ' + element.age + '\n' + 'Genero: ' + element.gender + '\n' + 'Calorias diarias: ' + element.TDCI + '\n' + 'Proteinas diarias: ' + element.PROT + ' gr \n' + 'Carbs diarios: ' + element.CARBS + ' gr \n'+ 'Grasas  diarias: ' + element.FAT + ' gr \n\n');
-            alert(info);
-        return info;
-    }
     */
 
 
