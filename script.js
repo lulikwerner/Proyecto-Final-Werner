@@ -11,7 +11,6 @@ let users = [
 
 class Person {
   constructor(
-    id,
     userName,
     lastName,
     gender,
@@ -23,7 +22,6 @@ class Person {
     FAT,
     PROT
   ) {
-    this.id = id;
     this.userName = userName;
     this.lastName = lastName;
     this.gender = gender;
@@ -34,9 +32,6 @@ class Person {
     this.CARBS = parseInt(CARBS);
     this.FAT = parseInt(FAT);
     this.PROT = parseInt(PROT);
-  }
-  asigniId(array) {
-    return (this.id = array.length);
   }
 }
 
@@ -205,7 +200,7 @@ const showInfo = forms.addEventListener("submit", function (e) {
 
   //Subo al array el nuevo "paciente"*/
   peopl.push(macro_1);
-  macro_1.asigniId(peopl);
+
 
   //Muestro por consola el mensaje de get macro
   ver = macro_1.macro;
@@ -342,6 +337,7 @@ function Protein(metric, weight) {
     PROT = 2.2 * weight;
   }
   return Number(PROT).toFixed(2);
+ 
 }
 
 /*Funcion para calcular el consumo de grasas diarias*/
@@ -381,16 +377,16 @@ function retriveUser(storage) {
   let userInStorage = JSON.parse(storage.getItem("user"));
   return userInStorage;
 }
-
-function showPatients(array) {
-  contingo.innerHTML = "";
-  array.forEach((e) => {
-    let html = `
+function showPatients(array){
+    contingo.innerHTML ='';
+    array.forEach((e,i) => {
+        i+=1;
+        let html = `
         <table class="table table-striped">
         <thead>
        
-        <tr id ="${e.id}">
-        <td scope="row">${e.id}</td>
+        <tr>
+        <td scope="row">${i}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
         <td>${e.gender}</td>
@@ -401,14 +397,12 @@ function showPatients(array) {
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
         <td>${e.PROT}</td>
-        
         </thead>
         </table>
-      `;
-    contingo.innerHTML += html;
-  });
-
-
+      `
+      i++;
+      contingo.innerHTML +=html;
+    })
 }
 
 function magic(array, clase) {
