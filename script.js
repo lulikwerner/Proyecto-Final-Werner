@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 let BMR = "";
 let TDCI = "";
 let PROT = "";
@@ -11,6 +13,7 @@ let users = [
 
 class Person {
   constructor(
+    id,
     userName,
     lastName,
     gender,
@@ -22,6 +25,7 @@ class Person {
     FAT,
     PROT
   ) {
+    this.id = uuidv4();
     this.userName = userName;
     this.lastName = lastName;
     this.gender = gender;
