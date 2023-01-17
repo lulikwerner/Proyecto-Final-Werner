@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 
 let BMR = "";
 let TDCI = "";
@@ -25,7 +25,7 @@ class Person {
     FAT,
     PROT
   ) {
-    this.id = uuidv4();
+    this.id =id;
     this.userName = userName;
     this.lastName = lastName;
     this.gender = gender;
@@ -37,6 +37,9 @@ class Person {
     this.FAT = parseInt(FAT);
     this.PROT = parseInt(PROT);
   }
+  asigniId(array){
+    return this.id = array.length;
+}
 }
 
 /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/
@@ -185,11 +188,12 @@ const showInfo = forms.addEventListener("submit", function (e) {
 
 
   /*Calcula los CARBS*/
-  let carbsIntake = Carbs(calorieIntake, fatIntake, proteinIntake);
+   Carbs(calorieIntake, fatIntake, proteinIntake);
 
 
   /*Devuelve la MACRO de la persona que se ingreso*/
   let macro_1 = new Person(
+    
     userName,
     lastName,
     gender,
@@ -204,7 +208,8 @@ const showInfo = forms.addEventListener("submit", function (e) {
 
   //Subo al array el nuevo "paciente"*/
   peopl.push(macro_1);
-
+  macro_1.asigniId(peopl);
+  console.log(peopl);
 
   //Muestro por consola el mensaje de get macro
   ver = macro_1.macro;
@@ -383,14 +388,16 @@ function retriveUser(storage) {
 }
 function showPatients(array){
     contingo.innerHTML ='';
-    array.forEach((e,i) => {
-        i+=1;
+   let i;
+    array.forEach((e,i,x) => {
+        i=1;
+
         let html = `
         <table class="table table-striped">
         <thead>
        
-        <tr>
-        <td scope="row">${i}</td>
+        <tr id ="${i}">
+        <td scope="row">${e.id}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
         <td>${e.gender}</td>
@@ -401,12 +408,21 @@ function showPatients(array){
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
         <td>${e.PROT}</td>
+        <td> <button id="btnclear" class="clear" data-toggle="modal">x</button></td/
         </thead>
         </table>
       `
-      i++;
+   
       contingo.innerHTML +=html;
-    })
+    });
+    i++;
+
+/*Borrar dato de la tabla
+let rowSelected = document.getElementById("id")
+let deleteRow= document.getElementById("btnclear")
+deleteRow.addEventListener("click",function(){
+   rowSelected.remove()
+})*/
 }
 
 function magic(array, clase) {
@@ -452,10 +468,10 @@ btnLogin.addEventListener("click", (e) => {
   }
 });
 
-/* Salgo del logut*/
-let logoutLink = document.getElementById("btnLogout");
 
 /*Escondo cuando apreto logout*/
+let logoutLink = document.getElementById("btnLogout");
+
 logoutLink.addEventListener("click", function () {
   magic(toggles, "d-none");
 });
