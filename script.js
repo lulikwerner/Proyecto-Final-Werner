@@ -1,10 +1,11 @@
-
-
+import { v4 } from 'https://cdn.skypack.dev/uuid';
+let id =v4();
 let BMR = "";
 let TDCI = "";
 let PROT = "";
 let FAT = "";
 let CARBS = "";
+let showInfo;
 
 let users = [
   { email: "doc@mail.com", pw: "user123" },
@@ -37,15 +38,15 @@ class Person {
     this.FAT = parseInt(FAT);
     this.PROT = parseInt(PROT);
   }
-  asigniId(array){
-    return this.id = array.length;
+  asignId(array){
+    return this.id = v4();
 }
 }
 
 /*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/
 let peopl = [
   {
-    id: 1,
+    id: v4(),
     userName: "SOPHIE",
     lastName: "WERNER",
     gender: "MUJER",
@@ -58,7 +59,7 @@ let peopl = [
     PROT: 600,
   },
   {
-    id: 2,
+    id: v4(),
     userName: "THOMAS",
     lastName: "PEREZ",
     gender: "VARON",
@@ -71,7 +72,7 @@ let peopl = [
     PROT: 950,
   },
   {
-    id: 3,
+    id:v4(),
     userName: "AUSTIN",
     lastName: "FERNANDEZ",
     gender: "VARON",
@@ -84,7 +85,7 @@ let peopl = [
     PROT: 340,
   },
   {
-    id: 4,
+    id: v4(),
     userName: "FELICITAS",
     lastName: "ZABULETA",
     gender: "MUJER",
@@ -129,7 +130,7 @@ lastNamef.addEventListener("input", function () {
   }
 });
 
-const showInfo = forms.addEventListener("submit", function (e) {
+showInfo = forms.addEventListener("submit", function (e) {
   const age = parseFloat(document.querySelector("#ages").value);
   const height = parseFloat(document.querySelector(".heights").value);
   const weight = parseFloat(document.querySelector(".weights").value);
@@ -141,7 +142,7 @@ const showInfo = forms.addEventListener("submit", function (e) {
   //Traigo el valor del gender seleccionado
   const genderInputs = document.getElementsByName("sexo");
   let gender = "";
-
+  let i;
   for (i = 0; i < genderInputs.length; i++) {
     if (genderInputs[i].checked) {
       gender = genderInputs[i].value;
@@ -150,6 +151,7 @@ const showInfo = forms.addEventListener("submit", function (e) {
   // Traigo el valor de la metrica seleccionada
   const metricInputs = document.getElementsByName("metrics");
   let metric = "";
+  let x;
   for (x = 0; x < metricInputs.length; x++) {
     if (metricInputs[x].checked) {
       metric = metricInputs[x].value;
@@ -168,6 +170,7 @@ const showInfo = forms.addEventListener("submit", function (e) {
   // Traigo el valor del goal
   const goalInputs = document.getElementsByName("goals");
   let goal = "";
+  let z;
   for (z = 0; z < goalInputs.length; z++) {
     if (goalInputs[z].checked) {
       goal = goalInputs[z].value;
@@ -193,7 +196,7 @@ const showInfo = forms.addEventListener("submit", function (e) {
 
   /*Devuelve la MACRO de la persona que se ingreso*/
   let macro_1 = new Person(
-    
+    id,
     userName,
     lastName,
     gender,
@@ -208,11 +211,11 @@ const showInfo = forms.addEventListener("submit", function (e) {
 
   //Subo al array el nuevo "paciente"*/
   peopl.push(macro_1);
-  macro_1.asigniId(peopl);
+  macro_1.asignId(peopl);
   console.log(peopl);
 
   //Muestro por consola el mensaje de get macro
-  ver = macro_1.macro;
+  let val = macro_1.macro;
 
   //Convierto el array en un string
   JSON.stringify(peopl);
@@ -235,7 +238,7 @@ const showInfo = forms.addEventListener("submit", function (e) {
              </div>
              <div class="d-flex flex-column ">
              <div class="modal-body">
-             <p> Deberia consumir por dia: ${TDCI.toFixed(
+             <p> Deberia consumir por dia: ${parseFloat(TDCI).toFixed(
                2
              )} calorias.<br> De los cuales se componene:
              <br>Proteina: ${parseFloat(PROT).toFixed(2)}  gramos
@@ -291,6 +294,7 @@ function calculate_BMR(gender, metric, weight, height, age) {
 
 /*Funcion para calcular el TDEE*/
 function calculate_TDEE(BMR, lifestyle) {
+  let TDEE;
   if (lifestyle == "sedent") {
     TDEE = BMR * 1.35;
   } else if (lifestyle == "moderate") {
@@ -373,8 +377,7 @@ const btnLogin = document.getElementById("btnIngres"),
   remember = document.getElementById("remember"),
   emailLog = document.getElementById("email1"),
   pwLog = document.getElementById("password1"),
-  contingo = document.getElementById("ingo"),
-  modal = new bootstrap.Modal(document.getElementById("loginModal"));
+  contingo = document.getElementById("ingo");
 
 function saveLogin(userDB, storage) {
   const user = { email: userDB.email, pw: userDB.pw };
@@ -388,16 +391,16 @@ function retriveUser(storage) {
 }
 function showPatients(array){
     contingo.innerHTML ='';
-   let i;
-    array.forEach((e,i,x) => {
-        i=1;
-
+   let i=1;
+    array.forEach((e,i) => {
+     
+       
         let html = `
         <table class="table table-striped">
         <thead>
-       
-        <tr id ="${i}">
-        <td scope="row">${e.id}</td>
+
+        <tr id ="${e.id}">
+        <td scope="row">${i}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
         <td>${e.gender}</td>
@@ -408,19 +411,25 @@ function showPatients(array){
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
         <td>${e.PROT}</td>
-        <td> <button id="btnclear" class="clear" data-toggle="modal">x</button></td/
+        <td> <button id="btnclear" class="clearbt" data-toggle="modal"> x </button></td/
+        </tr>
         </thead>
         </table>
       `
-   
+    
       contingo.innerHTML +=html;
-    });
-    i++;
+     
+  
 
-/*Borrar dato de la tabla
-let rowSelected = document.getElementById("id")
+/*Borrar dato de la tabla*/
+let rowSelected = document.getElement("tr")
+console.log(rowSelected)
 let deleteRow= document.getElementById("btnclear")
-deleteRow.addEventListener("click",function(){
+console.log(deleteRow)
+});
+   
+i++;
+/*deleteRow.addEventListener("click",function(){
    rowSelected.remove()
 })*/
 }
