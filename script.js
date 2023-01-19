@@ -390,6 +390,7 @@ function retriveUser(storage) {
   return userInStorage;
 }
 function showPatients(array){
+  console.log(array)
     contingo.innerHTML ='';
    let i=1;
     array.forEach((e,i) => {
@@ -399,7 +400,8 @@ function showPatients(array){
         <table class="table table-striped">
         <thead>
 
-        <tr id ="${e.id}">
+        <tr id ="row">
+        <td style="display:none" id="rowDe">${e.id}</td>
         <td scope="row">${i}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
@@ -418,20 +420,26 @@ function showPatients(array){
       `
     
       contingo.innerHTML +=html;
-     
-  
 
-/*Borrar dato de la tabla*/
-let rowSelected = document.getElement("tr")
-console.log(rowSelected)
-let deleteRow= document.getElementById("btnclear")
-console.log(deleteRow)
 });
    
 i++;
-/*deleteRow.addEventListener("click",function(){
-   rowSelected.remove()
-})*/
+/*Borrar dato de la tabla*/
+
+let rowSelected = document.getElementById("rowDe")
+console.log(rowSelected)
+let deleteRow= document.getElementById("btnclear")
+console.log(deleteRow)
+
+deleteRow.addEventListener("click",function(){
+  let u;
+  for(u=0;u<array;u++){
+  rowSelected.remove()
+  console.log(rowSelected)
+  }
+})
+
+
 }
 
 function magic(array, clase) {
@@ -488,6 +496,7 @@ logoutLink.addEventListener("click", function () {
 function logged(user) {
   if (user) {
     showPatients(peopl);
+
   }
 }
 
