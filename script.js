@@ -390,7 +390,6 @@ function retriveUser(storage) {
   return userInStorage;
 }
 function showPatients(array){
-  console.log(array)
     contingo.innerHTML ='';
    let i=1;
     array.forEach((e,i) => {
@@ -400,9 +399,9 @@ function showPatients(array){
         <table class="table table-striped">
         <thead>
 
-        <tr id ="row">
+        <tr>
         <td style="display:none" id="rowDe">${e.id}</td>
-        <td scope="row">${i}</td>
+        <td id="row">${i}</td>
         <td >${e.userName}</td>
         <td >${e.lastName}</td>
         <td>${e.gender}</td>
@@ -413,7 +412,7 @@ function showPatients(array){
         <td>${e.CARBS}</td>
         <td>${e.FAT}</td>
         <td>${e.PROT}</td>
-        <td> <button id="btnclear" class="clearbt" data-toggle="modal"> x </button></td/
+        <td> <button id="${e.id}" class="clearbt" data-toggle="modal">x</button></td>
         </tr>
         </thead>
         </table>
@@ -426,21 +425,19 @@ function showPatients(array){
 i++;
 /*Borrar dato de la tabla*/
 
-let rowSelected = document.getElementById("rowDe")
-console.log(rowSelected)
-let deleteRow= document.getElementById("btnclear")
-console.log(deleteRow)
+let btnDeleteRow= document.querySelectorAll(".clearbt")
+console.log(btnDeleteRow)
 
-deleteRow.addEventListener("click",function(){
-  let u;
-  for(u=0;u<array;u++){
-  rowSelected.remove()
-  console.log(rowSelected)
-  }
-})
-
-
+btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 }
+
+function deleteR(ele){
+  const idEle = ele.target.id;
+  peopl = peopl.filter(el => el.id !=idEle)
+  showPatients(peopl)
+}
+
+
 
 function magic(array, clase) {
   array.forEach((e) => {
