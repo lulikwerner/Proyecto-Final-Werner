@@ -423,14 +423,13 @@ function showPatients(array){
 });
    
 i++;
-/*Borrar dato de la tabla*/
-
+/*Llamo a la funcion que elimina las filas*/
 let btnDeleteRow= document.querySelectorAll(".clearbt")
 console.log(btnDeleteRow)
-
 btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 }
 
+/*Funcion para borrar las filas de las tablas*/
 function deleteR(ele){
   const idEle = ele.target.id;
   peopl = peopl.filter(el => el.id !=idEle)
@@ -503,7 +502,7 @@ logged(retriveUser(localStorage));
 let newPeopl = "";
 document.getElementById("myInput").addEventListener("keyup", function () {
   let search = this.value.toUpperCase();
-  newArray = peopl.filter(function (val) {
+  let newArray = peopl.filter(function (val) {
     if (
       val.userName.includes(search) ||
       val.lastName.includes(search) ||
