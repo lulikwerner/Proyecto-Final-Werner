@@ -474,6 +474,11 @@ btnLogin.addEventListener("click", (e) => {
     } else {
       if (remember.checked) {
         saveLogin(data, localStorage);
+
+        Toastify({
+          text:'Su usuario ha sido guardado Exitosamente',
+          duration: 3000,
+      }).showToast();
       } else {
         saveLogin(data, sessionStorage);
       }
