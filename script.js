@@ -375,11 +375,12 @@ function retriveUser(storage) {
 
 function showPatients(array){
     contingo.innerHTML ='';
-    let i;
+    let i=1;
     array.forEach((e,i) => {
-
-    
+      i++;
+     
     console.log(i) 
+
         let html = `  
         <table class="table table-striped">
         <thead>
@@ -402,11 +403,9 @@ function showPatients(array){
         </thead>
         </table>
       `
-    
       contingo.innerHTML +=html;
-
 });
-i++;
+
 
 /*Llamo al evento que va a permitir elimina las filas*/
 let btnDeleteRow= document.querySelectorAll(".clearbt")
