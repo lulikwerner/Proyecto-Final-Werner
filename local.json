@@ -1,0 +1,55 @@
+
+[
+    {
+      "id": 1,
+      "userName": "SOPHIE",
+      "lastName": "WERNER",
+      "gender": "MUJER",
+      "age": "70",
+      "weight": "63",
+      "height": 170,
+      "TDCI": 1234,
+      "CARBS": 23,
+      "FAT": 45,
+      "PROT": 600
+    },
+    {
+      "id": 2,
+      "userName": "THOMAS",
+      "lastName": "PEREZ",
+      "gender": "VARON",
+      "age": 18,
+      "weight": 89,
+      "height": 190,
+      "TDCI": 1900,
+      "CARBS": 123,
+      "FAT": 78,
+      "PROT": 950
+    },
+    {
+      "id":3,
+      "userName": "AUSTIN",
+      "lastName": "FERNANDEZ",
+      "gender": "VARON",
+      "age": 39,
+      "weight": 76,
+      "height": 187,
+      "TDCI": 1350,
+      "CARBS": 785,
+      "FAT": 56,
+      "PROT": 340
+    },
+    {
+      "id": 4,
+      "userName": "FELICITAS",
+      "lastName": "ZABULETA",
+      "gender": "MUJER",
+      "age": 50,
+      "weight": 1.66,
+      "height": 166,
+      "TDCI": 1200,
+      "CARBS": 985,
+      "FAT": 87,
+      "PROT": 506
+    }
+  ]

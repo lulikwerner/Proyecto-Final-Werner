@@ -120,13 +120,13 @@ const lastNamef = document.querySelector("#last_name");
 //Eventos
 userNamef.addEventListener("input", function () {
   if (userNamef.value === "") {
-    alert("Por favor ingrese un nombre");
+    Swal.fire('Por favor ingrese un nombre');
   }
 });
 
 lastNamef.addEventListener("input", function () {
   if (lastNamef.value === "") {
-    alert("Por favor ingrese un apellido");
+    Swal.fire('Por favor ingrese un apellido');
   }
 });
 
@@ -212,10 +212,6 @@ showInfo = forms.addEventListener("submit", function (e) {
   //Subo al array el nuevo "paciente"*/
   peopl.push(macro_1);
   macro_1.asignId(peopl);
-  console.log(peopl);
-
-  //Muestro por consola el mensaje de get macro
-  let val = macro_1.macro;
 
   //Convierto el array en un string
   JSON.stringify(peopl);
@@ -242,7 +238,7 @@ showInfo = forms.addEventListener("submit", function (e) {
                2
              )} calorias.<br> De los cuales se componene:
              <br>Proteina: ${parseFloat(PROT).toFixed(2)}  gramos
-             <br>Grasas Fat:${parseFloat(FAT).toFixed(2)} gramos
+             <br>Grasas Fat: ${parseFloat(FAT).toFixed(2)} gramos
              <br>Carbohidratos: ${parseFloat(CARBS).toFixed(2)} gramos
            </div>
      
@@ -295,13 +291,10 @@ function calculate_BMR(gender, metric, weight, height, age) {
 /*Funcion para calcular el TDEE*/
 function calculate_TDEE(BMR, lifestyle) {
   let TDEE;
-  if (lifestyle == "sedent") {
-    TDEE = BMR * 1.35;
-  } else if (lifestyle == "moderate") {
-    TDEE = BMR * 1.55;
-  } else if (lifestyle == "active") {
-    TDEE = BMR * 1.75;
-  }
+  (lifestyle == "sedent")? TDEE = BMR * 1.35:
+  (lifestyle == "moderate")? TDEE = BMR * 1.55:
+   TDEE = BMR * 1.75
+
   return Number(TDEE).toFixed(2);
 }
 
@@ -344,22 +337,13 @@ function calculate_TDCI(TDEE, metric, weight, goal, level) {
 
 /*Funcion para calcular el consumo de proteinas diarias*/
 function Protein(metric, weight) {
-  if (metric == "lbs") {
-    PROT = 1 * weight;
-  } else if (metric == "kls") {
-    PROT = 2.2 * weight;
-  }
+   (metric == "lbs")? PROT = 1 * weight : PROT = 2.2 * weight;
   return Number(PROT).toFixed(2);
- 
 }
 
 /*Funcion para calcular el consumo de grasas diarias*/
 function Fat(TDCI, goal) {
-  if (goal === "shred") {
-    FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9;
-  } else if (goal === "gains") {
-    FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9;
-  }
+  (goal === "shred") ? FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9 : FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9;
   return Number(FAT).toFixed(2);
 }
 
@@ -386,16 +370,17 @@ function saveLogin(userDB, storage) {
 }
 /*Traigo un usuario del storage*/
 function retriveUser(storage) {
-  let userInStorage = JSON.parse(storage.getItem("user"));
-  return userInStorage;
+  return JSON.parse(storage.getItem("user"));
 }
+
 function showPatients(array){
     contingo.innerHTML ='';
-   let i=1;
+    let i;
     array.forEach((e,i) => {
-     
-       
-        let html = `
+
+    
+    console.log(i) 
+        let html = `  
         <table class="table table-striped">
         <thead>
 
@@ -421,20 +406,39 @@ function showPatients(array){
       contingo.innerHTML +=html;
 
 });
-   
 i++;
-/*Llamo a la funcion que elimina las filas*/
+
+/*Llamo al evento que va a permitir elimina las filas*/
 let btnDeleteRow= document.querySelectorAll(".clearbt")
-console.log(btnDeleteRow)
 btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 }
 
 /*Funcion para borrar las filas de las tablas*/
 function deleteR(ele){
-  const idEle = ele.target.id;
-  peopl = peopl.filter(el => el.id !=idEle)
-  showPatients(peopl)
+  Swal.fire({
+    title: 'Estas seguro',
+    text: "Que deseas eliminar el paciente?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Si, deseo eliminarlo',
+  })
+    .then((result) => {
+      if (result.isConfirmed) {
+      const idEle = ele.target.id;
+      peopl = peopl.filter(el => el.id !=idEle)
+      showPatients(peopl)
+        Swal.fire(
+          'Borrado!',
+          'El paciente ha sido eliminado satisfactoriamente',
+        )
+      } 
+    })
 }
+ 
+
 
 
 
@@ -484,15 +488,13 @@ btnLogin.addEventListener("click", (e) => {
 
 /*Escondo cuando apreto logout*/
 let logoutLink = document.getElementById("btnLogout");
-
 logoutLink.addEventListener("click", function () {
   magic(toggles, "d-none");
 });
-
+/*Muestra la tabla de pacientes cuando uno esta loggead*/
 function logged(user) {
   if (user) {
     showPatients(peopl);
-
   }
 }
 
@@ -502,6 +504,7 @@ logged(retriveUser(localStorage));
 let newPeopl = "";
 document.getElementById("myInput").addEventListener("keyup", function () {
   let search = this.value.toUpperCase();
+  
   let newArray = peopl.filter(function (val) {
     if (
       val.userName.includes(search) ||
