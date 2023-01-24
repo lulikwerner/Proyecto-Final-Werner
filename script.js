@@ -43,61 +43,8 @@ class Person {
 }
 }
 
-/*Creo ya pacientes en el array para poder hacer las comparaciones necesarias en las opciones que tiene el doctor sin tener que cargar muchos pacientes*/
-let peopl = [
-  {
-    id: v4(),
-    userName: "SOPHIE",
-    lastName: "WERNER",
-    gender: "MUJER",
-    age: "70",
-    weight: "63",
-    height: 170,
-    TDCI: 1234,
-    CARBS: 23,
-    FAT: 45,
-    PROT: 600,
-  },
-  {
-    id: v4(),
-    userName: "THOMAS",
-    lastName: "PEREZ",
-    gender: "VARON",
-    age: 18,
-    weight: 89,
-    height: 190,
-    TDCI: 1900,
-    CARBS: 123,
-    FAT: 78,
-    PROT: 950,
-  },
-  {
-    id:v4(),
-    userName: "AUSTIN",
-    lastName: "FERNANDEZ",
-    gender: "VARON",
-    age: 39,
-    weight: 76,
-    height: 187,
-    TDCI: 1350,
-    CARBS: 785,
-    FAT: 56,
-    PROT: 340,
-  },
-  {
-    id: v4(),
-    userName: "FELICITAS",
-    lastName: "ZABULETA",
-    gender: "MUJER",
-    age: 50,
-    weight: 1.66,
-    height: 166,
-    TDCI: 1200,
-    CARBS: 985,
-    FAT: 87,
-    PROT: 506,
-  },
-];
+/*Es el array donde voy a guardar los pacientes que cargo*/
+let peopl = [];
 
 //Llama al modal del Login
 $(document).ready(function () {
@@ -374,6 +321,7 @@ function retriveUser(storage) {
 }
 
 function showPatients(array){
+
     contingo.innerHTML ='';
     let i=1;
     array.forEach((e,i) => {
@@ -407,11 +355,24 @@ function showPatients(array){
 });
 
 
+
 /*Llamo al evento que va a permitir elimina las filas*/
 let btnDeleteRow= document.querySelectorAll(".clearbt")
 btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 }
+fetch('./local.json')
+.then (res => res.json())
+.then(data => {
+  let newPat;
+  data.forEach(pat =>{
+     newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
+      pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
+      peopl.push(newPat)
+      console.log(newPat)
+  })
 
+})
+.catch(err => console.log(err))
 /*Funcion para borrar las filas de las tablas*/
 function deleteR(ele){
   Swal.fire({
