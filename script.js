@@ -44,8 +44,8 @@ class Person {
 }
 
 /*Es el array donde voy a guardar los pacientes que cargo*/
-let peopl = [];
-
+let peopl = JSON.parse(localStorage.getItem('patient'))||[];
+console.log(peopl)
 //Llama al modal del Login
 $(document).ready(function () {
   $("#loginModal").modal("hide");
@@ -159,6 +159,8 @@ showInfo = forms.addEventListener("submit", function (e) {
   //Subo al array el nuevo "paciente"*/
   peopl.push(macro_1);
   macro_1.asignId(peopl);
+  localStorage.setItem('patient', JSON.stringify(peopl));
+  
 
   //Convierto el array en un string
   JSON.stringify(peopl);
@@ -327,7 +329,6 @@ function showPatients(array){
     array.forEach((e,i) => {
       i++;
      
-    console.log(i) 
 
         let html = `  
         <table class="table table-striped">
@@ -355,21 +356,20 @@ function showPatients(array){
 });
 
 
-
 /*Llamo al evento que va a permitir elimina las filas*/
 let btnDeleteRow= document.querySelectorAll(".clearbt")
 btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 }
+
 fetch('./local.json')
 .then (res => res.json())
 .then(data => {
-  let newPat;
-  data.forEach(pat =>{
-     newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
-      pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
-      peopl.push(newPat)
-      console.log(newPat)
-  })
+  console.log(data)
+
+
+showPatients(data)
+      
+
 
 })
 .catch(err => console.log(err))
@@ -445,7 +445,8 @@ btnLogin.addEventListener("click", (e) => {
       //Cierro el modal
       $("#loginModal").modal("hide");
       magic(toggles, "d-none");
-      showPatients(peopl);
+      showPatients(peopl)
+      showPatients(data);
     }
   }
 });
@@ -459,7 +460,8 @@ logoutLink.addEventListener("click", function () {
 /*Muestra la tabla de pacientes cuando uno esta loggead*/
 function logged(user) {
   if (user) {
-    showPatients(peopl);
+    showPatients(peopl)
+
   }
 }
 
