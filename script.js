@@ -44,28 +44,36 @@ class Person {
 }
 
 /*Es el array donde voy a guardar los pacientes que cargo*/
-let peopl = JSON.parse(localStorage.getItem('patient'))||[];
+let peopl= JSON.parse(localStorage.getItem('patient'))||[];
+let pip=[];
+let newpeopl=peopl.concat(pip)
+console.log(newpeopl)
+/*fetch('./local.json')
+  .then (res => res.json())
+  .then(json =>pip=json.map(obj =>obj.id, obj.userName, obj.lastName, obj.gender, t.weight,
+    obj.heightobjt.age,obj.TDCI,obj.CARBS,obj.FAT,obj.PROT));
 
+    console.log(pip)*/
 fetch('./local.json')
   .then (res => res.json())
   .then(data => { 
-    let newPat;
+ 
     data.forEach(pat =>{
     
-       newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
+       let newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
         pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
-        peopl.push(newPat)
+        pip.push(newPat)
         
 
     })
-
+console.log(pip)
   })
-  .catch(err => console.log(err))
-
+  .catch(err => console.log(err));
+console.log(pip)
 
 
 //Llama al modal del Login
-$(document).ready(function () {
+  $(document).ready(function () {
   $("#loginModal").modal("hide");
 
   $(function () {
