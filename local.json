@@ -1,12 +1,11 @@
-
 [
     {
       "id": 1,
       "userName": "SOPHIE",
       "lastName": "WERNER",
       "gender": "MUJER",
-      "age": "70",
-      "weight": "63",
+      "age": 70,
+      "weight": 63,
       "height": 170,
       "TDCI": 1234,
       "CARBS": 23,

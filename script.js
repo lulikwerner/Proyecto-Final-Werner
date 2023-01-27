@@ -45,31 +45,32 @@ class Person {
 
 /*Es el array donde voy a guardar los pacientes que cargo*/
 let peopl= JSON.parse(localStorage.getItem('patient'))||[];
-let pip=[];
-let newpeopl=peopl.concat(pip)
-console.log(newpeopl)
+//const pip=[];
+
+
 /*fetch('./local.json')
   .then (res => res.json())
   .then(json =>pip=json.map(obj =>obj.id, obj.userName, obj.lastName, obj.gender, t.weight,
     obj.heightobjt.age,obj.TDCI,obj.CARBS,obj.FAT,obj.PROT));
 
     console.log(pip)*/
-fetch('./local.json')
+  fetch('./local.json')
   .then (res => res.json())
-  .then(data => { 
- 
-    data.forEach(pat =>{
-    
+  .then(datap => datap.forEach(pat => {
+   
        let newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
         pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
-        pip.push(newPat)
-        
+        peopl.push(newPat)
+     
 
-    })
-console.log(pip)
-  })
+    }))
+
+
   .catch(err => console.log(err));
-console.log(pip)
+
+
+//new patientArray=pip.concat(peopl)
+//console.log(patientArray)
 
 
 //Llama al modal del Login
@@ -182,13 +183,15 @@ showInfo = forms.addEventListener("submit", function (e) {
     PROT
   );
 
-  //Subo al array el nuevo "paciente"*/
+  //Subo al array el nuevo "paciente"*/ 
   peopl.push(macro_1);
+
   macro_1.asignId(peopl);
 
 
-  localStorage.setItem('patient', JSON.stringify(macro_1));
+  localStorage.setItem('patient', JSON.stringify(peopl));
   console.log(peopl)
+ 
   //Convierto el array en un string
   JSON.stringify(peopl);
 
@@ -249,6 +252,7 @@ showInfo = forms.addEventListener("submit", function (e) {
   //Borra la info cargada en  el form
   document.getElementById("form_cal").reset();
 });
+
 
 
 /*Funcion para calcular el BMR*/
@@ -351,7 +355,6 @@ function retriveUser(storage) {
 }
 
 function showPatients(array){
-
     contingo.innerHTML ='';
     let i=1;
     array.forEach((e,i) => {
@@ -411,6 +414,8 @@ function deleteR(ele){
       const idEle = ele.target.id;
       peopl = peopl.filter(el => el.id !=idEle)
       showPatients(peopl)
+      localStorage.setItem('patient', JSON.stringify(peopl));
+      console.log(peopl)
         Swal.fire(
           'Borrado!',
           'El paciente ha sido eliminado satisfactoriamente',
