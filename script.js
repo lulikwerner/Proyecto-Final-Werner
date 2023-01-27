@@ -45,7 +45,6 @@ class Person {
 
 /*Es el array donde voy a guardar los pacientes que cargo*/
 let peopl = JSON.parse(localStorage.getItem('patient'))||[];
-console.log(peopl)
 
 fetch('./local.json')
   .then (res => res.json())
@@ -55,8 +54,8 @@ fetch('./local.json')
     
        newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
         pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
-     peopl.push(newPat)
-     
+        peopl.push(newPat)
+        
 
     })
 
@@ -180,7 +179,7 @@ showInfo = forms.addEventListener("submit", function (e) {
   macro_1.asignId(peopl);
 
 
-  localStorage.setItem('patient', JSON.stringify(peopl));
+  localStorage.setItem('patient', JSON.stringify(macro_1));
   console.log(peopl)
   //Convierto el array en un string
   JSON.stringify(peopl);
