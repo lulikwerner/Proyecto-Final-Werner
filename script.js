@@ -46,6 +46,20 @@ class Person {
 /*Es el array donde voy a guardar los pacientes que cargo*/
 let peopl = JSON.parse(localStorage.getItem('patient'))||[];
 console.log(peopl)
+
+fetch('./local.json')
+.then (res => res.json())
+.then(data => {
+  let newPat;
+  data.forEach(pat =>{
+     newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
+      pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
+      peopl.push(newPat)
+  })
+
+})
+.catch(err => console.log(err))
+
 //Llama al modal del Login
 $(document).ready(function () {
   $("#loginModal").modal("hide");
@@ -361,18 +375,11 @@ let btnDeleteRow= document.querySelectorAll(".clearbt")
 btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 }
 
-fetch('./local.json')
-.then (res => res.json())
-.then(data => {
-  console.log(data)
 
 
-showPatients(data)
-      
 
 
-})
-.catch(err => console.log(err))
+
 /*Funcion para borrar las filas de las tablas*/
 function deleteR(ele){
   Swal.fire({
@@ -445,8 +452,7 @@ btnLogin.addEventListener("click", (e) => {
       //Cierro el modal
       $("#loginModal").modal("hide");
       magic(toggles, "d-none");
-      showPatients(peopl)
-      showPatients(data);
+      //showPatients(peopl)
     }
   }
 });
@@ -460,8 +466,9 @@ logoutLink.addEventListener("click", function () {
 /*Muestra la tabla de pacientes cuando uno esta loggead*/
 function logged(user) {
   if (user) {
-    showPatients(peopl)
-
+  showPatients(peopl)
+    
+   
   }
 }
 
