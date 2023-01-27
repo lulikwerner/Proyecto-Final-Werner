@@ -48,17 +48,22 @@ let peopl = JSON.parse(localStorage.getItem('patient'))||[];
 console.log(peopl)
 
 fetch('./local.json')
-.then (res => res.json())
-.then(data => {
-  let newPat;
-  data.forEach(pat =>{
-     newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
-      pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
-      peopl.push(newPat)
-  })
+  .then (res => res.json())
+  .then(data => { 
+    let newPat;
+    data.forEach(pat =>{
+    
+       newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
+        pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
+     peopl.push(newPat)
+     
 
-})
-.catch(err => console.log(err))
+    })
+
+  })
+  .catch(err => console.log(err))
+
+
 
 //Llama al modal del Login
 $(document).ready(function () {
@@ -173,9 +178,10 @@ showInfo = forms.addEventListener("submit", function (e) {
   //Subo al array el nuevo "paciente"*/
   peopl.push(macro_1);
   macro_1.asignId(peopl);
-  localStorage.setItem('patient', JSON.stringify(peopl));
-  
 
+
+  localStorage.setItem('patient', JSON.stringify(peopl));
+  console.log(peopl)
   //Convierto el array en un string
   JSON.stringify(peopl);
 
@@ -236,6 +242,7 @@ showInfo = forms.addEventListener("submit", function (e) {
   //Borra la info cargada en  el form
   document.getElementById("form_cal").reset();
 });
+
 
 /*Funcion para calcular el BMR*/
 function calculate_BMR(gender, metric, weight, height, age) {
@@ -452,7 +459,7 @@ btnLogin.addEventListener("click", (e) => {
       //Cierro el modal
       $("#loginModal").modal("hide");
       magic(toggles, "d-none");
-      //showPatients(peopl)
+      showPatients(peopl)
     }
   }
 });
