@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div class=bar>
+  <div class="bar login-wrap">
 
     <header>
       <nav class="nav-bar">
@@ -23,9 +23,9 @@
         <ul class="menu">
           <div class="text-center">
             <!-- Button HTML (to Trigger Modal) -->
-            <button id="btnLogin" href="#loginModal" class="trigger-btn btnLogin toggles" data-toggle="modal"
+            <button id="btnLogin" href="#loginModal" class="trigger-btn btnLogin toggles btnLO" data-toggle="modal"
               data-bs-target="#modalLogin">Login </button>
-            <button id="btnLogout" href="/logout" class="trigger-btn d-none toggles" data-toggle="modal">Logout
+            <button id="btnLogout" href="/logout" class="trigger-btn d-none toggles btnLO" data-toggle="modal">Logout
             </button>
           </div>
         </ul>
@@ -45,13 +45,13 @@
             <br>
             <div>
               <label for="">Nombre completo:</label>
-              <input type="text" placeholder="Nombre" id="name" required>
-              <input type="text" placeholder="Apellido" id="last_name" required>
+              <input type="text" placeholder="Nombre" id="name" class="group" required>
+              <input type="text" placeholder="Apellido" id="last_name"class="group"  required>
             </div>
             <br>
             <div>
               <label for="">Edad:</label>
-              <input type="number" placeholder="Edad" id="ages" required>
+              <input type="number" placeholder="Edad" id="ages"class="group"  required>
             </div>
             <br>
             <section id="gender">
@@ -78,8 +78,8 @@
                   <label for="">Ingrese su altura:</label>
                 </div>
                 <div class="spc_btw">
-                  <input class="weights" type="number" step="0.01" placeholder="Peso">
-                  <input class="heights" type="number" placeholder="Altura">
+                  <input class="weights group" type="number" step="0.01" placeholder="Peso">
+                  <input class="heights group" type="number" placeholder="Altura">
                 </div>
               </section>
             </section>
@@ -87,7 +87,7 @@
             <div>
               <h3> Ingrese su nivel de actividad: </h3>
               <br>
-              <select name=" " id="activity">
+              <select name=" " id="activity" class="group">
                 <option value="sedent">Sedentaria</option>
                 <option value="moderate">Moderada</option>
                 <option value="active">Activa</option>
@@ -97,7 +97,7 @@
             <div>
               <h3> Ingrese su meta: </h3>
               <br>
-              <div class="spc_2">
+              <div class="spc_2 ">
                 <input type="radio" name="goals" value="shred" id="shred" checked="checked">
                 <label for="shred">Bajar de peso</label>
                 <input type="radio" name="goals" value="gains" id="gains">
@@ -106,7 +106,7 @@
             </div>
             <br>
             <div class="train_level">
-              <select name=" " id="levels">
+              <select name=" " id="levels" class="group">
                 <h3> Ingrese el nivel de entrenamiento: </h3>
                 <br>
                 <option value="begginer">Principiante</option>
@@ -117,7 +117,7 @@
             </div>
             <br>
             <div>
-              <button type="submit" class="butt_send">Enviar</button>
+              <button type="submit" class="butt_send ">Enviar</button>
             </div>
   </div>
   </fieldset>
@@ -150,7 +150,7 @@
   </main>
   <footer>
     <section>
-      <a> © 2022 Copyright: </a>
+      <a> © 2022 Copyright </a>
     </section>
   </footer>
   </div>
