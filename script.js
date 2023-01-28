@@ -58,11 +58,12 @@ console.log(peopl)
        let newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
         pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
       const resultado = peopl.find( e => e.id ===pat.id);
-      console.log(resultado)
+
       const resultDelet = deletPeopl.find(ele => ele.id === pat.id)
-  
       console.log(resultDelet)
-      if(peopl==[]||!resultado||!resultDelet ){
+      if(peopl==[]||(!resultado &&!resultDelet )){
+        console.log(resultado)
+        console.log(resultDelet)
         peopl.push(newPat)
       }
 
@@ -417,6 +418,7 @@ function deleteR(ele){
     console.log(idEle)
     deletPeopls=peopl.find(ele =>ele.id==idEle)
     deletPeopl.push(deletPeopls)
+    console.log(deletPeopl)
     localStorage.setItem('deletPatient', JSON.stringify(deletPeopl));
       peopl = peopl.filter(el => el.id !=idEle)
      
