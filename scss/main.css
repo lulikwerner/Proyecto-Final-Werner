@@ -367,7 +367,7 @@ footer {
   width: 103%;
   font-family: "Montserrat", sans-serif;
   color: lightgray;
-  background-image: linear-gradient(rgba(5, 0, 136, 0.5), rgba(5, 0, 136, 0.5)), url("/PreEntrega2-Werner/static/background.png");
+  background-image: linear-gradient(rgba(5, 0, 136, 0.5), rgba(5, 0, 136, 0.5)), url("./PreEntrega2-Werner/static/background.png");
   background-position: center;
   background-size: cover;
   overflow: scroll;
