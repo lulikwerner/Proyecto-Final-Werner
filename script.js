@@ -45,23 +45,15 @@ class Person {
 
 /*Es el array donde voy a guardar los pacientes que cargo*/
 let peopl= JSON.parse(localStorage.getItem('patient'))||[];
-//const pip=[];
-
-
-/*fetch('./local.json')
-  .then (res => res.json())
-  .then(json =>pip=json.map(obj =>obj.id, obj.userName, obj.lastName, obj.gender, t.weight,
-    obj.heightobjt.age,obj.TDCI,obj.CARBS,obj.FAT,obj.PROT));
-
-    console.log(pip)*/
   fetch('./local.json')
   .then (res => res.json())
   .then(datap => datap.forEach(pat => {
    
        let newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
         pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
+       
         peopl.push(newPat)
-     
+      
 
     }))
 
@@ -355,6 +347,7 @@ function retriveUser(storage) {
 }
 
 function showPatients(array){
+  console.log(array)
     contingo.innerHTML ='';
     let i=1;
     array.forEach((e,i) => {
@@ -396,7 +389,7 @@ btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 
 
 
-
+console.log(peopl)
 /*Funcion para borrar las filas de las tablas*/
 function deleteR(ele){
   Swal.fire({
