@@ -6,6 +6,8 @@ let PROT = "";
 let FAT = "";
 let CARBS = "";
 let showInfo;
+let idEle;
+
 
 let users = [
   { email: "doc@mail.com", pw: "user123" },
@@ -42,18 +44,27 @@ class Person {
     return this.id = v4();
 }
 }
-
+let deletPeopls;
 /*Es el array donde voy a guardar los pacientes que cargo*/
 let peopl= JSON.parse(localStorage.getItem('patient'))||[];
+let deletPeopl= JSON.parse(localStorage.getItem('deletPatient'))||[];
+console.log(deletPeopl)
+console.log(peopl)
+
   fetch('./local.json')
   .then (res => res.json())
   .then(datap => datap.forEach(pat => {
    
        let newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
         pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
-       
+      const resultado = peopl.find( e => e.id ===pat.id);
+      console.log(resultado)
+      const resultDelet = deletPeopl.find(ele => ele.id === pat.id)
+  
+      console.log(resultDelet)
+      if(peopl==[]||!resultado||!resultDelet ){
         peopl.push(newPat)
-      
+      }
 
     }))
 
@@ -61,8 +72,6 @@ let peopl= JSON.parse(localStorage.getItem('patient'))||[];
   .catch(err => console.log(err));
 
 
-//new patientArray=pip.concat(peopl)
-//console.log(patientArray)
 
 
 //Llama al modal del Login
@@ -347,7 +356,6 @@ function retriveUser(storage) {
 }
 
 function showPatients(array){
-  console.log(array)
     contingo.innerHTML ='';
     let i=1;
     array.forEach((e,i) => {
@@ -389,7 +397,7 @@ btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
 
 
 
-console.log(peopl)
+
 /*Funcion para borrar las filas de las tablas*/
 function deleteR(ele){
   Swal.fire({
@@ -402,13 +410,21 @@ function deleteR(ele){
     cancelButtonText: 'Cancelar',
     confirmButtonText: 'Si, deseo eliminarlo',
   })
+  
     .then((result) => {
       if (result.isConfirmed) {
-      const idEle = ele.target.id;
+        idEle = ele.target.id;
+    console.log(idEle)
+    deletPeopls=peopl.find(ele =>ele.id==idEle)
+    deletPeopl.push(deletPeopls)
+    localStorage.setItem('deletPatient', JSON.stringify(deletPeopl));
       peopl = peopl.filter(el => el.id !=idEle)
-      showPatients(peopl)
+     
       localStorage.setItem('patient', JSON.stringify(peopl));
-      console.log(peopl)
+      
+      showPatients(peopl)
+     
+
         Swal.fire(
           'Borrado!',
           'El paciente ha sido eliminado satisfactoriamente',
@@ -478,7 +494,7 @@ logoutLink.addEventListener("click", function () {
 /*Muestra la tabla de pacientes cuando uno esta loggead*/
 function logged(user) {
   if (user) {
-  showPatients(peopl)
+    showPatients(peopl)
     
    
   }
