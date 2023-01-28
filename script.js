@@ -1,5 +1,5 @@
-import { v4 } from 'https://cdn.skypack.dev/uuid';
-let id =v4();
+import { v4 } from "https://cdn.skypack.dev/uuid";
+let id = v4();
 let BMR = "";
 let TDCI = "";
 let PROT = "";
@@ -7,7 +7,15 @@ let FAT = "";
 let CARBS = "";
 let showInfo;
 let idEle;
+let deletPeopls;
 
+//Para mostrar el modal de data
+const personalData = document.querySelector("#data");
+//Para mostrar la informacion del form
+let forms = document.querySelector("#form_cal");
+//Lo utilizo para los Eventos de ingreso del nombre y apellido
+const userNamef = document.querySelector("#name");
+const lastNamef = document.querySelector("#last_name");
 
 let users = [
   { email: "doc@mail.com", pw: "user123" },
@@ -28,7 +36,7 @@ class Person {
     FAT,
     PROT
   ) {
-    this.id =id;
+    this.id = id;
     this.userName = userName;
     this.lastName = lastName;
     this.gender = gender;
@@ -40,43 +48,45 @@ class Person {
     this.FAT = parseInt(FAT);
     this.PROT = parseInt(PROT);
   }
-  asignId(array){
-    return this.id = v4();
+  asignId(array) {
+    return (this.id = v4());
+  }
 }
-}
-let deletPeopls;
-/*Es el array donde voy a guardar los pacientes que cargo*/
-let peopl= JSON.parse(localStorage.getItem('patient'))||[];
-let deletPeopl= JSON.parse(localStorage.getItem('deletPatient'))||[];
-console.log(deletPeopl)
-console.log(peopl)
 
-  fetch('./local.json')
-  .then (res => res.json())
-  .then(datap => datap.forEach(pat => {
-   
-       let newPat = new Person (pat.id, pat.userName, pat.lastName, pat.gender, pat.weight,
-        pat.height,pat.age,pat.TDCI,pat.CARBS,pat.FAT,pat.PROT)
-      const resultado = peopl.find( e => e.id ===pat.id);
-
-      const resultDelet = deletPeopl.find(ele => ele.id === pat.id)
-      console.log(resultDelet)
-      if(peopl==[]||(!resultado &&!resultDelet )){
-        console.log(resultado)
-        console.log(resultDelet)
-        peopl.push(newPat)
+//Es el array donde guardo los pacientes que cargo y los que traigo del JSON
+let peopl = JSON.parse(localStorage.getItem("patient")) || [];
+//Es el array donde guardo los pacientes que borro en la tabla
+let deletPeopl = JSON.parse(localStorage.getItem("deletPatient")) || [];
+//Traigo la informacion del JSON y la envio a peopl 
+fetch("./local.json")
+  .then((res) => res.json())
+  .then((datap) =>
+    datap.forEach((pat) => {
+      let newPat = new Person(
+        pat.id,
+        pat.userName,
+        pat.lastName,
+        pat.gender,
+        pat.weight,
+        pat.height,
+        pat.age,
+        pat.TDCI,
+        pat.CARBS,
+        pat.FAT,
+        pat.PROT
+      );
+      //Solo hago el push a peopl si el array esta vacio o si el id del paciente no se encuentra ya en peopl o en lel array de los elementos eliminados
+      const resultado = peopl.find((e) => e.id === pat.id);
+      const resultDelet = deletPeopl.find((ele) => ele.id === pat.id);
+      if (peopl == [] || (!resultado && !resultDelet)) {
+        peopl.push(newPat);
       }
-
-    }))
-
-
-  .catch(err => console.log(err));
-
-
-
+    })
+  )
+ .catch((err) => console.log(err));
 
 //Llama al modal del Login
-  $(document).ready(function () {
+$(document).ready(function () {
   $("#loginModal").modal("hide");
 
   $(function () {
@@ -84,28 +94,22 @@ console.log(peopl)
   });
 });
 
-//Para el modal de data
-const personalData = document.querySelector("#data");
 
-//Para mostrar la informacion del form
-let forms = document.querySelector("#form_cal");
 
-const userNamef = document.querySelector("#name");
-const lastNamef = document.querySelector("#last_name");
-
-//Eventos
+//Eventos utilizando Sweet Alert
 userNamef.addEventListener("input", function () {
   if (userNamef.value === "") {
-    Swal.fire('Por favor ingrese un nombre');
+    Swal.fire("Por favor ingrese un nombre");
   }
 });
 
 lastNamef.addEventListener("input", function () {
   if (lastNamef.value === "") {
-    Swal.fire('Por favor ingrese un apellido');
+    Swal.fire("Por favor ingrese un apellido");
   }
 });
 
+//Evento/funcion que se crea cuando envio la informacion cargada por formulario
 showInfo = forms.addEventListener("submit", function (e) {
   const age = parseFloat(document.querySelector("#ages").value);
   const height = parseFloat(document.querySelector(".heights").value);
@@ -124,6 +128,7 @@ showInfo = forms.addEventListener("submit", function (e) {
       gender = genderInputs[i].value;
     }
   }
+
   // Traigo el valor de la metrica seleccionada
   const metricInputs = document.getElementsByName("metrics");
   let metric = "";
@@ -134,15 +139,14 @@ showInfo = forms.addEventListener("submit", function (e) {
     }
   }
 
-  /*Calcula el BMR*/
+  //Calcula el BMR
   var metabolic = calculate_BMR(gender, metric, weight, height, age);
-  let lifestyle = document.querySelector("#activity").value;
 
-  /*Calcula el TDEE*/
+  //Calcula el TDEE
+  let lifestyle = document.querySelector("#activity").value;
   var energy = Number(calculate_TDEE(metabolic, lifestyle));
 
-  /*Calcula el TDCI*/
-
+  
   // Traigo el valor del goal
   const goalInputs = document.getElementsByName("goals");
   let goal = "";
@@ -153,24 +157,20 @@ showInfo = forms.addEventListener("submit", function (e) {
     }
   }
 
+  //Calcula las calorias
   let level = document.querySelector("#levels").value;
-
   let calorieIntake = calculate_TDCI(energy, metric, weight, goal, level);
 
-
-  /*Calcula la Proteina*/
+  //Calcula la Proteina
   let proteinIntake = Protein(metric, weight);
 
-
-  /*Calcula el FAT intake*/
+  //Calcula el FAT intake
   let fatIntake = Fat(calorieIntake, goal);
 
+  //Calcula los CARBS
+  Carbs(calorieIntake, fatIntake, proteinIntake);
 
-  /*Calcula los CARBS*/
-   Carbs(calorieIntake, fatIntake, proteinIntake);
-
-
-  /*Devuelve la MACRO de la persona que se ingreso*/
+  //Devuelve la MACRO de la persona que se ingreso
   let macro_1 = new Person(
     id,
     userName,
@@ -185,21 +185,17 @@ showInfo = forms.addEventListener("submit", function (e) {
     PROT
   );
 
-  //Subo al array el nuevo "paciente"*/ 
+  //Subo al array el nuevo "paciente"
   peopl.push(macro_1);
-
+  // Le asigna el ID que se genera random
   macro_1.asignId(peopl);
-
-
-  localStorage.setItem('patient', JSON.stringify(peopl));
-  console.log(peopl)
- 
+  // Guardo en el local storage
+  localStorage.setItem("patient", JSON.stringify(peopl));
   //Convierto el array en un string
   JSON.stringify(peopl);
 
   //Creo un modal mostrando la informacion de la persona ingresada
   const modal = document.createElement("div");
-
   modal.innerHTML += `
        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
        <div class="modal-dialog modal-dialog-centered" role="document">
@@ -248,16 +244,15 @@ showInfo = forms.addEventListener("submit", function (e) {
       modal.innerHTML = "";
     });
   });
-
   personalData.appendChild(modal);
 
   //Borra la info cargada en  el form
   document.getElementById("form_cal").reset();
 });
 
+/*Aca estan todas las funciones que llamo anteriormente: BMR/TDEE/TDCI/PROT/FAT/CARBS*/
 
-
-/*Funcion para calcular el BMR*/
+//Funcion para calcular el BMR
 function calculate_BMR(gender, metric, weight, height, age) {
   if (gender === "hombre" && metric === "lbs") {
     BMR = 66 + 6.2 * weight + 12.7 * height - 6.8 * age;
@@ -271,17 +266,19 @@ function calculate_BMR(gender, metric, weight, height, age) {
   return BMR;
 }
 
-/*Funcion para calcular el TDEE*/
+//Funcion para calcular el TDEE
 function calculate_TDEE(BMR, lifestyle) {
   let TDEE;
-  (lifestyle == "sedent")? TDEE = BMR * 1.35:
-  (lifestyle == "moderate")? TDEE = BMR * 1.55:
-   TDEE = BMR * 1.75
+  lifestyle == "sedent"
+    ? (TDEE = BMR * 1.35)
+    : lifestyle == "moderate"
+    ? (TDEE = BMR * 1.55)
+    : (TDEE = BMR * 1.75);
 
   return Number(TDEE).toFixed(2);
 }
 
-/*Funcion para calcular el consumo de calorias diarias*/
+//Funcion para calcular el consumo de calorias diarias
 function calculate_TDCI(TDEE, metric, weight, goal, level) {
   switch (true) {
     case goal === "shred" && metric === "lbs":
@@ -318,27 +315,29 @@ function calculate_TDCI(TDEE, metric, weight, goal, level) {
   return Number(TDCI).toFixed(2);
 }
 
-/*Funcion para calcular el consumo de proteinas diarias*/
+//Funcion para calcular el consumo de proteinas diarias
 function Protein(metric, weight) {
-   (metric == "lbs")? PROT = 1 * weight : PROT = 2.2 * weight;
+  metric == "lbs" ? (PROT = 1 * weight) : (PROT = 2.2 * weight);
   return Number(PROT).toFixed(2);
 }
 
-/*Funcion para calcular el consumo de grasas diarias*/
+//Funcion para calcular el consumo de grasas diarias
 function Fat(TDCI, goal) {
-  (goal === "shred") ? FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9 : FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9;
+  goal === "shred"
+    ? (FAT = (TDCI * 0.15 + TDCI * 0.25) / 2 / 9)
+    : (FAT = (TDCI * 0.2 + TDCI * 0.3) / 2 / 9);
   return Number(FAT).toFixed(2);
 }
 
-/*Funcion para calcular el consumo de carbohidratos diarias*/
+//Funcion para calcular el consumo de carbohidratos diarias
 function Carbs(TDCI, Fat, Protein) {
   CARBS = TDCI / 4 - Fat - Protein;
   return Number(CARBS).toFixed(2);
 }
 
-/*Aca empieza lo que sucede apartir de clickear Login*/
+/*Apartir de aca esta todo lo que comienza a  suceder a partir de clickear Login*/
 
-//Log in
+//Defino todas las const que voy a utilizar en esta seccion
 const btnLogin = document.getElementById("btnIngres"),
   toggles = document.querySelectorAll(".toggles"),
   remember = document.getElementById("remember"),
@@ -346,24 +345,26 @@ const btnLogin = document.getElementById("btnIngres"),
   pwLog = document.getElementById("password1"),
   contingo = document.getElementById("ingo");
 
+
+//Guardo el usuario y pw en el storage
 function saveLogin(userDB, storage) {
   const user = { email: userDB.email, pw: userDB.pw };
-  /*Seteo un usuaio*/
+  //Seteo un usuario
   storage.setItem("user", JSON.stringify(user));
 }
-/*Traigo un usuario del storage*/
+//Recupero usuario del storage
 function retriveUser(storage) {
   return JSON.parse(storage.getItem("user"));
 }
 
-function showPatients(array){
-    contingo.innerHTML ='';
-    let i=1;
-    array.forEach((e,i) => {
-      i++;
-     
+//Renderiza los pacientes en la tabla 
+function showPatients(array) {
+  contingo.innerHTML = "";
+  let i = 1;
+  array.forEach((e, i) => {
+    i++;
 
-        let html = `  
+    let html = `  
         <table class="table table-striped">
         <thead>
 
@@ -384,67 +385,51 @@ function showPatients(array){
         </tr>
         </thead>
         </table>
-      `
-      contingo.innerHTML +=html;
-});
+      `;
+    contingo.innerHTML += html;
+  });
 
-
-/*Llamo al evento que va a permitir elimina las filas*/
-let btnDeleteRow= document.querySelectorAll(".clearbt")
-btnDeleteRow.forEach(btn => btn.addEventListener("click",deleteR));
+  //Llamo al evento que va a permitir elimina las filas
+  let btnDeleteRow = document.querySelectorAll(".clearbt");
+  btnDeleteRow.forEach((btn) => btn.addEventListener("click", deleteR));
 }
 
-
-
-
-
-
-/*Funcion para borrar las filas de las tablas*/
-function deleteR(ele){
+//Funcion para borrar las filas de las tablas utilizando sweetAlerts
+function deleteR(ele) {
   Swal.fire({
-    title: 'Estas seguro',
+    title: "Estas seguro",
     text: "Que deseas eliminar el paciente?",
-    icon: 'warning',
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    cancelButtonText: 'Cancelar',
-    confirmButtonText: 'Si, deseo eliminarlo',
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "Cancelar",
+    confirmButtonText: "Si, deseo eliminarlo",
   })
-  
-    .then((result) => {
-      if (result.isConfirmed) {
-        idEle = ele.target.id;
-    console.log(idEle)
-    deletPeopls=peopl.find(ele =>ele.id==idEle)
-    deletPeopl.push(deletPeopls)
-    console.log(deletPeopl)
-    localStorage.setItem('deletPatient', JSON.stringify(deletPeopl));
-      peopl = peopl.filter(el => el.id !=idEle)
-     
-      localStorage.setItem('patient', JSON.stringify(peopl));
-      
-      showPatients(peopl)
-     
-
-        Swal.fire(
-          'Borrado!',
-          'El paciente ha sido eliminado satisfactoriamente',
-        )
-      } 
-    })
+  .then((result) => {
+    if (result.isConfirmed) {
+      idEle = ele.target.id;
+      //Guardo en un array los pacientes que elimino
+      deletPeopls = peopl.find((ele) => ele.id == idEle);
+      deletPeopl.push(deletPeopls);
+      localStorage.setItem("deletPatient", JSON.stringify(deletPeopl));
+      //Filtro por los pacientes que no elimine
+      peopl = peopl.filter((el) => el.id != idEle);
+      localStorage.setItem("patient", JSON.stringify(peopl));
+      showPatients(peopl);
+      Swal.fire("Borrado!", "El paciente ha sido eliminado satisfactoriamente");
+    }
+  });
 }
- 
 
-
-
-
+//Intercambio la visualizacion.Todos los elementos que tienen la clase que le pase se la va a sacar y se la va a agregar a todos los elementos que no la tienen
 function magic(array, clase) {
   array.forEach((e) => {
     e.classList.toggle(clase);
   });
 }
-/*Valido si el usuario ya existe*/
+
+//Valido si el usuario ya existe en la "base de datos" o no y tambien valido la contrasenia
 function validateUser(userDB, emailLog, pwLog) {
   do {
     let found = userDB.find((userDB) => userDB.email == emailLog.value);
@@ -454,61 +439,66 @@ function validateUser(userDB, emailLog, pwLog) {
       if (found.pw != pwLog.value) {
         return false;
       } else {
-        return found;
+        return found; 
       }
     }
   } while (emailLog.value != "" || pwLog.value != "");
+
 }
 
+/*Evento de del boton Login. Aca llamo a la funcion validar usuario y si chequeo el recordarme en este equipo
+me guarda el usuario y el pw en el local storage. En el caso de no estar chequeado me lo guarda en el session storage*/
 btnLogin.addEventListener("click", (e) => {
   e.preventDefault();
   let data = validateUser(users, emailLog, pwLog);
   if (emailLog.value === "" || pwLog.value === "") {
-    alert("Por favor complete todos los campos");
+    Swal.fire("Por favor complete todos los campos");
   } else {
     if (data === false && pwLog.value != "") {
-      alert("Usuario o contrasenia erroneos");
+      Swal.fire({ icon: 'error',
+      title: 'Oops...',
+      text: 'Usuario o contrasenia erroneos',
+ });
     } else {
       if (remember.checked) {
         saveLogin(data, localStorage);
-
         Toastify({
-          text:'Su usuario ha sido guardado Exitosamente',
+          text: "Su usuario ha sido guardado Exitosamente",
           duration: 3000,
-      }).showToast();
+        }).showToast();
       } else {
         saveLogin(data, sessionStorage);
       }
-      //Cierro el modal
+      //Cierro el modal cuando la persona se logeo correctamente
       $("#loginModal").modal("hide");
       magic(toggles, "d-none");
-      showPatients(peopl)
+      showPatients(peopl);
+
     }
   }
 });
 
-
-/*Escondo cuando apreto logout*/
+//Escondo todo lo que tiene la clase d-none llamando a la funcion magic
 let logoutLink = document.getElementById("btnLogout");
 logoutLink.addEventListener("click", function () {
   magic(toggles, "d-none");
 });
-/*Muestra la tabla de pacientes cuando uno esta loggead*/
-function logged(user) {
+
+//Cuando se carga la pagina se fija si hay algo guardado en el storage
+function loggede(user) {
   if (user) {
-    showPatients(peopl)
-    
-   
+    showPatients(peopl);
+    magic(toggles, 'd-none');
   }
 }
 
-logged(retriveUser(localStorage));
+//Busca en el local storage si hay algun user guardado y si es asi muestra la tabla
+loggede(retriveUser(localStorage));
 
-/*Busca en el search box por Nombre Apellido o genero*/
+//Busca en el search box por Nombre/Apellido/enero*/
 let newPeopl = "";
 document.getElementById("myInput").addEventListener("keyup", function () {
   let search = this.value.toUpperCase();
-  
   let newArray = peopl.filter(function (val) {
     if (
       val.userName.includes(search) ||
@@ -534,5 +524,3 @@ document.getElementById("myInput").addEventListener("keyup", function () {
   });
   showPatients(newArray);
 });
-
-

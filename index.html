@@ -1,178 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./scss/main.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-        <title>Consultas</title>
-        <link rel="icon" href="./static/logo.svg">
-    </head>
-    <body>
-<div class = bar>
-        <header>
-            <nav class = "nav-bar">
-                <li class="logo"><a href="./index.html" ><img
-                    href="./index.html" src="./static/logo.png"
-                    alt="Muscle logo"></li></a>
-           
 
-            
-                <ul class = "menu">
-                  <!-- Button trigger modal -->
-                  <div class="text-center">
-                    <!-- Button HTML (to Trigger Modal) -->
-                    <button id="btnLogin" href="#loginModal" class="trigger-btn btnLogin toggles" data-toggle="modal" data-bs-target="#modalLogin">Login </button>
-                    <button id="btnLogout" href="/logout" class="trigger-btn d-none toggles" data-toggle="modal">Logout </button>
-                   
-                </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./scss/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <title>Consultas</title>
+  <link rel="icon" href="./static/logo.svg">
+</head>
 
-                </ul>
-            </nav>
-        </header>
-        <main>
-          <div class="search__container ">
-            <input id="myInput" class="search__input d-none toggles" type="text" placeholder="Busque por nombre o apellido">
-        </div>
+<body>
+  <div class=bar>
 
- <section class="form toggles">
-                <form action="/redireccion" id="form_cal" class="toggles" >
-                    <fieldset class="op">
-                        <h1>Informacion del paciente:</h1>
-                        <br>
-                      
-                        <div>
-                            <label for="">Nombre completo:</label>
-                            <input type="text" placeholder="Nombre" id="name" required>
-                            <input type="text" placeholder="Apellido" id="last_name" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="">Edad:</label>
-                            <input type="number" placeholder="Edad" id="ages" required>
-                        </div>
-                        <br>
-                        <section id = "gender" >
-                            <label>Sexo:</label>
-                            <input  class = "male" type="radio" name="sexo" value="VARON" id="sexo_h">
-                            <label for="sexo_h">hombre</label>
-                            <input class = "female" type="radio" name="sexo" value="MUJER" id="sexo_m">
-                            <label for="sexo_m">mujer</label>
+    <header>
+      <nav class="nav-bar">
+        <li class="logo"><a href="./index.html"><img href="./index.html" src="./static/logo.png" alt="Muscle logo"></li>
+        </a>
+        <ul class="menu">
+          <div class="text-center">
+            <!-- Button HTML (to Trigger Modal) -->
+            <button id="btnLogin" href="#loginModal" class="trigger-btn btnLogin toggles" data-toggle="modal"
+              data-bs-target="#modalLogin">Login </button>
+            <button id="btnLogout" href="/logout" class="trigger-btn d-none toggles" data-toggle="modal">Logout
+            </button>
+          </div>
+        </ul>
+      </nav>
+    </header>
 
-                        </section>  
-                        <br>
-
-                        <section>
-                            <h3>Elija como quiere ingresar la informacion</h3>
-                            <br> 
-                            <div class="spc" required>
-                            <input type="radio" name="metrics" value="lbs" id="pounds">
-                            <label for="pounds">lbs/pulgadas</label>
-                            <input type="radio" name="metrics" value="kls" id="kilos">
-                            <label for="kilos">kg/cms</label>
-                        </div>
-                        <section >
-                            <br>
-                        <div class="spc_btw">
-                            <label for="">Ingrese su peso:</label>
-                            <label for="">Ingrese su altura:</label>
-                        </div>
-                        <div class="spc_btw">
-                            <input class = "weights" type="number" step="0.01"placeholder="Peso">
-                            <input class = "heights" type="number"  placeholder="Altura">
-                        </div>
-                    </section>
-                    </section>
-                        <br>
-                        <div>
-                            <h3> Ingrese su nivel de actividad: </h3>
-                            <br>
-                            <select name=" " id = "activity">
-                                <option value="sedent">Sedentaria</option>
-                                <option value="moderate">Moderada</option>
-                                <option value="active">Activa</option>
-                            </select>
-                        </div>
-
-                        <br>
-                        <div >
-                            <h3> Ingrese su meta: </h3>
-                            <br>    
-                            <div class="spc_2">
-                            <input type="radio" name="goals" value="shred" id="shred">
-                            <label for="shred">Bajar de peso</label>
-                            <input type="radio" name="goals" value="gains" id="gains">
-                            <label for="gains">Ganar masa muscular</label>
-                        </div>
-                    </div>
-                        <br>
-                        <div class = "train_level">
-                            <select name=" " id = "levels"> 
-                                <h3> Ingrese el nivel de entrenamiento: </h3>
-                                <br>
-                                     <option value="begginer">Principiante</option>
-                                     <option value="novice">Novato</option>
-                                     <option value="intermediate">Intermedio</option>
-                                     <option value="advance">Avanzado</option>;
-                             </select>`
-                        </div>
-                        <br>
-               
-                <div>
-                    <button type="submit"   class="butt_send">Enviar</button>
-                </div>
-                    </div>
-                    </fieldset>
-                </form>
-                
-<!--Info de la tabla con todos los pacientes-->
-                <section id="inform" class="table d-none toggles table-fr">
-                  <table class="table table-dark table-responsive w-auto">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Sexo</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Peso</th>
-                        <th scope="col">Altura</th>
-                        <th scope="col">Calorias</th>
-                        <th scope="col">Carbs</th>
-                        <th scope="col">Grasas</th>
-                        <th scope="col">Proteinas</th>
-                      </tr>
-                    </thead>
-                    <tbody id="ingo">
-                      <!--Traigo la ingo-->
-                    </tbody>
-                  </table>
-                </section>
+    <main>
+      <!--Search box-->
+      <div class="search__container ">
+        <input id="myInput" class="search__input d-none toggles" type="text" placeholder="Busque por nombre o apellido">
+      </div>
+      <!--Comienza el formulario de carga-->
+      <section class="form toggles">
+        <form action="/redireccion" id="form_cal" class="toggles">
+          <fieldset class="op">
+            <h1>Informacion del paciente:</h1>
+            <br>
+            <div>
+              <label for="">Nombre completo:</label>
+              <input type="text" placeholder="Nombre" id="name" required>
+              <input type="text" placeholder="Apellido" id="last_name" required>
+            </div>
+            <br>
+            <div>
+              <label for="">Edad:</label>
+              <input type="number" placeholder="Edad" id="ages" required>
+            </div>
+            <br>
+            <section id="gender">
+              <label>Sexo:</label>
+              <input class="male" type="radio" name="sexo" value="VARON" id="sexo_h" checked="checked">
+              <label for="sexo_h">hombre</label>
+              <input class="female" type="radio" name="sexo" value="MUJER" id="sexo_m">
+              <label for="sexo_m">mujer</label>
             </section>
-        </main>
-        <footer>
+            <br>
             <section>
-                    <a>  © 2022 Copyright: </a>
+              <h3>Elija como quiere ingresar la informacion</h3>
+              <br>
+              <div class="spc" required>
+                <input type="radio" name="metrics" value="lbs" id="pounds" checked="checked">
+                <label for="pounds">lbs/pulgadas</label>
+                <input type="radio" name="metrics" value="kls" id="kilos">
+                <label for="kilos">kg/cms</label>
+              </div>
+              <section>
+                <br>
+                <div class="spc_btw">
+                  <label for="">Ingrese su peso:</label>
+                  <label for="">Ingrese su altura:</label>
+                </div>
+                <div class="spc_btw">
+                  <input class="weights" type="number" step="0.01" placeholder="Peso">
+                  <input class="heights" type="number" placeholder="Altura">
+                </div>
+              </section>
             </section>
-        </footer>
-    </div>
-  
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-<script type = "module" defer src="./script.js"></script> 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+            <br>
+            <div>
+              <h3> Ingrese su nivel de actividad: </h3>
+              <br>
+              <select name=" " id="activity">
+                <option value="sedent">Sedentaria</option>
+                <option value="moderate">Moderada</option>
+                <option value="active">Activa</option>
+              </select>
+            </div>
+            <br>
+            <div>
+              <h3> Ingrese su meta: </h3>
+              <br>
+              <div class="spc_2">
+                <input type="radio" name="goals" value="shred" id="shred" checked="checked">
+                <label for="shred">Bajar de peso</label>
+                <input type="radio" name="goals" value="gains" id="gains">
+                <label for="gains">Ganar masa muscular</label>
+              </div>
+            </div>
+            <br>
+            <div class="train_level">
+              <select name=" " id="levels">
+                <h3> Ingrese el nivel de entrenamiento: </h3>
+                <br>
+                <option value="begginer">Principiante</option>
+                <option value="novice">Novato</option>
+                <option value="intermediate">Intermedio</option>
+                <option value="advance">Avanzado</option>;
+              </select>`
+            </div>
+            <br>
+            <div>
+              <button type="submit" class="butt_send">Enviar</button>
+            </div>
+  </div>
+  </fieldset>
+  </form>
+
+  <!--Es el esqueleto de la tabla donde se van a mostrar todos los pacientes-->
+  <section id="inform" class="table d-none toggles table-fr">
+    <table class="table table-dark table-responsive w-auto">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Sexo</th>
+          <th scope="col">Age</th>
+          <th scope="col">Peso</th>
+          <th scope="col">Altura</th>
+          <th scope="col">Calorias</th>
+          <th scope="col">Carbs</th>
+          <th scope="col">Grasas</th>
+          <th scope="col">Proteinas</th>
+        </tr>
+      </thead>
+      <tbody id="ingo">
+        <!--Renderiza la informacion de los pacientes -->
+      </tbody>
+    </table>
+  </section>
+  </section>
+  </main>
+  <footer>
+    <section>
+      <a> © 2022 Copyright: </a>
+    </section>
+  </footer>
+  </div>
+  <!--Todos los scripts-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+    integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+    integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+  <script type="module" defer src="./script.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 
-   <!--Info del formulario de la persona ingresada-->
-<section id="data"  class="container posit">
-</section>
-
-  <!-- Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--Aqui se va a renderizar el modal con la informacion cargada por formulario del paciente-->
+  <section id="data" class="container posit">
+  </section>
+  <!-- Modal para logearse -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header border-bottom-0">
@@ -187,25 +189,23 @@
           <div class="d-flex flex-column text-center">
             <form>
               <div class="form-group">
-                <input type="email" class="form-control" id="email1"placeholder="Su email es...">
+                <input type="email" class="form-control" id="email1" placeholder="Su email es...">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" id="password1" autocomplete="off" placeholder="Su password es...">
+                <input type="password" class="form-control" id="password1" autocomplete="off"
+                  placeholder="Su password es...">
               </div>
-             
-              <button id="btnIngres"type="button" class="btn btn-info btn-block btn-round">Ingresar</button>
+              <button id="btnIngres" type="button" class="btn btn-info btn-block btn-round">Ingresar</button>
             </form>
             <br>
-            <div class ="form-check">
-                <input class ="form-check-input" type="checkbox" value="" id="remember">
-                <label class ="form-check-label" for="remember">Recordarme en este Equipo</label>
-              </div>
-        
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="remember">
+              <label class="form-check-label" for="remember">Recordarme en este Equipo</label>
+            </div>
+          </div>
         </div>
       </div>
-    
     </div>
-  </div>
   </div>
 </body>
 </htm>
